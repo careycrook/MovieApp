@@ -30,8 +30,17 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 2 put your implementation here
-	  return null;
+	  int length = input.length();
+          int index;
+          String mxdUp = "";
+          for (int x = length; x > 0; x--) {
+              StringBuilder bob = new StringBuilder(input);
+              index = ((int) Math.ceil(Math.random() * 100))%x;  // Gives a random # from 1 to 100.
+              mxdUp = mxdUp + input.charAt(index);               // Then mods it to get an index,
+              bob.deleteCharAt(index);                           // deletes index from old string,
+              input = bob.toString();                            // and adds it to the new one
+          }
+	  return mxdUp;
 	}
 	/**
 	 * Return a string rep of this object
