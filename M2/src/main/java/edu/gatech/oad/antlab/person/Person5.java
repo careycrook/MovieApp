@@ -30,12 +30,12 @@ public class Person5 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-        int l = input.length();
-        if (input == null || l <= 2) {
-            return null;
-        }
-        input += input;
-        return input.substring(2, l + 2);
+      int l = input.length();
+      if (input == null || l <= 2) {
+        return null;
+      }
+      input += input;
+      return input.substring(2, l + 2);
 	}
 	
 	/**
