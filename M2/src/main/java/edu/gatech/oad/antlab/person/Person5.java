@@ -32,7 +32,7 @@ public class Person5 {
   private String calc(String input) {
     int l = input.length();
     if (input == null || l <= 2) {
-      return null;
+      return input;
     }
     input += input;
     return input.substring(2, l + 2);
