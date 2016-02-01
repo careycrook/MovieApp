@@ -29,14 +29,14 @@ public class Person5 {
 	 * @param input the string to be modified
 	 * @return the modified string
 	 */
-	private String calc(String input) {
-      int l = input.length();
-      if (input == null || l <= 2) {
-        return null;
-      }
-      input += input;
-      return input.substring(2, l + 2);
-	}
+  private String calc(String input) {
+    int l = input.length();
+    if (input == null || l <= 2) {
+      return null;
+    }
+    input += input;
+    return input.substring(2, l + 2);
+  }
 	
 	/**
 	 * Return a string rep of this object
