@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import java.util.HashMap;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,16 +13,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void buttonLoginClick(View v) {
+    public void buttonOnClick(View v) {
         Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(loginIntent);
-
     }
-
-    public void buttonRegisterClick(View v) {
-        Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivity(registerIntent);
-    }
-
 
 }

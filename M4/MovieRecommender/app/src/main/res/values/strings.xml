@@ -13,17 +13,4 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="action_logout">Log Out</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_dashboard">Dashboard</string>
-    <string-array name="spin">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
 </resources>

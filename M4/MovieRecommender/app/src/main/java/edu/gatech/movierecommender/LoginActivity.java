@@ -21,9 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameBox.getText().toString();
         String password = passwordBox.getText().toString();
 
-        if (World.accountHash.containsKey(username) &&
-                World.accountHash.get(username).getPassword().equals(password)) {
-            World.currentUser = World.accountHash.get(username);
+        if (username.equals("user") && password.equals("pass")) {
             Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
             startActivity(dashboardIntent);
         } else {
