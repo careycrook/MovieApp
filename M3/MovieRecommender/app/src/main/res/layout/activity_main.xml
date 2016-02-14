@@ -25,15 +25,14 @@
         android:id="@+id/registerButton"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/descLabel"
-        android:layout_alignParentStart="true"
-        android:onClick="buttonRegisterClick" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Login"
         android:id="@+id/loginButton"
-        android:onClick="buttonLoginClick"
+        android:onClick="buttonOnClick"
         android:layout_below="@+id/registerButton"
         android:layout_alignParentEnd="true" />
 

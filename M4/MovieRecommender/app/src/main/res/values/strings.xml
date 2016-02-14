@@ -13,4 +13,17 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="action_logout">Log Out</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string-array name="spin">
+        <item>CS</item>
+        <item>EE</item>
+        <item>ME</item>
+        <item>ISYE</item>
+        <item>Math</item>
+        <item>Phys</item>
+        <item>Chem</item>
+        <item>ChemE</item>
+    </string-array>
 </resources>

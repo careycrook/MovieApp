@@ -24,7 +24,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Dashboard"></activity>
+        <activity android:name=".RegisterActivity">
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name=".Dashboard"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
