@@ -111,7 +111,7 @@ public class Dashboard extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        builder.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
             }
@@ -123,6 +123,8 @@ public class Dashboard extends AppCompatActivity {
     public boolean profileButton(View v) {
         if (World.currentUser.getProfile() == null) {
             dialog(v);
+        } else {
+            launchProfile(v);
         }
         return true;
     }

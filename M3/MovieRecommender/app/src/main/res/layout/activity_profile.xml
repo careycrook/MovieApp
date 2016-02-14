@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +13,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.gatech.movierecommender.ProfileActivity">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,18 +29,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username:"
-        android:id="@+id/textView"
+        android:id="@+id/usernameProfileLabel"
         android:layout_marginTop="18dp"
         android:layout_below="@+id/headerProfileText"
-        android:layout_alignStart="@+id/textView2" />
+        android:layout_alignStart="@+id/nameProfileLabel" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Name: "
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
+        android:id="@+id/nameProfileLabel"
+        android:layout_below="@+id/usernameProfileLabel"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="42dp" />
 
@@ -43,8 +49,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Email:"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
+        android:id="@+id/emailProfileLabel"
+        android:layout_below="@+id/nameProfileLabel"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="42dp" />
 
@@ -53,7 +59,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/majorSpinner"
         android:layout_marginTop="29dp"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/emailProfileLabel"
         android:layout_alignParentStart="true"
         android:spinnerMode="dialog" />
 
@@ -62,7 +68,19 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText"
-        android:layout_centerVertical="true"
+        android:id="@+id/descTextBox"
+        android:layout_below="@+id/majorSpinner"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/profileButton"
+        android:layout_below="@+id/descTextBox"
+        android:layout_toEndOf="@+id/usernameProfileLabel"
+        android:layout_marginTop="46dp"
+        android:layout_alignParentStart="true"
+        android:onClick="finishProfile" />
 </RelativeLayout>
+    </ScrollView>

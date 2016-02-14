@@ -2,8 +2,8 @@ package edu.gatech.movierecommender;
 
 public class Profile {
 
-    private String major = "";
-    private String desc = "";
+    private String major = "CS";
+    private String desc = "Add description.";
 
     public Profile() {
     }
