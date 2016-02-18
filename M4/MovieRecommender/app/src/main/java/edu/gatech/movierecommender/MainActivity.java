@@ -15,13 +15,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     * Opens login page when activated.
+
+     * @param  v  View for layout
+     */
     public void buttonLoginClick(View v) {
+        //Open login activity.
         Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(loginIntent);
 
     }
 
+    /**
+     * Opens register page when activated.
+
+     * @param  v  View for layout
+     */
     public void buttonRegisterClick(View v) {
+        //Open register activity.
         Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(registerIntent);
     }

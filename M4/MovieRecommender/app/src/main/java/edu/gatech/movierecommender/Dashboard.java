@@ -94,16 +94,30 @@ public class Dashboard extends AppCompatActivity {
     public void onBackPressed() {
     }
 
+    /**
+     * Opens main page when activated.
+     *
+     * @param  item  MenuItem corresponding to this method.
+     * @return true on successful completion.
+     */
     public boolean logout(MenuItem item) {
+        //Launch main activity.
         Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(homeIntent);
         return true;
     }
 
+    /**
+     * Creates and launches dialog.
+     *
+     * @param  v  View for layout
+     */
     private void dialog(View v) {
+        //Create dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("You don't have a profile. Do you want to create a profile?");
         final View vi = v;
+        //Create profile case.
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 World.currentUser.setProfile(new Profile());
@@ -111,25 +125,41 @@ public class Dashboard extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+        //Don't create profile case.
         builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
             }
         });
         AlertDialog dialog = builder.create();
+        //Show the dialog that was created.
         dialog.show();
     }
 
+    /**
+     * Dialog branching.
+     *
+     * @param  v  View for layout
+     * @return true on successful completion
+     */
     public boolean profileButton(View v) {
+        //If currentUser does not have a profile, show the prompt.
         if (World.currentUser.getProfile() == null) {
             dialog(v);
+        //Else just launch the profile.
         } else {
             launchProfile(v);
         }
         return true;
     }
 
+    /**
+     * Opens profile activity
+     *
+     * @param  v  View for layout
+     */
     public void launchProfile(View v) {
+        //Launch profile activity.
         Intent profileIntent = new Intent(v.getContext(), ProfileActivity.class);
         startActivity(profileIntent);
     }
