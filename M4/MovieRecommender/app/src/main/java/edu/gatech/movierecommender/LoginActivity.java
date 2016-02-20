@@ -34,8 +34,12 @@ public class LoginActivity extends AppCompatActivity {
             Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
             startActivity(dashboardIntent);
 
-        //Otherwise notify the user of failed attempt and clear fields.
-        } else {
+        } else if (username.equals("admin") && password.equals("admin")) { //Added a persistent admin account
+            User admin = new User("admin", "admin@google.com", "admin", "admin");
+            World.currentUser = admin;
+            Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
+            startActivity(dashboardIntent);
+        } else { //Otherwise notify the user of failed attempt and clear fields.
             Toast.makeText(this, "Incorrect username or password.", Toast.LENGTH_LONG).show();
             usernameBox.setText("");
             passwordBox.setText("");

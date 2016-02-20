@@ -226,7 +226,7 @@ public class Dashboard extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Search for Movies";
                 case 1:
                     return "SECTION 2";
                 case 2:
