@@ -8,24 +8,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.gatech.movierecommender.Dashboard$PlaceholderFragment">
 
-    <SearchView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/search_box"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="#E3E3E3"
+        android:layout_centerHorizontal="true"
+        android:hint="Movie Title Here"
+        android:textSize="30dp"
+        android:textAlignment="center"/>
+
     <Button
         android:id="@+id/new_release"
-        android:layout_width="130dip"
-        android:layout_height="130dip"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
         android:text="New Releases"
-        android:background="@android:color/holo_orange_light"/>
+        android:background="@android:color/holo_orange_light"
+        android:onClick="buttonNewReleaseClick"
+        android:layout_alignTop="@+id/new_dvd" />
+
     <Button
         android:id="@+id/new_dvd"
-        android:layout_width="130dip"
-        android:layout_height="130dip"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:text="New to DVD"
-        android:background="@android:color/holo_orange_light"/>
+        android:background="@android:color/holo_orange_light"
+        android:onClick="buttonNewDVDClick"/>
+
+    <Button
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:text="Search"
+        android:id="@+id/search_button"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@android:color/holo_blue_bright"
+        android:onClick="buttonSearchClick"/>
 </RelativeLayout>

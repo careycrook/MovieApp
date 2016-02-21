@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -195,7 +196,6 @@ public class Dashboard extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-            SearchView searchBox = (SearchView) rootView.findViewById(R.id.section_label);
             return rootView;
         }
     }
@@ -235,5 +235,27 @@ public class Dashboard extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    public void buttonSearchClick(View v) {
+        Intent results = new Intent(getApplicationContext(), SearchResultsList.class);
+        EditText searchBox = (EditText) findViewById(R.id.search_box);
+        String query = searchBox.getText().toString();
+        results.putExtra("QUERY", query);
+        startActivity(results);
+    }
+
+    public void buttonNewReleaseClick(View v) {
+        Intent results = new Intent(getApplicationContext(), SearchResultsList.class);
+        String query = "New Releases";
+        results.putExtra("QUERY", query);
+        startActivity(results);
+    }
+
+    public void buttonNewDVDClick(View v) {
+        Intent results = new Intent(getApplicationContext(), SearchResultsList.class);
+        String query = "New to DVD";
+        results.putExtra("QUERY", query);
+        startActivity(results);
     }
 }
