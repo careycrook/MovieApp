@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 public class Dashboard extends AppCompatActivity {
@@ -193,8 +195,7 @@ public class Dashboard extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            SearchView searchBox = (SearchView) rootView.findViewById(R.id.section_label);
             return rootView;
         }
     }

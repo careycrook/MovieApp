@@ -8,9 +8,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.gatech.movierecommender.Dashboard$PlaceholderFragment">
 
-    <TextView
+    <SearchView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/new_release"
+        android:layout_width="130dip"
+        android:layout_height="130dip"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="New Releases"
+        android:background="@android:color/holo_orange_light"/>
+    <Button
+        android:id="@+id/new_dvd"
+        android:layout_width="130dip"
+        android:layout_height="130dip"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:text="New to DVD"
+        android:background="@android:color/holo_orange_light"/>
 </RelativeLayout>
