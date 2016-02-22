@@ -1,0 +1,7 @@
+Key: gw4zq2guve29tdm79xkmfauv
+
+Box Office Movies URL:
+http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=[gw4zq2guve29tdm79xkmfauv]&limit=10
+
+DVD New Releases URL:
+http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?apikey=[gw4zq2guve29tdm79xkmfauv]
