@@ -13,37 +13,28 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="#E3E3E3"
-        android:layout_centerHorizontal="true"
-        android:hint="Movie Title Here"
+        android:hint="Movie title"
         android:textSize="30dp"
-        android:textAlignment="center"/>
-
-    <Button
-        android:id="@+id/new_release"
-        android:layout_width="100dip"
-        android:layout_height="100dip"
-        android:text="New Releases"
-        android:background="@android:color/holo_orange_light"
-        android:onClick="buttonNewReleaseClick"
-        android:layout_alignTop="@+id/new_dvd" />
-
-    <Button
-        android:id="@+id/new_dvd"
-        android:layout_width="100dip"
-        android:layout_height="100dip"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:text="New to DVD"
-        android:background="@android:color/holo_orange_light"
-        android:onClick="buttonNewDVDClick"/>
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/search_button" />
 
     <Button
         android:layout_width="100dip"
         android:layout_height="100dip"
         android:text="Search"
         android:id="@+id/search_button"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:background="@android:color/holo_blue_bright"
-        android:onClick="buttonSearchClick"/>
+        android:onClick="buttonSearchClick"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/search_box" />
+
+    <include layout="@layout/content_scrolling"
+        android:layout_height="90dp"
+        android:layout_below="@+id/search_box"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>

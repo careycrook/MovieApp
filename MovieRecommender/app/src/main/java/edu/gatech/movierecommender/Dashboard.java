@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -220,7 +221,7 @@ public class Dashboard extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 1;
         }
 
         @Override
@@ -238,24 +239,14 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void buttonSearchClick(View v) {
-        Intent results = new Intent(getApplicationContext(), SearchResultsList.class);
+        Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         EditText searchBox = (EditText) findViewById(R.id.search_box);
         String query = searchBox.getText().toString();
         results.putExtra("QUERY", query);
-        startActivity(results);
-    }
-
-    public void buttonNewReleaseClick(View v) {
-        Intent results = new Intent(getApplicationContext(), SearchResultsList.class);
-        String query = "New Releases";
-        results.putExtra("QUERY", query);
-        startActivity(results);
-    }
-
-    public void buttonNewDVDClick(View v) {
-        Intent results = new Intent(getApplicationContext(), SearchResultsList.class);
-        String query = "New to DVD";
-        results.putExtra("QUERY", query);
-        startActivity(results);
+        if (query.length() < 2) {
+            Toast.makeText(this, "Searches must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
+        } else {
+            startActivity(results);
+        }
     }
 }
