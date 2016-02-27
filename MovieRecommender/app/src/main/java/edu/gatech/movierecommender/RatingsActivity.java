@@ -17,12 +17,15 @@ public class RatingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ratings);
 
+        //Get listview control
         ListView lv = (ListView) findViewById(R.id.ratinglist);
 
+        //Only run if this movie has ratings
         Movie m = World.videoHash.get(getIntent().getStringExtra("title"));
         if (m == null) {
             return;
         }
+        //Build rating strings and put them in an arraylist
         ArrayList<String> arr = new ArrayList<String>();
         ArrayList<Rating> ratingArr = m.getRatings();
         for (Rating r : ratingArr) {
@@ -32,6 +35,8 @@ public class RatingsActivity extends AppCompatActivity {
             build += ") " + (int) r.getRating() + "/5: " + r.getComment();
             arr.add(build);
         }
+
+        //Create ArrayAdapter
         ArrayAdapter<String> itemsAdapter =
                 new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, arr);
         lv.setAdapter(itemsAdapter);

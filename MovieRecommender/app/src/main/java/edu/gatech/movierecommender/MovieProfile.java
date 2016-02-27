@@ -42,6 +42,11 @@ public class MovieProfile extends AppCompatActivity {
 
     }
 
+    /**
+     * Saves rating information to a movie
+     *
+     * @param  v  View for layout
+     */
     public void onPost(View v) {
         //If user doesn't have a profile, fail
         if (World.currentUser.getProfile() == null) {
@@ -70,6 +75,11 @@ public class MovieProfile extends AppCompatActivity {
         }
     }
 
+    /**
+     * Launches RatingsActivity activity
+     *
+     * @param  v  View for layout
+     */
     public void onSeeRatings(View v) {
         Intent seeRatings = new Intent(getBaseContext(), RatingsActivity.class);
         seeRatings.putExtra("title", getIntent().getStringExtra("title"));
@@ -78,6 +88,11 @@ public class MovieProfile extends AppCompatActivity {
 
     private class LoadImage extends AsyncTask<String, String, Bitmap> {
 
+        /**
+         * Downloads a bitmap async
+         *
+         * @param  args  Required by implementation
+         */
         protected Bitmap doInBackground(String... args) {
             try {
                 bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
@@ -88,6 +103,11 @@ public class MovieProfile extends AppCompatActivity {
             return bitmap;
         }
 
+        /**
+         * Post completion, set ImageView to have this bitmap
+         *
+         * @param  image results of download
+         */
         protected void onPostExecute(Bitmap image) {
 
             if(image != null) {
