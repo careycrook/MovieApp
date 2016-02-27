@@ -36,7 +36,12 @@
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MovieProfile"
+            android:label="@string/title_activity_movie_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RatingsActivity"></activity>
     </application>
 
 </manifest>
