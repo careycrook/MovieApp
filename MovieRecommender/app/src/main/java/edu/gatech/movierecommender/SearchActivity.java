@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -103,11 +104,14 @@ public class SearchActivity extends AppCompatActivity {
             mRequestQueue.add(stringRequest);
 
         } else {
+            System.out.println("gay");
 
-            //////////////////////////////////////////
-            /////////    YOUR CODE HERE     //////////
-            //////////////////////////////////////////
+            ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
+            Collections.sort(movieList);
 
+            for (Movie m : movieList) {
+                System.out.println(m);
+            }
         }
     }
 }

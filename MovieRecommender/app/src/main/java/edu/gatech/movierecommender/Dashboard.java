@@ -255,7 +255,7 @@ public class Dashboard extends AppCompatActivity {
     public void buttonSearchClick2(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         EditText searchBox = (EditText) findViewById(R.id.search_box);
-        results.putExtra("TITLE", false);
+        results.putExtra("TYPE", false);
 
         if (false) {
             Toast.makeText(this, "Searches must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
