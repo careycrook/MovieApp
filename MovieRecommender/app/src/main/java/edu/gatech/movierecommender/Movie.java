@@ -38,15 +38,19 @@ public class Movie implements Comparable<Movie> {
     public HashMap<String, ArrayList<Float>> getMajorRatings() { return majorRatings; }
 
     public float getAverageMajorRating(String major) {
-        ArrayList<Float> listRatings = majorRatings.get(major);
+        if (majorRatings.containsKey(major)) {
+            ArrayList<Float> listRatings = majorRatings.get(major);
 
-        float aggregateRating = 0;
+            float aggregateRating = 0;
 
-        for (Float f : listRatings) {
-            aggregateRating += f;
+            for (Float f : listRatings) {
+                aggregateRating += f;
+            }
+
+            return aggregateRating / listRatings.size();
+        } else {
+            return 0;
         }
-
-        return aggregateRating / listRatings.size();
     }
 
     public float getAverageRating() { return averageRating; }
