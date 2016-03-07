@@ -9,4 +9,5 @@ public class World extends Application {
     public static HashMap<String, Movie> videoHash = new HashMap<>();
     public static HashMap<String, User> accountHash = new HashMap<>();
     public static User currentUser = null;
+
 }

@@ -243,6 +243,8 @@ public class Dashboard extends AppCompatActivity {
         EditText searchBox = (EditText) findViewById(R.id.search_box);
         String query = searchBox.getText().toString();
         results.putExtra("QUERY", query);
+        results.putExtra("TITLE", true);
+
         if (query.length() < 2) {
             Toast.makeText(this, "Searches must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
         } else {

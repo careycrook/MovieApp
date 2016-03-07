@@ -37,9 +37,12 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scrolling);
 
         Intent intent = getIntent();
-        final String query = intent.getStringExtra("QUERY");
+        final boolean isSearch = intent.getBooleanExtra("TYPE", true);
         final ListView populate = (ListView) findViewById(R.id.populate);
-        RequestQueue mRequestQueue;
+
+        if (isSearch) {
+            final String query = intent.getStringExtra("QUERY");
+            RequestQueue mRequestQueue;
 
             // Instantiate the cache
             Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
@@ -52,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
 
             // Start the queue
             mRequestQueue.start();
-            String url ="http://www.omdbapi.com/?s=" + query;
+            String url = "http://www.omdbapi.com/?s=" + query;
 
             final ArrayList<String> titleArr = new ArrayList<String>();
             final ArrayList<String> imgArr = new ArrayList<String>();
@@ -75,7 +78,7 @@ public class SearchActivity extends AppCompatActivity {
                                 ArrayAdapter<String> itemsAdapter =
                                         new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, titles);
                                 populate.setAdapter(itemsAdapter);
-                                } catch (JSONException e1) {
+                            } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }
                         }
@@ -88,15 +91,23 @@ public class SearchActivity extends AppCompatActivity {
                     });
             // Add the request to the RequestQueue.
 
-        populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id){
-                Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
-                movieProfile.putExtra("title", titleArr.get(position));
-                movieProfile.putExtra("url", imgArr.get(position));
+            populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
+                    movieProfile.putExtra("title", titleArr.get(position));
+                    movieProfile.putExtra("url", imgArr.get(position));
 
-                startActivity(movieProfile);
-            }
-        });
+                    startActivity(movieProfile);
+                }
+            });
             mRequestQueue.add(stringRequest);
+
+        } else {
+
+            //////////////////////////////////////////
+            /////////    YOUR CODE HERE     //////////
+            //////////////////////////////////////////
+
+        }
     }
 }
