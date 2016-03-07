@@ -238,6 +238,7 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
+    //Search function
     public void buttonSearchClick(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         EditText searchBox = (EditText) findViewById(R.id.search_box);
@@ -252,6 +253,7 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
+    //Top recommendation function
     public void buttonSearchClick2(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         String query = "TOP";
@@ -260,6 +262,7 @@ public class Dashboard extends AppCompatActivity {
         startActivity(results);
     }
 
+    //Major recommendation function
     public void buttonSearchClick3(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         String query = "MAJOR";

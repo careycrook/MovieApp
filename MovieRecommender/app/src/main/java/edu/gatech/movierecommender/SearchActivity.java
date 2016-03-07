@@ -92,6 +92,7 @@ public class SearchActivity extends AppCompatActivity {
                         }
                     });
 
+            //Click listener
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
                     Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
@@ -103,13 +104,17 @@ public class SearchActivity extends AppCompatActivity {
             });
             mRequestQueue.add(stringRequest);
 
+        //If clicked top recommendations
         } else if (query.equals("TOP")){
+
+            //arrays
             ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
             Collections.sort(movieList);
             ArrayList<String> arr = new ArrayList<>();
             ArrayList<String> img = new ArrayList<>();
             ArrayList<String> title = new ArrayList<String>();
 
+            //Fille arrays
             for (Movie m : movieList) {
                 arr.add(m.toString());
                 title.add(m.getTitle());
@@ -119,10 +124,12 @@ public class SearchActivity extends AppCompatActivity {
             final ArrayList<String> imgArr = img;
             final ArrayList<String> titles = title;
 
+            //Make adapter for listview
             ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, arr);
             populate.setAdapter(itemsAdapter);
 
+            //Click listener
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
                     Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
@@ -133,17 +140,22 @@ public class SearchActivity extends AppCompatActivity {
                 }
             });
 
+            //Majro recommendation
         } else {
+
+            //Arrays
             ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
             ArrayList<Movie> majorMovieList = new ArrayList<Movie>();
             String major = World.currentUser.getProfile().getMajor();
 
+            //Fill arrays
             for (Movie m : movieList) {
                 if (m.getMajorRatings().containsKey(major)) {
                     majorMovieList.add(m);
                 }
             }
 
+            //Custom sort
             Collections.sort(majorMovieList, new Comparator<Movie>() {
                 public int compare(Movie m1, Movie m2) {
                     String compMajor = World.currentUser.getProfile().getMajor();
@@ -158,10 +170,12 @@ public class SearchActivity extends AppCompatActivity {
                 }
             });
 
+            //Arrays
             ArrayList<String> arr = new ArrayList<>();
             ArrayList<String> img = new ArrayList<>();
             ArrayList<String> title = new ArrayList<String>();
 
+            //Fill them
             for (Movie m : majorMovieList) {
                 arr.add(m.toString());
                 title.add(m.getTitle());
@@ -171,10 +185,12 @@ public class SearchActivity extends AppCompatActivity {
             final ArrayList<String> imgArr = img;
             final ArrayList<String> titles = title;
 
+            //Listview adapter
             ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, arr);
             populate.setAdapter(itemsAdapter);
 
+            //Click listener
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
                     Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
