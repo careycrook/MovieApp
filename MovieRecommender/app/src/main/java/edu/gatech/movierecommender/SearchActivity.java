@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -135,11 +136,33 @@ public class SearchActivity extends AppCompatActivity {
             });
 
         } else {
+            ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
+            ArrayList<Movie> majorMovieList = new ArrayList<Movie>();
+            String major = World.currentUser.getProfile().getMajor();
 
+            for (Movie m : movieList) {
+                if (m.getMajorRatings().containsKey(major)) {
+                    majorMovieList.add(m);
+                }
+            }
 
-            ///
+            Collections.sort(majorMovieList, new Comparator<Movie>() {
+                public int compare(Movie m1, Movie m2) {
+                    String compMajor = World.currentUser.getProfile().getMajor();
 
+                    if (m1.getAverageMajorRating(compMajor) > m2.getAverageMajorRating(compMajor)) {
+                        return -1;
+                    } else if (m1.getAverageMajorRating(compMajor) == m2.getAverageMajorRating(compMajor)) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
 
+            for (Movie m : majorMovieList) {
+                System.out.println(m);
+            }
         }
     }
 }
