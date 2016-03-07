@@ -24,6 +24,8 @@ public class Movie implements Comparable<Movie> {
                     / ratings.size();
     }
 
+    public String getTitle() { return title; }
+
     public float getAverageRating() { return averageRating; }
 
     public ArrayList<Rating> getRatings() {

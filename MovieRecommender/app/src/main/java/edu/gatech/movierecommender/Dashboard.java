@@ -255,6 +255,7 @@ public class Dashboard extends AppCompatActivity {
     public void buttonSearchClick2(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         String query = "TOP";
+        results.putExtra("QUERY", "TOP");
         results.putExtra("TYPE", false);
         startActivity(results);
     }
@@ -262,6 +263,7 @@ public class Dashboard extends AppCompatActivity {
     public void buttonSearchClick3(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         String query = "MAJOR";
+        results.putExtra("QUERY", "MAJOR");
         results.putExtra("TYPE", false);
 
         if (World.currentUser.getProfile() == null) {

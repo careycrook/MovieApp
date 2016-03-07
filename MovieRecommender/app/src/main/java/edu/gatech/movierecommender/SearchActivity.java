@@ -90,7 +90,6 @@ public class SearchActivity extends AppCompatActivity {
                             // Handle error
                         }
                     });
-            // Add the request to the RequestQueue.
 
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -104,14 +103,37 @@ public class SearchActivity extends AppCompatActivity {
             mRequestQueue.add(stringRequest);
 
         } else if (query.equals("TOP")){
-            System.out.println("gay");
-
             ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
             Collections.sort(movieList);
+            ArrayList<String> arr = new ArrayList<>();
+            ArrayList<String> titleArr = new ArrayList<>();
+            final ArrayList<String> imgArr = new ArrayList<>();
 
             for (Movie m : movieList) {
-                System.out.println(m);
+                arr.add(m.toString());
             }
+
+            ArrayList<String> title = new ArrayList<String>();
+            for (Movie m : movieList) {
+                title.add(m.getTitle());
+            }
+
+            final ArrayList<String> titles = title;
+
+            ArrayAdapter<String> itemsAdapter =
+                    new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, arr);
+            populate.setAdapter(itemsAdapter);
+
+            populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
+                    movieProfile.putExtra("title", titles.get(position));
+                    movieProfile.putExtra("url", titles.get(position));
+
+                    startActivity(movieProfile);
+                }
+            });
+
         } else {
 
 
