@@ -107,18 +107,16 @@ public class SearchActivity extends AppCompatActivity {
             ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
             Collections.sort(movieList);
             ArrayList<String> arr = new ArrayList<>();
-            ArrayList<String> titleArr = new ArrayList<>();
-            final ArrayList<String> imgArr = new ArrayList<>();
+            ArrayList<String> img = new ArrayList<>();
+            ArrayList<String> title = new ArrayList<String>();
 
             for (Movie m : movieList) {
                 arr.add(m.toString());
-            }
-
-            ArrayList<String> title = new ArrayList<String>();
-            for (Movie m : movieList) {
                 title.add(m.getTitle());
+                img.add(m.getURL());
             }
 
+            final ArrayList<String> imgArr = img;
             final ArrayList<String> titles = title;
 
             ArrayAdapter<String> itemsAdapter =
@@ -129,7 +127,7 @@ public class SearchActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
                     Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
                     movieProfile.putExtra("title", titles.get(position));
-                    movieProfile.putExtra("url", titles.get(position));
+                    movieProfile.putExtra("url", imgArr.get(position));
 
                     startActivity(movieProfile);
                 }
@@ -160,9 +158,33 @@ public class SearchActivity extends AppCompatActivity {
                 }
             });
 
+            ArrayList<String> arr = new ArrayList<>();
+            ArrayList<String> img = new ArrayList<>();
+            ArrayList<String> title = new ArrayList<String>();
+
             for (Movie m : majorMovieList) {
-                System.out.println(m);
+                arr.add(m.toString());
+                title.add(m.getTitle());
+                img.add(m.getURL());
             }
+
+            final ArrayList<String> imgArr = img;
+            final ArrayList<String> titles = title;
+
+            ArrayAdapter<String> itemsAdapter =
+                    new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, arr);
+            populate.setAdapter(itemsAdapter);
+
+            populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
+                    movieProfile.putExtra("title", titles.get(position));
+                    movieProfile.putExtra("url", imgArr.get(position));
+
+                    startActivity(movieProfile);
+                }
+            });
+
         }
     }
 }

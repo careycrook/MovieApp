@@ -12,6 +12,7 @@ public class Movie implements Comparable<Movie> {
     private ArrayList<Rating> ratings;
     private float averageRating;
     private HashMap<String, ArrayList<Float>> majorRatings;
+    private String imgURL = "";
 
     public Movie(String t) {
         title = t;
@@ -52,6 +53,10 @@ public class Movie implements Comparable<Movie> {
             return 0;
         }
     }
+
+    public void setUrl(String s) { imgURL = s; }
+
+    public String getURL() { return imgURL; }
 
     public String getTitle() { return title; }
 

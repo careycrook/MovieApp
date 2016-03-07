@@ -34,7 +34,8 @@ public class MovieProfile extends AppCompatActivity {
         //Fill ImageView
         img =  (ImageView) findViewById(R.id.img);
         img.setScaleType(ImageView.ScaleType.FIT_XY);
-        new LoadImage().execute(getIntent().getStringExtra("url"));
+        String imgURL = getIntent().getStringExtra("url");
+        new LoadImage().execute(imgURL);
 
         //Change activity header
         TextView tv = (TextView) findViewById(R.id.movieTitle);
@@ -63,6 +64,7 @@ public class MovieProfile extends AppCompatActivity {
             if (m == null) {
                 m = new Movie(title);
             }
+            m.setUrl(getIntent().getStringExtra("url"));
             m.addRating(r);
 
             //Update video hash
