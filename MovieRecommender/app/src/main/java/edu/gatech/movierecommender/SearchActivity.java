@@ -40,9 +40,9 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final boolean isSearch = intent.getBooleanExtra("TYPE", true);
         final ListView populate = (ListView) findViewById(R.id.populate);
+        final String query = intent.getStringExtra("QUERY");
 
         if (isSearch) {
-            final String query = intent.getStringExtra("QUERY");
             RequestQueue mRequestQueue;
 
             // Instantiate the cache
@@ -103,7 +103,7 @@ public class SearchActivity extends AppCompatActivity {
             });
             mRequestQueue.add(stringRequest);
 
-        } else {
+        } else if (query.equals("TOP")){
             System.out.println("gay");
 
             ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
@@ -112,6 +112,12 @@ public class SearchActivity extends AppCompatActivity {
             for (Movie m : movieList) {
                 System.out.println(m);
             }
+        } else {
+
+
+            ///
+
+
         }
     }
 }
