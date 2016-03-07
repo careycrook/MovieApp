@@ -254,13 +254,21 @@ public class Dashboard extends AppCompatActivity {
 
     public void buttonSearchClick2(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
-        EditText searchBox = (EditText) findViewById(R.id.search_box);
+        String query = "TOP";
+        results.putExtra("TYPE", false);
+        startActivity(results);
+    }
+
+    public void buttonSearchClick3(View v) {
+        Intent results = new Intent(getApplicationContext(), SearchActivity.class);
+        String query = "MAJOR";
         results.putExtra("TYPE", false);
 
-        if (false) {
-            Toast.makeText(this, "Searches must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
+        if (World.currentUser.getProfile() == null) {
+            Toast.makeText(this, "You must have a profile to get a recommendation.", Toast.LENGTH_LONG).show();
         } else {
             startActivity(results);
         }
     }
+
 }
