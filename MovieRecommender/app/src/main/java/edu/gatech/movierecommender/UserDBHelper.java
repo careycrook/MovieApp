@@ -10,27 +10,11 @@ import android.provider.BaseColumns;
 /**
  * Created by theon on 3/12/2016.
  */
-public class UserDBHelper extends SQLiteOpenHelper {
+public class UserDBHelper {
 
     // Increment database version when updating schema
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "movieapp.db";
-    public Context context;
-
-    public UserDBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(UserEntry.SQL_CREATE_ENTRIES);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
 
     public static boolean checkIfInDB(String tableName, String dbField, String fieldValue) {
         String query = "Select 1 from " + tableName + " where " + dbField + " = \'" + fieldValue + "\' LIMIT 1";
@@ -44,24 +28,24 @@ public class UserDBHelper extends SQLiteOpenHelper {
     }
 
     public static void lockUser(String user) {
-        Cursor cursor = null;
-
         String query = "UPDATE users SET status = \'Locked\' WHERE username = \'" + user + "\'";
 
         World.DB.execSQL(query);
     }
 
-    public static void setMajor(String user, String major) {
-        Cursor cursor = null;
+    public static void banUser(String user) {
+        String query = "UPDATE users SET status = \'Banned\' WHERE username = \'" + user + "\'";
 
+        World.DB.execSQL(query);
+    }
+
+    public static void setMajor(String user, String major) {
         String query = "UPDATE users SET major = \'" + major + "\' WHERE username = \'" + user + "\'";
 
         World.DB.execSQL(query);
     }
 
     public static void setDescription(String user, String description) {
-        Cursor cursor = null;
-
         String query = "UPDATE users SET description = \'" + description + "\' WHERE username = \'" + user + "\'";
 
         World.DB.execSQL(query);
@@ -197,23 +181,5 @@ public class UserDBHelper extends SQLiteOpenHelper {
         }
 
         return passHash;
-    }
-
-    public static abstract class UserEntry implements BaseColumns {
-        public static final String TABLE_NAME = "entry";
-        public static final String COLUMN_NAME_ENTRY_ID = "entryid";
-        public static final String COLUMN_NAME_TITLE = "title";
-        public static final String COLUMN_NAME_SUBTITLE = "subtitle";
-        private static final String TEXT_TYPE = " TEXT";
-        private static final String COMMA_SEP = ",";
-        private static final String SQL_CREATE_ENTRIES =
-                "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
-                        UserEntry._ID + " INTEGER PRIMARY KEY," +
-                        UserEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
-                        UserEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
-                        " )";
-
-        private static final String SQL_DELETE_ENTRIES =
-                "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
     }
 }
