@@ -140,7 +140,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
             });
 
-            //Majro recommendation
+            //Major recommendation
         } else {
 
             //Arrays

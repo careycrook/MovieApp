@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import static edu.gatech.movierecommender.UserDBHelper.setDescription;
+import static edu.gatech.movierecommender.UserDBHelper.setMajor;
+
 public class ProfileActivity extends AppCompatActivity {
 
     @Override
@@ -50,6 +53,9 @@ public class ProfileActivity extends AppCompatActivity {
         //Set values in singleton.
         World.currentUser.getProfile().setMajor(spinner.getSelectedItem().toString());
         World.currentUser.getProfile().setDesc(et.getText().toString());
+
+        setMajor(World.currentUser.getUsername(), spinner.getSelectedItem().toString());
+        setDescription(World.currentUser.getUsername(), et.getText().toString());
 
         //Close profile, reopen dashboard.
         Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);

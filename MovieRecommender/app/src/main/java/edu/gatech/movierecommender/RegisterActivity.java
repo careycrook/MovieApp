@@ -1,11 +1,14 @@
 package edu.gatech.movierecommender;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import static edu.gatech.movierecommender.UserDBHelper.checkIfInDB;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -55,7 +58,29 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        //Check that username is not already registered.
+        if (checkIfInDB("users", "username", username)) {
+            Toast.makeText(this, "A user by that name already exists", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            ContentValues userInfo = new ContentValues();
+            userInfo.put("name", name);
+            userInfo.put("email", email);
+            userInfo.put("username", username);
+            userInfo.put("password", password1.hashCode());
+            userInfo.put("status", "Active");
+            userInfo.put("major", "NONE");
+            userInfo.put("description", "NONE");
+
+            long check = World.DB.insert("users", null, userInfo);
+
+            if (check != 0) {
+                Toast.makeText(this, "Account registered!", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Account registration failed!", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        /*//Check that username is not already registered.
         if (World.accountHash.containsKey(username)) {
             Toast.makeText(this, "That username is taken.",
                     Toast.LENGTH_LONG).show();
@@ -64,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Complete registration.
         World.accountHash.put(username, u);
-        Toast.makeText(this, "Account registered!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Account registered!", Toast.LENGTH_LONG).show();*/
 
         //Set active user.
         World.currentUser = u;
