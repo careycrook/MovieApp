@@ -13,6 +13,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private int PASSWORD_ATTEMPTS = 0;
 
+    /**
+     * Runs on inception of activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

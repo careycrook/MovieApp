@@ -43,6 +43,11 @@ public class Dashboard extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    /**
+     * Runs on inception of activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +76,11 @@ public class Dashboard extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Logout button dropdown
+     *
+     * @param menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -79,6 +88,11 @@ public class Dashboard extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * On logout
+     *
+     * @param item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -94,6 +108,9 @@ public class Dashboard extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Disable back button
+     */
     @Override
     public void onBackPressed() {
     }
@@ -238,7 +255,11 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
-    //Search function
+    /**
+     * Search function
+     *
+     * @param v
+     */
     public void buttonSearchClick(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         EditText searchBox = (EditText) findViewById(R.id.search_box);
@@ -253,7 +274,11 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
-    //Top recommendation function
+    /**
+     * Top recommendation function
+     *
+     * @param v
+     */
     public void buttonSearchClick2(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         String query = "TOP";
@@ -262,7 +287,11 @@ public class Dashboard extends AppCompatActivity {
         startActivity(results);
     }
 
-    //Major recommendation function
+    /**
+     * Major recommendation function
+     *
+     * @param v
+     */
     public void buttonSearchClick3(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         String query = "MAJOR";

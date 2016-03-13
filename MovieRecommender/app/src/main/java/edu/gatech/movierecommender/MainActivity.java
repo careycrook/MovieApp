@@ -14,6 +14,11 @@ import static edu.gatech.movierecommender.UserDBHelper.initUserTable;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Runs on inception of activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

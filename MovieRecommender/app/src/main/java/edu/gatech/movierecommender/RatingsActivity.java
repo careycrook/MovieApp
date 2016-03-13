@@ -12,6 +12,11 @@ public class RatingsActivity extends AppCompatActivity {
 
     private Context c = this;
 
+    /**
+     * Runs on inception of activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

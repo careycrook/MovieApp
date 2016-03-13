@@ -9,12 +9,22 @@ import android.view.View;
 
 public class AdminDashboard extends AppCompatActivity {
 
+    /**
+     * Runs on inception of activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
     }
 
+    /**
+     * Logout button dropdown
+     *
+     * @param menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -22,6 +32,11 @@ public class AdminDashboard extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * On logout
+     *
+     * @param item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -37,11 +52,21 @@ public class AdminDashboard extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * On button click to view user list
+     *
+     * @param v
+     */
     public void viewUserList(View v) {
         Intent newIntent = new Intent(getApplicationContext(), UserListActivity.class);
         startActivity(newIntent);
     }
 
+    /**
+     * Logout function
+     *
+     * @param item
+     */
     public boolean logout(MenuItem item) {
         //Launch main activity.
         Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -49,6 +74,10 @@ public class AdminDashboard extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Disable back button
+     */
+    @Override
     public void onBackPressed() {
     }
 }

@@ -21,6 +21,11 @@ public class MovieProfile extends AppCompatActivity {
     private Bitmap bitmap;
     private ImageView img = null;
 
+    /**
+     * Runs on inception of activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

@@ -28,10 +28,10 @@ public class UserDBHelper {
     public static void initMovieTable() {
         World.DB.execSQL("CREATE TABLE IF NOT EXISTS movies (_id INTEGER PRIMARY KEY "
         + "AUTOINCREMENT, title TEXT NOT NULL, averageRating REAL NOT NULL DEFAULT '0', " +
-                "imgURL TEXT NOT NULL");
+                "imgURL TEXT NOT NULL)");
     }
 
-    public ArrayList<User> getAllUsers() {
+    public static ArrayList<User> getAllUsers() {
         ArrayList<User> temp = new ArrayList<User>();
         String query = "SELECT * FROM users";
 
@@ -90,6 +90,12 @@ public class UserDBHelper {
 
     public static void setDescription(String user, String description) {
         String query = "UPDATE users SET description = \'" + description + "\' WHERE username = \'" + user + "\'";
+
+        World.DB.execSQL(query);
+    }
+
+    public static void setStatus(String user, String status) {
+        String query = "UPDATE users SET status = \'" + status + "\' WHERE username = \'" + user + "\'";
 
         World.DB.execSQL(query);
     }
