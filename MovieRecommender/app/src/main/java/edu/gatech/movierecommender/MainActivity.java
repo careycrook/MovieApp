@@ -9,6 +9,9 @@ import android.view.View;
 
 import java.util.HashMap;
 
+import static edu.gatech.movierecommender.UserDBHelper.initMovieTable;
+import static edu.gatech.movierecommender.UserDBHelper.initUserTable;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -19,10 +22,8 @@ public class MainActivity extends AppCompatActivity {
         if (World.DB == null) {
             World.DB = openOrCreateDatabase("movieapp.db", Context.MODE_PRIVATE, null);
 
-            World.DB.execSQL("CREATE TABLE IF NOT EXISTS users (_id INTEGER PRIMARY KEY "
-                    + "AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, username TEXT NOT NULL," +
-                    " password INTEGER NOT NULL DEFAULT '0', status TEXT NOT NULL, " +
-                    "major TEXT NOT NULL, description TEXT NOT NULL)");
+            initUserTable();
+            initMovieTable();
         }
     }
 

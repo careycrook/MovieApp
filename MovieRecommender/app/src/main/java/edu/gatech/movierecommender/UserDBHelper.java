@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
+import java.util.ArrayList;
+
 /**
  * Created by theon on 3/12/2016.
  */
@@ -15,6 +17,47 @@ public class UserDBHelper {
     // Increment database version when updating schema
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "movieapp.db";
+
+    public static void initUserTable() {
+        World.DB.execSQL("CREATE TABLE IF NOT EXISTS users (_id INTEGER PRIMARY KEY "
+                + "AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, username TEXT NOT NULL," +
+                " password INTEGER NOT NULL DEFAULT '0', status TEXT NOT NULL, " +
+                "major TEXT NOT NULL, description TEXT NOT NULL)");
+    }
+
+    public static void initMovieTable() {
+        World.DB.execSQL("CREATE TABLE IF NOT EXISTS movies (_id INTEGER PRIMARY KEY "
+        + "AUTOINCREMENT, title TEXT NOT NULL, averageRating REAL NOT NULL DEFAULT '0', " +
+                "imgURL TEXT NOT NULL");
+    }
+
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> temp = new ArrayList<User>();
+        String query = "SELECT * FROM users";
+
+        Cursor cursor = World.DB.rawQuery(query, null);
+
+        while (cursor.moveToNext()) {
+            String name = "";
+            String email = "";
+            String username = "";
+            int password = 0;
+            String status = "";
+
+            name = cursor.getString(cursor.getColumnIndex("name"));
+            email = cursor.getString(cursor.getColumnIndex("email"));
+            username = cursor.getString(cursor.getColumnIndex("username"));
+            password = cursor.getInt(cursor.getColumnIndex("password"));
+            status = cursor.getString(cursor.getColumnIndex("status"));
+
+            User u = new User(name, email, username, String.valueOf(password));
+            u.setStatus(status);
+
+            temp.add(u);
+        }
+
+        return temp;
+    }
 
     public static boolean checkIfInDB(String tableName, String dbField, String fieldValue) {
         String query = "Select 1 from " + tableName + " where " + dbField + " = \'" + fieldValue + "\' LIMIT 1";
