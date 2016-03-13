@@ -6,6 +6,7 @@ public class User {
     private String email;
     private String username;
     private String password;
+    private String status;
     private Profile profile;
 
     public User(String name, String email, String username, String password) {
@@ -55,4 +56,8 @@ public class User {
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
 }
