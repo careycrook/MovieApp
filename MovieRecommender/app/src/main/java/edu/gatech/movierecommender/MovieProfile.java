@@ -99,6 +99,7 @@ public class MovieProfile extends AppCompatActivity {
          * Downloads a bitmap async
          *
          * @param  args  Required by implementation
+         * @return the acquired bitmap
          */
         protected Bitmap doInBackground(String... args) {
             try {

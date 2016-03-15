@@ -80,6 +80,7 @@ public class Dashboard extends AppCompatActivity {
      * Logout button dropdown
      *
      * @param menu
+     * @return success boolean
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,6 +93,7 @@ public class Dashboard extends AppCompatActivity {
      * On logout
      *
      * @param item
+     * @return success boolean
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -201,6 +203,8 @@ public class Dashboard extends AppCompatActivity {
         /**
          * Returns a new instance of this fragment for the given section
          * number.
+         *
+         * @return PlaceholderFragment
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
@@ -210,6 +214,11 @@ public class Dashboard extends AppCompatActivity {
             return fragment;
         }
 
+        /**
+         * Create view listener
+         *
+         * @return view
+         */
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -228,6 +237,12 @@ public class Dashboard extends AppCompatActivity {
             super(fm);
         }
 
+        /**
+         * Gets item position
+         *
+         * @param position
+         * @return Fragment
+         */
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
@@ -235,12 +250,22 @@ public class Dashboard extends AppCompatActivity {
             return PlaceholderFragment.newInstance(position + 1);
         }
 
+        /**
+         * Gets number of pages
+         * @return num pages
+         */
         @Override
         public int getCount() {
             // Show 3 total pages.
             return 1;
         }
 
+        /**
+         * Gets title of specified page
+         *
+         * @param position the page number
+         * @return CharSequence page titles
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {

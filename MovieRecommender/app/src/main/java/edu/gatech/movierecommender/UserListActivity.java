@@ -19,8 +19,9 @@ public class UserListActivity extends AppCompatActivity {
 
     private ArrayList<User> arrU;
 
+
     /**
-     * Runs on inception of UserListActivity
+     * Runs on inception of activity
      *
      * @param savedInstanceState
      */
@@ -74,7 +75,11 @@ public class UserListActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int item) {
                         if (items[item].equals("Active")) {
                             u2.setStatus("Active");
-                            UserDBHelper.setStatus(u2.getUsername(), "Active");
+                            /**
+                             * Runs on inception of UserListActivity
+                             *
+                             * @param savedInstanceState
+                             */                  UserDBHelper.setStatus(u2.getUsername(), "Active");
                         } else if (items[item].equals("Locked")) {
                             u2.setStatus("Locked");
                             UserDBHelper.setStatus(u2.getUsername(), "Locked");

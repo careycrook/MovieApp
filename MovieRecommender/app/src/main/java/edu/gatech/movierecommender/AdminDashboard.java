@@ -24,6 +24,7 @@ public class AdminDashboard extends AppCompatActivity {
      * Logout button dropdown
      *
      * @param menu
+     * @return success boolean
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,6 +37,7 @@ public class AdminDashboard extends AppCompatActivity {
      * On logout
      *
      * @param item
+     * @return success boolean
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -66,6 +68,7 @@ public class AdminDashboard extends AppCompatActivity {
      * Logout function
      *
      * @param item
+     * @return success boolean
      */
     public boolean logout(MenuItem item) {
         //Launch main activity.

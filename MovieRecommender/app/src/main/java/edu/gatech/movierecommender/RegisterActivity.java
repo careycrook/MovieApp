@@ -85,17 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
 
-        /*//Check that username is not already registered.
-        if (World.accountHash.containsKey(username)) {
-            Toast.makeText(this, "That username is taken.",
-                    Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        //Complete registration.
-        World.accountHash.put(username, u);
-        Toast.makeText(this, "Account registered!", Toast.LENGTH_LONG).show();*/
-
         //Set active user.
         World.currentUser = u;
 
