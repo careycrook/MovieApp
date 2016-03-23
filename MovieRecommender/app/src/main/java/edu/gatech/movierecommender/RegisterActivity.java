@@ -1,6 +1,5 @@
 package edu.gatech.movierecommender;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static edu.gatech.movierecommender.UserDBHelper.checkIfInDB;
+import static edu.gatech.movierecommender.DBHelper.addUser;
+import static edu.gatech.movierecommender.DBHelper.checkIfInDB;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -67,18 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "A user by that name already exists", Toast.LENGTH_LONG).show();
             return;
         } else {
-            ContentValues userInfo = new ContentValues();
-            userInfo.put("name", name);
-            userInfo.put("email", email);
-            userInfo.put("username", username);
-            userInfo.put("password", password1.hashCode());
-            userInfo.put("status", "Active");
-            userInfo.put("major", "NONE");
-            userInfo.put("description", "NONE");
-
-            long check = World.DB.insert("users", null, userInfo);
-
-            if (check != 0) {
+            if (addUser(u)) {
                 Toast.makeText(this, "Account registered!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Account registration failed!", Toast.LENGTH_LONG).show();

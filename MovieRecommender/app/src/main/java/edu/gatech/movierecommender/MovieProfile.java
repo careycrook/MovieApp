@@ -16,6 +16,11 @@ import android.widget.Toast;
 import java.io.InputStream;
 import java.net.URL;
 
+import static edu.gatech.movierecommender.DBHelper.addNewMovie;
+import static edu.gatech.movierecommender.DBHelper.addRating;
+import static edu.gatech.movierecommender.DBHelper.getMovie;
+import static edu.gatech.movierecommender.DBHelper.isMovie;
+
 public class MovieProfile extends AppCompatActivity {
 
     private Bitmap bitmap;
@@ -65,15 +70,18 @@ public class MovieProfile extends AppCompatActivity {
 
             //Make rating and movie
             Rating r = new Rating(rb.getRating(), et.getText().toString(), World.currentUser);
-            Movie m = World.videoHash.get(title);
-            if (m == null) {
-                m = new Movie(title);
-            }
-            m.setUrl(getIntent().getStringExtra("url"));
-            m.addRating(r);
+            Movie m;
 
-            //Update video hash
-            World.videoHash.put(title, m);
+            if (isMovie(title)) {
+                m = getMovie(title);
+            } else {
+                m = new Movie(title);
+                m.setUrl(getIntent().getStringExtra("url"));
+                addNewMovie(m);
+            }
+
+            m.addRating(r);
+            addRating(m, r);
 
             //Clear controls and notify
             rb.setRating(0);

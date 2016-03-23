@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static edu.gatech.movierecommender.DBHelper.getAllMovies;
+
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -78,8 +80,8 @@ public class SearchActivity extends AppCompatActivity {
                                 ArrayList<String> titles = new ArrayList<String>();
                                 for (int i = 0; i < s.length(); i++) {
                                     JSONObject c = s.getJSONObject(i);
-                                    titles.add(c.getString("Title"));
-                                    titleArr.add(c.getString("Title"));
+                                    titles.add(c.getString("Title") + " (" + c.getString("Year").replaceAll(" ", "") + ")");
+                                    titleArr.add(c.getString("Title") + " (" + c.getString("Year").replaceAll(" ", "") + ")");
                                     imgArr.add(c.getString("Poster"));
                                 }
                                 ArrayAdapter<String> itemsAdapter =
@@ -113,7 +115,7 @@ public class SearchActivity extends AppCompatActivity {
         } else if (query.equals("TOP")){
 
             //arrays
-            ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
+            ArrayList<Movie> movieList = getAllMovies();
             Collections.sort(movieList);
             ArrayList<String> arr = new ArrayList<>();
             ArrayList<String> img = new ArrayList<>();
@@ -149,7 +151,7 @@ public class SearchActivity extends AppCompatActivity {
         } else {
 
             //Arrays
-            ArrayList<Movie> movieList = new ArrayList<Movie>(World.videoHash.values());
+            ArrayList<Movie> movieList = getAllMovies();
             ArrayList<Movie> majorMovieList = new ArrayList<Movie>();
             String major = World.currentUser.getProfile().getMajor();
 

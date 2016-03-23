@@ -1,7 +1,6 @@
 package edu.gatech.movierecommender;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,7 +33,7 @@ public class UserListActivity extends AppCompatActivity {
         populate.setBackgroundColor(Color.BLACK);
 
         //Fill arraylist with list items.
-        arrU = UserDBHelper.getAllUsers();
+        arrU = DBHelper.getAllUsers();
         ArrayList<String> l = new ArrayList<>();
         for (User u : arrU) {
             l.add(u.getUsername() + ": " + u.getStatus());
@@ -79,13 +77,13 @@ public class UserListActivity extends AppCompatActivity {
                              * Runs on inception of UserListActivity
                              *
                              * @param savedInstanceState
-                             */                  UserDBHelper.setStatus(u2.getUsername(), "Active");
+                             */                  DBHelper.setStatus(u2.getUsername(), "Active");
                         } else if (items[item].equals("Locked")) {
                             u2.setStatus("Locked");
-                            UserDBHelper.setStatus(u2.getUsername(), "Locked");
+                            DBHelper.setStatus(u2.getUsername(), "Locked");
                         } else if (items[item].equals("Banned")) {
                             u2.setStatus("Banned");
-                            UserDBHelper.setStatus(u2.getUsername(), "Banned");
+                            DBHelper.setStatus(u2.getUsername(), "Banned");
                         }
                         dialog.dismiss();
 

@@ -2,15 +2,13 @@ package edu.gatech.movierecommender;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import java.util.HashMap;
-
-import static edu.gatech.movierecommender.UserDBHelper.initMovieTable;
-import static edu.gatech.movierecommender.UserDBHelper.initUserTable;
+import static edu.gatech.movierecommender.DBHelper.DATABASE_NAME;
+import static edu.gatech.movierecommender.DBHelper.initMovieTable;
+import static edu.gatech.movierecommender.DBHelper.initUserTable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (World.DB == null) {
-            World.DB = openOrCreateDatabase("movieapp.db", Context.MODE_PRIVATE, null);
+            World.DB = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
 
             initUserTable();
             initMovieTable();

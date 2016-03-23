@@ -35,20 +35,21 @@ public class Movie implements Comparable<Movie> {
         averageRating = (aggregateRating + ratings.get(ratings.size() - 1).getRating())
                     / ratings.size();
 
-        String major = World.currentUser.getProfile().getMajor();
+        String major = r.getPoster().getProfile().getMajor();
 
-        //Add to majorRatins arraylist
+        //Add to majorRatings ArrayList
         if (majorRatings.containsKey(major)) {
             majorRatings.get(major).add(r.getRating());
         } else {
             majorRatings.put(major, new ArrayList<Float>());
+            majorRatings.get(major).add(r.getRating());
         }
     }
 
     /**
      * Gets ratings for a major
      *
-     * @return the hashmap of majors to ratins
+     * @return the HashMap of majors to ratings
      */
     public HashMap<String, ArrayList<Float>> getMajorRatings() { return majorRatings; }
 
@@ -82,6 +83,10 @@ public class Movie implements Comparable<Movie> {
      * @param s
      */
     public void setUrl(String s) { imgURL = s; }
+
+    public void setAverageRating(float r) {
+        averageRating = r;
+    }
 
     /**
      * Gets image url for this movie

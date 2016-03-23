@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import static edu.gatech.movierecommender.UserDBHelper.setDescription;
-import static edu.gatech.movierecommender.UserDBHelper.setMajor;
+import static edu.gatech.movierecommender.DBHelper.setDescription;
+import static edu.gatech.movierecommender.DBHelper.setMajor;
 
 public class ProfileActivity extends AppCompatActivity {
 

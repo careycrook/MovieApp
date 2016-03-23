@@ -8,6 +8,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import static edu.gatech.movierecommender.DBHelper.getMovie;
+import static edu.gatech.movierecommender.DBHelper.isMovie;
+
 public class RatingsActivity extends AppCompatActivity {
 
     private Context c = this;
@@ -26,10 +29,12 @@ public class RatingsActivity extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.ratinglist);
 
         //Only run if this movie has ratings
-        Movie m = World.videoHash.get(getIntent().getStringExtra("title"));
-        if (m == null) {
+        if (!isMovie(getIntent().getStringExtra("title"))) {
             return;
         }
+
+        Movie m = getMovie(getIntent().getStringExtra("title"));
+
         //Build rating strings and put them in an arraylist
         ArrayList<String> arr = new ArrayList<String>();
         ArrayList<Rating> ratingArr = m.getRatings();

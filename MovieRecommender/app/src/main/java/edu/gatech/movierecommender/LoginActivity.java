@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static edu.gatech.movierecommender.UserDBHelper.*;
+import static edu.gatech.movierecommender.DBHelper.*;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (status.equals("Banned")) {
                     Toast.makeText(this, "This account has been banned.", Toast.LENGTH_LONG).show();
                     passwordBox.setText("");
-                //Block and alert banned users on login attempt
+                //Block and alert locked users on login attempt
                 } else if (status.equals("Locked")) {
                     Toast.makeText(this, "This account is locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
                     passwordBox.setText("");
