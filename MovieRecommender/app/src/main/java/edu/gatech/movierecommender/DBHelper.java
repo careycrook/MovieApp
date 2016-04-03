@@ -54,9 +54,8 @@ class DBHelper {
     /**
      * Adds a new movie with no ratings to the table of movies
      * @param m the Movie object we want to add
-     * @return true if the Movie was successfully added
      */
-    public static void addNewMovie(Movie m) {
+    public static boolean addNewMovie(Movie m) {
         ContentValues movieInfo = new ContentValues();
         movieInfo.put("title", m.getTitle());
         movieInfo.put("averageRating", m.getAverageRating());
@@ -154,7 +153,6 @@ class DBHelper {
      * Returns true if the Rating is successfully added for a Movie
      * @param m The Movie we want to add a Rating to
      * @param r The Rating object we want to add
-     * @return true if the Rating is successfully added for a Movie
      */
     public static void addRating(Movie m, Rating r) {
         String tempTitle = m.getTitle().replaceAll(" ", "_").trim();

@@ -153,7 +153,6 @@ public class Dashboard extends AppCompatActivity {
      * Dialog branching.
      *
      * @param  v  View for layout
-     * @return true on successful completion
      */
     private void profileButton(View v) {
         //If currentUser does not have a profile, show the prompt.

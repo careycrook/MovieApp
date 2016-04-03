@@ -29,7 +29,7 @@
 
     <string name="view_user_list">View User List</string>
     <string name="welcome">Welcome to Movie Recommender!
-        If it&apos;s your first time using this app, tap the Register button below.
+        If it\&apos;s your first time using this app, tap the Register button below.
         If you are a returning user, tap the Login button.</string>
     <string name="welcomeShort">Welcome to Movie Recommender</string>
     <string name="movie_title">Movie title</string>
@@ -43,6 +43,7 @@
     <string name="enterRating">Enter your rating</string>
     <string name="recRatings">Recommendation (Highest Ratings)</string>
     <string name="recMajor">Recommendation (Major Relevant)</string>
+    <string name="name">Name</string>
     <string name="nameColon">Name:</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
