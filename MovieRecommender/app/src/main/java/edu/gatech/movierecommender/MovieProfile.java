@@ -77,7 +77,10 @@ public class MovieProfile extends AppCompatActivity {
             } else {
                 m = new Movie(title);
                 m.setUrl(getIntent().getStringExtra("url"));
-                addNewMovie(m);
+
+                if (!addNewMovie(m)) {
+                    System.out.println("Fatal DB error");
+                }
             }
 
             m.addRating(r);

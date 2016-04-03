@@ -121,7 +121,7 @@ public class SearchActivity extends AppCompatActivity {
             ArrayList<String> img = new ArrayList<>();
             ArrayList<String> title = new ArrayList<>();
 
-            //Fille arrays
+            //Fill arrays
             for (Movie m : movieList) {
                 arr.add(m.toString());
                 title.add(m.getTitle());
@@ -131,7 +131,7 @@ public class SearchActivity extends AppCompatActivity {
             final ArrayList<String> imgArr = img;
             final ArrayList<String> titles = title;
 
-            //Make adapter for listview
+            //Make adapter for ListView
             ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
             populate.setAdapter(itemsAdapter);
@@ -192,7 +192,7 @@ public class SearchActivity extends AppCompatActivity {
             final ArrayList<String> imgArr = img;
             final ArrayList<String> titles = title;
 
-            //Listview adapter
+            //ListView adapter
             ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
             populate.setAdapter(itemsAdapter);

@@ -43,7 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RatingsActivity" />
         <activity android:name=".AdminDashboard" />
-        <activity android:name=".UserListActivity"></activity>
+        <activity android:name=".UserListActivity"/>
     </application>
 
 </manifest>

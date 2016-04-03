@@ -112,9 +112,9 @@ public class Movie implements Comparable<Movie> {
     public float getAverageRating() { return averageRating; }
 
     /**
-     * Get rating arraylist for this movie
+     * Get rating ArrayList for this movie
      *
-     * @return arraylist of ratings
+     * @return ArrayList of ratings
      */
     public ArrayList<Rating> getRatings() {
         return ratings;
@@ -137,7 +137,7 @@ public class Movie implements Comparable<Movie> {
     }
 
     /**
-     * Get stringified version of the class
+     * Get String representation of the class
      *
      * @return class attributes as string
      */
