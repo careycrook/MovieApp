@@ -41,12 +41,19 @@ public class DBTests extends AndroidTestCase {
                 + "AUTOINCREMENT, title TEXT NOT NULL, averageRating REAL NOT NULL DEFAULT '0', " +
                 "imgURL TEXT NOT NULL)");
 
+        World.getDatabase().execSQL("DROP TABLE IF EXISTS users");
+
+        World.getDatabase().execSQL("CREATE TABLE IF NOT EXISTS users (_id INTEGER PRIMARY KEY "
+                + "AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, username TEXT NOT NULL," +
+                " password INTEGER NOT NULL DEFAULT '0', status TEXT NOT NULL, " +
+                "major TEXT NOT NULL, description TEXT NOT NULL)");
+
         rand = new Random();
     }
 
     @Test
     public void getAllMoviesSize() {
-        int j = rand.nextInt(100);
+        int j = rand.nextInt(10);
         ArrayList<Movie> movies = new ArrayList<Movie>();
 
         User u = new User("u", "u", "u", "u");
@@ -73,6 +80,7 @@ public class DBTests extends AndroidTestCase {
             m.addRating(r1);
             m.addRating(r2);
             m.addRating(r3);
+            movies.add(m);
         }
 
         List<Movie> result = DBHelper.getAllMovies();
@@ -82,7 +90,7 @@ public class DBTests extends AndroidTestCase {
 
     @Test
     public void getAllMoviesStableOrder() {
-        int j = rand.nextInt(100);
+        int j = rand.nextInt(10);
         ArrayList<Movie> movies = new ArrayList<Movie>();
 
         User u = new User("u", "u", "u", "u");
@@ -109,18 +117,19 @@ public class DBTests extends AndroidTestCase {
             m.addRating(r1);
             m.addRating(r2);
             m.addRating(r3);
+            movies.add(m);
         }
 
         List<Movie> result = DBHelper.getAllMovies();
 
         for (int i = 0; i < j; i++) {
-            assertTrue(movies.get(i).getTitle().equals(result.get(i)));
+            assertTrue(movies.get(i).getTitle().equals(result.get(i).getTitle()));
         }
     }
 
     @Test
     public void getAllMoviesPropertiesPreserved() {
-        int j = rand.nextInt(100);
+        int j = rand.nextInt(10);
         ArrayList<Movie> movies = new ArrayList<Movie>();
 
         User u = new User("u", "u", "u", "u");
@@ -147,6 +156,7 @@ public class DBTests extends AndroidTestCase {
             m.addRating(r1);
             m.addRating(r2);
             m.addRating(r3);
+            movies.add(m);
         }
 
         List<Movie> result = DBHelper.getAllMovies();
