@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Movie Recommender! If it&apos;s your first time using this app, tap the Register button below. If you are a returning user, tap the Login button."
+        android:text="@string/welcome"
         android:id="@+id/descLabel"
         android:layout_below="@+id/welcomeLabel"
         android:layout_alignStart="@+id/welcomeLabel"
@@ -21,7 +21,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register"
         android:id="@+id/registerButton"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/descLabel"
@@ -31,7 +31,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:id="@+id/loginButton"
         android:onClick="buttonLoginClick"
         android:layout_below="@+id/registerButton"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome to Movie Recommender"
+        android:text="@string/welcomeShort"
         android:id="@+id/welcomeLabel"
         android:layout_marginTop="23dp"
         android:layout_alignParentTop="true"

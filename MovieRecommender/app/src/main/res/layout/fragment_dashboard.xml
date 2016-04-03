@@ -13,7 +13,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="#E3E3E3"
-        android:hint="Movie title"
+        android:hint="@string/movie_title"
         android:textSize="30sp"
         android:textAlignment="center"
         android:layout_alignParentTop="true"
@@ -23,7 +23,7 @@
     <Button
         android:layout_width="100dip"
         android:layout_height="100dip"
-        android:text="Search"
+        android:text="@string/search"
         android:id="@+id/search_button"
         android:background="@android:color/holo_blue_bright"
         android:onClick="buttonSearchClick"
@@ -34,7 +34,7 @@
     <Button
         android:layout_width="100dip"
         android:layout_height="100dip"
-        android:text="Recommendation (Highest Ratings)"
+        android:text="@string/recRatings"
         android:id="@+id/search_button2"
         android:background="#7384da"
         android:onClick="buttonSearchClick2"
@@ -46,7 +46,7 @@
     <Button
         android:layout_width="100dip"
         android:layout_height="100dip"
-        android:text="Recommendation (Major Relevant)"
+        android:text="@string/recMajor"
         android:id="@+id/button"
         android:background="#7ddad8"
         android:onClick="buttonSearchClick3"

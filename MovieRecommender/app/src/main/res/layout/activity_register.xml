@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Register"
+        android:text="@string/register"
         android:id="@+id/registerTitleLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/nameRegisterTextBox"
             android:layout_gravity="right"
-            android:hint="Name"
+            android:hint="@string/name"
             android:layout_marginTop="20dp" />
 
         <EditText
@@ -46,14 +46,14 @@
             android:ems="10"
             android:id="@+id/emailRegisterTextBox"
             android:layout_gravity="right"
-            android:hint="Email" />
+            android:hint="@string/email" />
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/usernameRegisterTextBox"
             android:layout_gravity="right"
-            android:hint="Username" />
+            android:hint="@string/username" />
 
         <EditText
             android:layout_width="fill_parent"
@@ -62,19 +62,19 @@
             android:ems="10"
             android:id="@+id/passwordRegisterTextBox"
             android:layout_gravity="right"
-            android:hint="Password" />
+            android:hint="@string/password" />
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/password2RegisterTextBox"
             android:layout_gravity="right"
-            android:hint="Re-enter Password" />
+            android:hint="@string/passwordRetry" />
 
         <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="@string/submit"
         android:id="@+id/submitButton"
         android:onClick="buttonOnClick"
             android:layout_alignBottom="@+id/scrollView"

@@ -12,7 +12,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="100dip"
-        android:text="View User List"
+        android:text="@string/view_user_list"
         android:id="@+id/userListButton"
         android:textColor="#fff"
         android:background="#3F51B5"

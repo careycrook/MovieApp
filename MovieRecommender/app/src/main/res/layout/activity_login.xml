@@ -16,13 +16,13 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/loginLabel"
         android:layout_alignParentEnd="true"
-        android:hint="Username" />
+        android:hint="@string/username" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Login"
+        android:text="@string/login"
         android:id="@+id/loginLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -37,12 +37,12 @@
         android:layout_below="@+id/usernameTextBox"
         android:layout_alignStart="@+id/usernameTextBox"
         android:layout_alignEnd="@+id/usernameTextBox"
-        android:hint="Password" />
+        android:hint="@string/password" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Log In"
+        android:text="@string/login"
         android:id="@+id/signInButton"
         android:layout_below="@+id/passwordTextBox"
         android:layout_marginTop="30dp"
