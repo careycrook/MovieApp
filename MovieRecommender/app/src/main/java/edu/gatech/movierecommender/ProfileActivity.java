@@ -38,9 +38,9 @@ public class ProfileActivity extends AppCompatActivity {
         EditText et = (EditText) findViewById(R.id.descTextBox);
 
         //Set text in controls
-        usernameLabel.setText("Username: " + World.currentUser.getUsername());
-        nameLabel.setText("Name: " + World.currentUser.getName());
-        emailLabel.setText("Email: " + World.currentUser.getEmail());
+        usernameLabel.setText(getString(R.string.usernameLabel, World.currentUser.getUsername()));
+        nameLabel.setText(getString(R.string.nameLabel, World.currentUser.getName()));
+        emailLabel.setText(getString(R.string.emailLabel, World.currentUser.getEmail()));
         et.setText(World.currentUser.getProfile().getDesc());
         spinner.setSelection(adapter.getPosition(World.currentUser.getProfile().getMajor()));
     }
