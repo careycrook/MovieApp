@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
      *
      * @param  v  View for layout
      */
+    @SuppressWarnings("unused")
     public void buttonOnClick(View v) {
         //Get references to all controls and text data.
         EditText usernameBox = (EditText) findViewById(R.id.usernameTextBox);

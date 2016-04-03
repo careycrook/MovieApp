@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
      *
      * @param  v  View for layout
      */
+    @SuppressWarnings("unused")
     public void buttonOnClick(View v) {
 
         //Get references to controls.

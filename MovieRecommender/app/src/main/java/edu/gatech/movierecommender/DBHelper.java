@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 class DBHelper {
 
-    public static final int DATABASE_VERSION = 36;
+    // Increment database version when updating schema
     public static final String DATABASE_NAME = "DB.db";
 
     /**

@@ -59,6 +59,7 @@ public class AdminDashboard extends AppCompatActivity {
      *
      * @param v current View
      */
+    @SuppressWarnings("unused")
     public void viewUserList(View v) {
         Intent newIntent = new Intent(getApplicationContext(), UserListActivity.class);
         startActivity(newIntent);
@@ -69,6 +70,7 @@ public class AdminDashboard extends AppCompatActivity {
      *
      * @param item item on action bar
      */
+    @SuppressWarnings("unused")
     public void logout(MenuItem item) {
         //Launch main activity.
         Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);

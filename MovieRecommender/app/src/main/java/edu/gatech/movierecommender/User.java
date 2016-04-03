@@ -2,10 +2,10 @@ package edu.gatech.movierecommender;
 
 public class User {
 
-    private String name;
-    private String email;
-    private String username;
-    private String password;
+    private final String name;
+    private final String email;
+    private final String username;
+    private final String password;
     private String status;
     private Profile profile;
 
@@ -35,30 +35,12 @@ public class User {
     }
 
     /**
-     * Set the name for this user
-     *
-     * @param name name of user
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Return the email for this user
      *
      * @return the person's email
      */
     public String getEmail() {
         return email;
-    }
-
-    /**
-     * Set the email for this user
-     *
-     * @param email email of user
-     */
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     /**
@@ -71,30 +53,12 @@ public class User {
     }
 
     /**
-     * Set the username for this user
-     *
-     * @param username username of user
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
      * Return the password for this user
      *
      * @return the person's password
      */
     public String getPassword() {
         return password;
-    }
-
-    /**
-     * Set the password for this user
-     *
-     * @param password password of user
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**

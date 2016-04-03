@@ -50,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
      *
      * @param  v  View for layout
      */
+    @SuppressWarnings("unused")
     public void finishProfile(View v) {
         //Get references to controls.
         Spinner spinner = (Spinner) findViewById(R.id.majorSpinner);

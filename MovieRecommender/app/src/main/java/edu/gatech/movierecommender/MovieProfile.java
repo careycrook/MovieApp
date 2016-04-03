@@ -58,6 +58,7 @@ public class MovieProfile extends AppCompatActivity {
      *
      * @param  v  View for layout
      */
+    @SuppressWarnings("unused")
     public void onPost(View v) {
         //If user doesn't have a profile, fail
         if (World.currentUser.getProfile() == null) {
@@ -98,6 +99,7 @@ public class MovieProfile extends AppCompatActivity {
      *
      * @param  v  View for layout
      */
+    @SuppressWarnings("unused")
     public void onSeeRatings(View v) {
         Intent seeRatings = new Intent(getBaseContext(), RatingsActivity.class);
         seeRatings.putExtra("title", getIntent().getStringExtra("title"));

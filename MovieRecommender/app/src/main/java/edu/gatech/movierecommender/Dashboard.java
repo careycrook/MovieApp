@@ -114,6 +114,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param  item  MenuItem corresponding to this method.
      */
+    @SuppressWarnings("unused")
     public void logout(MenuItem item) {
         //Launch main activity.
         Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -272,6 +273,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param v View for layout
      */
+    @SuppressWarnings("unused")
     public void buttonSearchClick(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         EditText searchBox = (EditText) findViewById(R.id.search_box);
@@ -291,6 +293,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param v View for layout
      */
+    @SuppressWarnings("unused")
     public void buttonSearchClick2(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "TOP");
@@ -303,6 +306,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param v View for layout
      */
+    @SuppressWarnings("unused")
     public void buttonSearchClick3(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "MAJOR");

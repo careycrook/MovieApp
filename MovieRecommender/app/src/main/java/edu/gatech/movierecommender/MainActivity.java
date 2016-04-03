@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
      * @param  v  View for layout
      */
+    @SuppressWarnings("unused")
     public void buttonLoginClick(View v) {
         //Open login activity.
         Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
      * @param  v  View for layout
      */
+    @SuppressWarnings("unused")
     public void buttonRegisterClick(View v) {
         //Open register activity.
         Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
