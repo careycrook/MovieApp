@@ -7,12 +7,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static edu.gatech.movierecommender.DBHelper.getMovie;
 import static edu.gatech.movierecommender.DBHelper.isMovie;
 
 public class RatingsActivity extends AppCompatActivity {
 
+    /**
+     * Context
+     */
     private final Context c = this;
 
     /**
@@ -37,7 +41,7 @@ public class RatingsActivity extends AppCompatActivity {
 
         //Build rating strings and put them in an ArrayList
         final ArrayList<String> arr = new ArrayList<>();
-        final ArrayList<Rating> ratingArr = m.getRatings();
+        final List<Rating> ratingArr = m.getRatings();
         for (final Rating r : ratingArr) {
             String build = "";
             build += r.getPoster().getUsername() + " (";

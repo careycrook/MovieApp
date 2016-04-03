@@ -17,8 +17,13 @@ import static edu.gatech.movierecommender.DBHelper.getStatus;
 import static edu.gatech.movierecommender.DBHelper.lockUser;
 
 public class LoginActivity extends AppCompatActivity {
-
+    /**
+     * Total attempts so far
+     **/
     private int passwordAttempts = 0;
+    /**
+     * Admin
+     **/
     private static final String ADMIN = "admin";
 
     /**
@@ -83,8 +88,8 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(dashboardIntent);
                             //Lock the user
                         } else {
-                            final int NUM_ATTEMPTS = 3;
-                            if (passwordAttempts >= NUM_ATTEMPTS) {
+                            final int ATTEMPTS = 3;
+                            if (passwordAttempts >= ATTEMPTS) {
                                 Toast.makeText(this, "This account is now locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
                                 lockUser(username);
                                 passwordBox.setText("");

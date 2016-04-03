@@ -27,12 +27,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import static edu.gatech.movierecommender.DBHelper.getAllMovies;
 
 
 public class SearchActivity extends AppCompatActivity {
 
+    /**
+     * Context
+     */
     private final Context c = this;
 
     /**
@@ -53,9 +57,9 @@ public class SearchActivity extends AppCompatActivity {
         if (isSearch) {
             RequestQueue mRequestQueue;
 
-            final int BASE_SIZE = 1024;
+            final int BASE = 1024;
             // Instantiate the cache
-            final Cache cache = new DiskBasedCache(getCacheDir(), BASE_SIZE * BASE_SIZE); // 1MB cap
+            final Cache cache = new DiskBasedCache(getCacheDir(), BASE * BASE); // 1MB cap
 
             // Set up the network to use HttpURLConnection as the HTTP client.
             final Network network = new BasicNetwork(new HurlStack());
@@ -115,7 +119,7 @@ public class SearchActivity extends AppCompatActivity {
         } else if (("TOP").equals(query)){
 
             //arrays
-            final ArrayList<Movie> movieList = getAllMovies();
+            final List<Movie> movieList = getAllMovies();
             Collections.sort(movieList);
             final ArrayList<String> arr = new ArrayList<>();
             final ArrayList<String> img = new ArrayList<>();
@@ -151,7 +155,7 @@ public class SearchActivity extends AppCompatActivity {
         } else {
 
             //Arrays
-            final ArrayList<Movie> movieList = getAllMovies();
+            final List<Movie> movieList = getAllMovies();
             final ArrayList<Movie> majorMovieList = new ArrayList<>();
             final String major = World.getCurrentUser().getProfile().getMajor();
 

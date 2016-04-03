@@ -9,10 +9,25 @@ import java.util.Map;
 
 public class Movie implements Comparable<Movie> {
 
+    /**
+     * Title
+     */
     private final String title;
+    /**
+     * Ratings
+     */
     private final List<Rating> ratings;
+    /**
+     * Average Rating
+     */
     private float averageRating;
+    /**
+     * Major Ratings
+     */
     private final Map<String, ArrayList<Float>> majorRatings;
+    /**
+     * Image URL
+     */
     private String imgURL = "";
 
     /**
@@ -88,6 +103,11 @@ public class Movie implements Comparable<Movie> {
      */
     public void setUrl(String s) { imgURL = s; }
 
+    /**
+     * Gets item position
+     *
+     * @param r float to set rating
+     */
     public void setAverageRating(float r) {
         averageRating = r;
     }

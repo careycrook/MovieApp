@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,7 +26,13 @@ import static edu.gatech.movierecommender.DBHelper.isMovie;
 
 public class MovieProfile extends AppCompatActivity {
 
+    /**
+     * Image from movie
+     */
     private Bitmap bitmap;
+    /**
+     * The image in memory
+     */
     private ImageView img = null;
 
     private static final String TITLE = "title";
@@ -84,7 +91,7 @@ public class MovieProfile extends AppCompatActivity {
                 m.setUrl(getIntent().getStringExtra("url"));
 
                 if (!addNewMovie(m)) {
-                    System.out.println("Fatal DB error");
+                    Log.d("WARNING", "Fatal DB error");
                 }
             }
 

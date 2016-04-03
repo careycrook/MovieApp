@@ -2,11 +2,29 @@ package edu.gatech.movierecommender;
 
 public class User {
 
+    /**
+     * Name
+     */
     private final String name;
+    /**
+     * Email
+     */
     private final String email;
+    /**
+     * Username
+     */
     private final String username;
+    /**
+     * Password
+     */
     private final String password;
+    /**
+     * Status
+     */
     private String status;
+    /**
+     * Profile
+     */
     private Profile profile;
 
     /**

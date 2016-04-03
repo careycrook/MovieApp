@@ -18,6 +18,9 @@ import static edu.gatech.movierecommender.DBHelper.lockUser;
 
 public class UserListActivity extends AppCompatActivity {
 
+    /**
+     * Array of users
+     */
     private List<User> arrU;
 
     private final String ACTIVE = "Active";

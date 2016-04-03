@@ -2,8 +2,17 @@ package edu.gatech.movierecommender;
 
 class Rating {
 
+    /**
+     * Rating
+     */
     private final float rating;
+    /**
+     * Comment
+     */
     private final String comment;
+    /**
+     * Poster
+     */
     private final User poster;
 
     /**

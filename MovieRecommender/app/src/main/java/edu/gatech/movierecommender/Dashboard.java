@@ -1,6 +1,7 @@
 package edu.gatech.movierecommender;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 public class Dashboard extends AppCompatActivity {
 
     private final String unused = "unused";
+    private Context c = this;
 
     /**
      * Runs on inception of activity
@@ -188,13 +190,11 @@ public class Dashboard extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
-        }
-
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          *
+         * @param sectionNumber the section number
          * @return PlaceholderFragment
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
@@ -208,6 +208,9 @@ public class Dashboard extends AppCompatActivity {
         /**
          * Create view listener
          *
+         * @param inflater item to grow
+         * @param container holds the controls
+         * @param savedInstanceState the bundle
          * @return view
          */
         @Override
@@ -223,6 +226,11 @@ public class Dashboard extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        /**
+         * Gets item position
+         *
+         * @param fm Fragment manager
+         */
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -270,6 +278,10 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
+    Intent results;
+    EditText searchBox;
+    String query;
+
     /**
      * Search function
      *
@@ -277,9 +289,9 @@ public class Dashboard extends AppCompatActivity {
      */
     @SuppressWarnings(unused)
     public void buttonSearchClick(View v) {
-        final Intent results = new Intent(getApplicationContext(), SearchActivity.class);
-        final EditText searchBox = (EditText) findViewById(R.id.search_box);
-        final String query = searchBox.getText().toString();
+        results = new Intent(c, SearchActivity.class);
+        searchBox = (EditText) findViewById(R.id.search_box);
+        query = searchBox.getText().toString();
         results.putExtra("QUERY", query);
         results.putExtra("TITLE", true);
 
@@ -297,7 +309,7 @@ public class Dashboard extends AppCompatActivity {
      */
     @SuppressWarnings(unused)
     public void buttonSearchClick2(View v) {
-        final Intent results = new Intent(getApplicationContext(), SearchActivity.class);
+        results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "TOP");
         results.putExtra("TYPE", false);
         startActivity(results);
@@ -310,7 +322,7 @@ public class Dashboard extends AppCompatActivity {
      */
     @SuppressWarnings(unused)
     public void buttonSearchClick3(View v) {
-        final Intent results = new Intent(getApplicationContext(), SearchActivity.class);
+        results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "MAJOR");
         results.putExtra("TYPE", false);
 
