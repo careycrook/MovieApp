@@ -170,9 +170,6 @@ class DBHelper {
 
         if (check != 0) {
             updateAverageRating(m, r.getRating());
-            return;
-        } else {
-            return;
         }
     }
 
