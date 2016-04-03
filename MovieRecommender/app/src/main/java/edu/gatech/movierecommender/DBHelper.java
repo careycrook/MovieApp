@@ -6,10 +6,12 @@ import android.database.sqlite.SQLiteException;
 
 import java.util.ArrayList;
 
-class DBHelper {
+final class DBHelper {
 
     // Increment database version when updating schema
     public static final String DATABASE_NAME = "DB.db";
+
+    private DBHelper(){}
 
     /**
      * Create table for users
