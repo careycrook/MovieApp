@@ -46,7 +46,8 @@
         android:layout_alignEnd="@+id/ratingBar"
         android:layout_alignStart="@+id/ratingBar"
         android:maxLines="2"
-        android:layout_marginTop="-5dp" />
+        android:layout_marginTop="-5dp"
+        android:inputType="textMultiLine"/>
 
     <RatingBar
         android:layout_width="wrap_content"
