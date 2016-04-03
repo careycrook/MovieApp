@@ -12,7 +12,7 @@ public class AdminDashboard extends AppCompatActivity {
     /**
      * Runs on inception of activity
      *
-     * @param savedInstanceState
+     * @param savedInstanceState default argument
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class AdminDashboard extends AppCompatActivity {
     /**
      * Logout button dropdown
      *
-     * @param menu
+     * @param menu menu to inflate
      * @return success boolean
      */
     @Override
@@ -36,7 +36,7 @@ public class AdminDashboard extends AppCompatActivity {
     /**
      * On logout
      *
-     * @param item
+     * @param item item on action bar
      * @return success boolean
      */
     @Override
@@ -57,7 +57,7 @@ public class AdminDashboard extends AppCompatActivity {
     /**
      * On button click to view user list
      *
-     * @param v
+     * @param v current View
      */
     public void viewUserList(View v) {
         Intent newIntent = new Intent(getApplicationContext(), UserListActivity.class);
@@ -67,14 +67,12 @@ public class AdminDashboard extends AppCompatActivity {
     /**
      * Logout function
      *
-     * @param item
-     * @return success boolean
+     * @param item item on action bar
      */
-    public boolean logout(MenuItem item) {
+    public void logout(MenuItem item) {
         //Launch main activity.
         Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(homeIntent);
-        return true;
     }
 
     /**
@@ -83,4 +81,5 @@ public class AdminDashboard extends AppCompatActivity {
     @Override
     public void onBackPressed() {
     }
+
 }

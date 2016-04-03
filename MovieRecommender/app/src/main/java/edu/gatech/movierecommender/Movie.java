@@ -1,14 +1,16 @@
 package edu.gatech.movierecommender;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Movie implements Comparable<Movie> {
 
-    private String title;
-    private ArrayList<Rating> ratings;
+    private final String title;
+    private final ArrayList<Rating> ratings;
     private float averageRating;
-    private HashMap<String, ArrayList<Float>> majorRatings;
+    private final HashMap<String, ArrayList<Float>> majorRatings;
     private String imgURL = "";
 
     /**
@@ -19,7 +21,7 @@ public class Movie implements Comparable<Movie> {
     public Movie(String t) {
         title = t;
         ratings = new ArrayList<>();
-        majorRatings = new HashMap<String, ArrayList<Float>>();
+        majorRatings = new HashMap<>();
     }
 
     /**
@@ -80,7 +82,7 @@ public class Movie implements Comparable<Movie> {
     /**
      * Set image url for this movie
      *
-     * @param s
+     * @param s url of image
      */
     public void setUrl(String s) { imgURL = s; }
 
@@ -124,7 +126,7 @@ public class Movie implements Comparable<Movie> {
      * @param m compares this movie to average
      * @return -1 for <, 0 for =, 1 for >
      */
-    public int compareTo(Movie m) {
+    public int compareTo(@NonNull Movie m) {
         if (this.getAverageRating() > m.getAverageRating()) {
             return -1;
         } else if (this.getAverageRating() == m.getAverageRating()) {

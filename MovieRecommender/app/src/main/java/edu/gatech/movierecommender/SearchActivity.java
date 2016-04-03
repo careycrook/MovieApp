@@ -33,12 +33,12 @@ import static edu.gatech.movierecommender.DBHelper.getAllMovies;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private Context c = this;
+    private final Context c = this;
 
     /**
      * Runs on inception of activity
      *
-     * @param savedInstanceState
+     * @param savedInstanceState default argument
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +66,8 @@ public class SearchActivity extends AppCompatActivity {
             mRequestQueue.start();
             String url = "http://www.omdbapi.com/?s=" + query;
 
-            final ArrayList<String> titleArr = new ArrayList<String>();
-            final ArrayList<String> imgArr = new ArrayList<String>();
+            final ArrayList<String> titleArr = new ArrayList<>();
+            final ArrayList<String> imgArr = new ArrayList<>();
 
             // Formulate the request and handle the response.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -77,7 +77,7 @@ public class SearchActivity extends AppCompatActivity {
                             try {
                                 JSONObject jsonObj = new JSONObject(response);
                                 JSONArray s = jsonObj.getJSONArray("Search");
-                                ArrayList<String> titles = new ArrayList<String>();
+                                ArrayList<String> titles = new ArrayList<>();
                                 for (int i = 0; i < s.length(); i++) {
                                     JSONObject c = s.getJSONObject(i);
                                     titles.add(c.getString("Title") + " (" + c.getString("Year").replaceAll(" ", "") + ")");
@@ -85,7 +85,7 @@ public class SearchActivity extends AppCompatActivity {
                                     imgArr.add(c.getString("Poster"));
                                 }
                                 ArrayAdapter<String> itemsAdapter =
-                                        new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, titles);
+                                        new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, titles);
                                 populate.setAdapter(itemsAdapter);
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
@@ -119,7 +119,7 @@ public class SearchActivity extends AppCompatActivity {
             Collections.sort(movieList);
             ArrayList<String> arr = new ArrayList<>();
             ArrayList<String> img = new ArrayList<>();
-            ArrayList<String> title = new ArrayList<String>();
+            ArrayList<String> title = new ArrayList<>();
 
             //Fille arrays
             for (Movie m : movieList) {
@@ -133,7 +133,7 @@ public class SearchActivity extends AppCompatActivity {
 
             //Make adapter for listview
             ArrayAdapter<String> itemsAdapter =
-                    new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, arr);
+                    new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
             populate.setAdapter(itemsAdapter);
 
             //Click listener
@@ -152,7 +152,7 @@ public class SearchActivity extends AppCompatActivity {
 
             //Arrays
             ArrayList<Movie> movieList = getAllMovies();
-            ArrayList<Movie> majorMovieList = new ArrayList<Movie>();
+            ArrayList<Movie> majorMovieList = new ArrayList<>();
             String major = World.currentUser.getProfile().getMajor();
 
             //Fill arrays
@@ -180,7 +180,7 @@ public class SearchActivity extends AppCompatActivity {
             //Arrays
             ArrayList<String> arr = new ArrayList<>();
             ArrayList<String> img = new ArrayList<>();
-            ArrayList<String> title = new ArrayList<String>();
+            ArrayList<String> title = new ArrayList<>();
 
             //Fill them
             for (Movie m : majorMovieList) {
@@ -194,7 +194,7 @@ public class SearchActivity extends AppCompatActivity {
 
             //Listview adapter
             ArrayAdapter<String> itemsAdapter =
-                    new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, arr);
+                    new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
             populate.setAdapter(itemsAdapter);
 
             //Click listener

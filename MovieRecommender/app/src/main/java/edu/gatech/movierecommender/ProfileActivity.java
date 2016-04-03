@@ -17,7 +17,7 @@ public class ProfileActivity extends AppCompatActivity {
     /**
      * Runs on inception of activity
      *
-     * @param savedInstanceState
+     * @param savedInstanceState default argument
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

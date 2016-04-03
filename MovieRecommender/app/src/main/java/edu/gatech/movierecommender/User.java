@@ -37,7 +37,7 @@ public class User {
     /**
      * Set the name for this user
      *
-     * @param name
+     * @param name name of user
      */
     public void setName(String name) {
         this.name = name;
@@ -55,7 +55,7 @@ public class User {
     /**
      * Set the email for this user
      *
-     * @param email
+     * @param email email of user
      */
     public void setEmail(String email) {
         this.email = email;
@@ -73,7 +73,7 @@ public class User {
     /**
      * Set the username for this user
      *
-     * @param username
+     * @param username username of user
      */
     public void setUsername(String username) {
         this.username = username;
@@ -91,7 +91,7 @@ public class User {
     /**
      * Set the password for this user
      *
-     * @param password
+     * @param password password of user
      */
     public void setPassword(String password) {
         this.password = password;
@@ -109,7 +109,7 @@ public class User {
     /**
      * Set the profile for this user
      *
-     * @param profile
+     * @param profile profile of user
      */
     public void setProfile(Profile profile) {
         this.profile = profile;
@@ -125,7 +125,7 @@ public class User {
     /**
      * Set the status for this user
      *
-     * @param status
+     * @param status status of user
      */
     public void setStatus(String status) { this.status = status; }
 }

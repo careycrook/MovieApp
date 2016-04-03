@@ -1,10 +1,10 @@
 package edu.gatech.movierecommender;
 
-public class Rating {
+class Rating {
 
-    private float rating;
-    private String comment;
-    private User poster;
+    private final float rating;
+    private final String comment;
+    private final User poster;
 
     /**
      * Contructor

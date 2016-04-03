@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteException;
 
 import java.util.ArrayList;
 
-public class DBHelper {
+class DBHelper {
 
     // Increment database version when updating schema
     public static final int DATABASE_VERSION = 36;
@@ -56,7 +56,7 @@ public class DBHelper {
      * @param m the Movie object we want to add
      * @return true if the Movie was successfully added
      */
-    public static boolean addNewMovie(Movie m) {
+    public static void addNewMovie(Movie m) {
         ContentValues movieInfo = new ContentValues();
         movieInfo.put("title", m.getTitle());
         movieInfo.put("averageRating", m.getAverageRating());
@@ -72,7 +72,7 @@ public class DBHelper {
      * @return an ArrayList of all of the Movies in the database
      */
     public static ArrayList<Movie> getAllMovies() {
-        ArrayList<Movie> temp = new ArrayList<Movie>();
+        ArrayList<Movie> temp = new ArrayList<>();
         String query = "SELECT * FROM movies";
 
         Cursor cursor = World.DB.rawQuery(query, null);
@@ -142,7 +142,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return m;
@@ -154,7 +156,7 @@ public class DBHelper {
      * @param r The Rating object we want to add
      * @return true if the Rating is successfully added for a Movie
      */
-    public static boolean addRating(Movie m, Rating r) {
+    public static void addRating(Movie m, Rating r) {
         String tempTitle = m.getTitle().replaceAll(" ", "_").trim();
 
         World.DB.execSQL("CREATE TABLE IF NOT EXISTS " + "\'" + tempTitle + "\'"
@@ -170,9 +172,9 @@ public class DBHelper {
 
         if (check != 0) {
             updateAverageRating(m, r.getRating());
-            return true;
+            return;
         } else {
-            return false;
+            return;
         }
     }
 
@@ -181,7 +183,7 @@ public class DBHelper {
      * @param m The Movie we want to update the Rating for
      * @param r The Rating we want to add
      */
-    public static void updateAverageRating(Movie m, float r) {
+    private static void updateAverageRating(Movie m, float r) {
         Cursor cursor = null;
         float originalRating = 0;
 
@@ -197,7 +199,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         String formattedTitle = m.getTitle().replaceAll(" ", "_").trim();
@@ -210,10 +214,12 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
-        float aggregateRating = 0;
+        float aggregateRating;
         float newRating = 0;
 
         if (numRatings != 0) {
@@ -231,8 +237,8 @@ public class DBHelper {
      * @param m The Movie we're looking up the Ratings for
      * @return an ArrayList of all Ratings for a given Movie
      */
-    public static ArrayList<Rating> getAllRatings(Movie m) {
-        ArrayList<Rating> temp = new ArrayList<Rating>();
+    private static ArrayList<Rating> getAllRatings(Movie m) {
+        ArrayList<Rating> temp = new ArrayList<>();
         String formattedTitle = m.getTitle().replaceAll(" ", "_").trim();
         String query = "SELECT * FROM " + "\'" + formattedTitle + "\'";
 
@@ -248,7 +254,7 @@ public class DBHelper {
             temp.add(new Rating(rating, comment, u));
         }
 
-        cursor.close();
+            cursor.close();
 
         return temp;
     }
@@ -260,17 +266,17 @@ public class DBHelper {
      *
      */
     public static ArrayList<User> getAllUsers() {
-        ArrayList<User> temp = new ArrayList<User>();
+        ArrayList<User> temp = new ArrayList<>();
         String query = "SELECT * FROM users";
 
         Cursor cursor = World.DB.rawQuery(query, null);
 
         while (cursor.moveToNext()) {
-            String name = "";
-            String email = "";
-            String username = "";
-            int password = 0;
-            String status = "";
+            String name;
+            String email;
+            String username;
+            int password;
+            String status;
 
             name = cursor.getString(cursor.getColumnIndex("name"));
             email = cursor.getString(cursor.getColumnIndex("email"));
@@ -284,7 +290,7 @@ public class DBHelper {
             temp.add(u);
         }
 
-        cursor.close();
+            cursor.close();
 
         return temp;
     }
@@ -294,7 +300,7 @@ public class DBHelper {
      * @param username The username of the User object we're looking for
      * @return the User object associated with a given username
      */
-    public static User getUser(String username) {
+    private static User getUser(String username) {
         Cursor cursor = null;
         User u = null;
 
@@ -315,7 +321,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return u;
@@ -412,7 +420,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return email;
@@ -439,7 +449,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return name;
@@ -466,7 +478,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return status;
@@ -493,7 +507,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return major;
@@ -520,7 +536,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return desc;
@@ -547,7 +565,9 @@ public class DBHelper {
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return passHash;

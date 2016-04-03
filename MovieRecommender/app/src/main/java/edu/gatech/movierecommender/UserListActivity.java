@@ -2,7 +2,6 @@ package edu.gatech.movierecommender;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +20,7 @@ public class UserListActivity extends AppCompatActivity {
     /**
      * Runs on inception of activity
      *
-     * @param savedInstanceState
+     * @param savedInstanceState default argument
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +40,13 @@ public class UserListActivity extends AppCompatActivity {
 
         //Array Adapter set up.
         ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, l);
+                new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, l);
         populate.setAdapter(itemsAdapter);
 
 
         //Click listener.
         populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
                 User u = arrU.get(position);
                 //Launch dialog.
                 dialog(u);
@@ -94,7 +92,7 @@ public class UserListActivity extends AppCompatActivity {
                         }
                         ListView populate = (ListView) findViewById(R.id.populate);
                         ArrayAdapter<String> itemsAdapter =
-                                new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, l);
+                                new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, l);
                         populate.setAdapter(itemsAdapter);
                     }
                 });

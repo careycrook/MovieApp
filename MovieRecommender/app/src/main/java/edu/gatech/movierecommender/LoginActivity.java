@@ -16,7 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Runs on inception of activity
      *
-     * @param savedInstanceState
+     * @param savedInstanceState default arguments
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,39 +48,43 @@ public class LoginActivity extends AppCompatActivity {
                 int theirHash = getPassHash(username);
                 String status = getStatus(username);
                 //Block and alert banned users on login attempt
-                if (status.equals("Banned")) {
-                    Toast.makeText(this, "This account has been banned.", Toast.LENGTH_LONG).show();
-                    passwordBox.setText("");
-                //Block and alert locked users on login attempt
-                } else if (status.equals("Locked")) {
-                    Toast.makeText(this, "This account is locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
-                    passwordBox.setText("");
-                //Success case
-                } else {
-                    //Set currentUser
-                    if (ourHash == theirHash) {
-                        Toast.makeText(this, "Login successful.", Toast.LENGTH_LONG).show();
-                        PASSWORD_ATTEMPTS = 0;
-                        World.currentUser = new User(getName(username), getEmail(username), username, password);
+                switch (status) {
+                    case "Banned":
+                        Toast.makeText(this, "This account has been banned.", Toast.LENGTH_LONG).show();
+                        passwordBox.setText("");
+                        //Block and alert locked users on login attempt
+                        break;
+                    case "Locked":
+                        Toast.makeText(this, "This account is locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
+                        passwordBox.setText("");
+                        //Success case
+                        break;
+                    default:
+                        //Set currentUser
+                        if (ourHash == theirHash) {
+                            Toast.makeText(this, "Login successful.", Toast.LENGTH_LONG).show();
+                            PASSWORD_ATTEMPTS = 0;
+                            World.currentUser = new User(getName(username), getEmail(username), username, password);
 
-                        if (!getMajor(username).equals("NONE")) {
-                            World.currentUser.setProfile(new Profile(getMajor(username), getDescription(username)));
-                        }
+                            if (!getMajor(username).equals("NONE")) {
+                                World.currentUser.setProfile(new Profile(getMajor(username), getDescription(username)));
+                            }
 
-                        Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
-                        startActivity(dashboardIntent);
-                    //Lock the user
-                    } else {
-                        if (PASSWORD_ATTEMPTS >= 3) {
-                            Toast.makeText(this, "This account is now locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
-                            lockUser(username);
-                            passwordBox.setText("");
+                            Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
+                            startActivity(dashboardIntent);
+                            //Lock the user
                         } else {
-                            Toast.makeText(this, "Incorrect password.", Toast.LENGTH_LONG).show();
-                            passwordBox.setText("");
-                            PASSWORD_ATTEMPTS++;
+                            if (PASSWORD_ATTEMPTS >= 3) {
+                                Toast.makeText(this, "This account is now locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
+                                lockUser(username);
+                                passwordBox.setText("");
+                            } else {
+                                Toast.makeText(this, "Incorrect password.", Toast.LENGTH_LONG).show();
+                                passwordBox.setText("");
+                                PASSWORD_ATTEMPTS++;
+                            }
                         }
-                    }
+                        break;
                 }
             //Name not found
             } else {

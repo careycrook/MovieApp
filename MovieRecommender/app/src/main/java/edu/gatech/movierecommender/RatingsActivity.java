@@ -13,12 +13,12 @@ import static edu.gatech.movierecommender.DBHelper.isMovie;
 
 public class RatingsActivity extends AppCompatActivity {
 
-    private Context c = this;
+    private final Context c = this;
 
     /**
      * Runs on inception of activity
      *
-     * @param savedInstanceState
+     * @param savedInstanceState default argument
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class RatingsActivity extends AppCompatActivity {
         Movie m = getMovie(getIntent().getStringExtra("title"));
 
         //Build rating strings and put them in an arraylist
-        ArrayList<String> arr = new ArrayList<String>();
+        ArrayList<String> arr = new ArrayList<>();
         ArrayList<Rating> ratingArr = m.getRatings();
         for (Rating r : ratingArr) {
             String build = "";
@@ -48,7 +48,7 @@ public class RatingsActivity extends AppCompatActivity {
 
         //Create ArrayAdapter
         ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, arr);
+                new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
         lv.setAdapter(itemsAdapter);
     }
 }

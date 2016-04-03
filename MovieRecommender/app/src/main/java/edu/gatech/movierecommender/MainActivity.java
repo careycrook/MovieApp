@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Runs on inception of activity
      *
-     * @param savedInstanceState
+     * @param savedInstanceState default arguments
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

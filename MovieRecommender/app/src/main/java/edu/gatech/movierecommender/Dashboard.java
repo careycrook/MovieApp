@@ -27,7 +27,7 @@ public class Dashboard extends AppCompatActivity {
     /**
      * Runs on inception of activity
      *
-     * @param savedInstanceState
+     * @param savedInstanceState default argument
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class Dashboard extends AppCompatActivity {
     /**
      * Logout button dropdown
      *
-     * @param menu
+     * @param menu item on action bar
      * @return success boolean
      */
     @Override
@@ -84,7 +84,7 @@ public class Dashboard extends AppCompatActivity {
     /**
      * On logout
      *
-     * @param item
+     * @param item item on action bar
      * @return success boolean
      */
     @Override
@@ -113,19 +113,17 @@ public class Dashboard extends AppCompatActivity {
      * Opens main page when activated.
      *
      * @param  item  MenuItem corresponding to this method.
-     * @return true on successful completion.
      */
-    public boolean logout(MenuItem item) {
+    public void logout(MenuItem item) {
         //Launch main activity.
         Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(homeIntent);
-        return true;
     }
 
     /**
      * Creates and launches dialog.
      *
-     * @param  v  View for layout
+     * @param v View for layout
      */
     private void dialog(View v) {
         //Create dialog.
@@ -157,7 +155,7 @@ public class Dashboard extends AppCompatActivity {
      * @param  v  View for layout
      * @return true on successful completion
      */
-    public boolean profileButton(View v) {
+    private void profileButton(View v) {
         //If currentUser does not have a profile, show the prompt.
         if (World.currentUser.getProfile() == null) {
             dialog(v);
@@ -165,7 +163,6 @@ public class Dashboard extends AppCompatActivity {
         } else {
             launchProfile(v);
         }
-        return true;
     }
 
     /**
@@ -173,7 +170,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param  v  View for layout
      */
-    public void launchProfile(View v) {
+    private void launchProfile(View v) {
         //Launch profile activity.
         Intent profileIntent = new Intent(v.getContext(), ProfileActivity.class);
         startActivity(profileIntent);
@@ -231,7 +228,7 @@ public class Dashboard extends AppCompatActivity {
         /**
          * Gets item position
          *
-         * @param position
+         * @param position current page
          * @return Fragment
          */
         @Override
@@ -274,7 +271,7 @@ public class Dashboard extends AppCompatActivity {
     /**
      * Search function
      *
-     * @param v
+     * @param v View for layout
      */
     public void buttonSearchClick(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
@@ -293,11 +290,10 @@ public class Dashboard extends AppCompatActivity {
     /**
      * Top recommendation function
      *
-     * @param v
+     * @param v View for layout
      */
     public void buttonSearchClick2(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
-        String query = "TOP";
         results.putExtra("QUERY", "TOP");
         results.putExtra("TYPE", false);
         startActivity(results);
@@ -306,11 +302,10 @@ public class Dashboard extends AppCompatActivity {
     /**
      * Major recommendation function
      *
-     * @param v
+     * @param v View for layout
      */
     public void buttonSearchClick3(View v) {
         Intent results = new Intent(getApplicationContext(), SearchActivity.class);
-        String query = "MAJOR";
         results.putExtra("QUERY", "MAJOR");
         results.putExtra("TYPE", false);
 
