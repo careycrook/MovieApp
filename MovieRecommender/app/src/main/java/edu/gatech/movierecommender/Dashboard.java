@@ -34,7 +34,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -46,19 +46,19 @@ public class Dashboard extends AppCompatActivity {
       may be best to switch to a
       {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        final SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         /*
       The {@link ViewPager} that will host the section contents.
      */
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+        final ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +92,7 @@ public class Dashboard extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -117,7 +117,7 @@ public class Dashboard extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void logout(MenuItem item) {
         //Launch main activity.
-        Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+        final Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(homeIntent);
     }
 
@@ -128,7 +128,7 @@ public class Dashboard extends AppCompatActivity {
      */
     private void dialog(View v) {
         //Create dialog.
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("You don't have a profile. Do you want to create a profile?");
         final View vi = v;
         //Create profile case.
@@ -145,7 +145,7 @@ public class Dashboard extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         //Show the dialog that was created.
         dialog.show();
     }
@@ -172,7 +172,7 @@ public class Dashboard extends AppCompatActivity {
      */
     private void launchProfile(View v) {
         //Launch profile activity.
-        Intent profileIntent = new Intent(v.getContext(), ProfileActivity.class);
+        final Intent profileIntent = new Intent(v.getContext(), ProfileActivity.class);
         startActivity(profileIntent);
     }
 
@@ -196,8 +196,8 @@ public class Dashboard extends AppCompatActivity {
          * @return PlaceholderFragment
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
+            final PlaceholderFragment fragment = new PlaceholderFragment();
+            final Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
@@ -275,9 +275,9 @@ public class Dashboard extends AppCompatActivity {
      */
     @SuppressWarnings("unused")
     public void buttonSearchClick(View v) {
-        Intent results = new Intent(getApplicationContext(), SearchActivity.class);
-        EditText searchBox = (EditText) findViewById(R.id.search_box);
-        String query = searchBox.getText().toString();
+        final Intent results = new Intent(getApplicationContext(), SearchActivity.class);
+        final EditText searchBox = (EditText) findViewById(R.id.search_box);
+        final String query = searchBox.getText().toString();
         results.putExtra("QUERY", query);
         results.putExtra("TITLE", true);
 
@@ -295,7 +295,7 @@ public class Dashboard extends AppCompatActivity {
      */
     @SuppressWarnings("unused")
     public void buttonSearchClick2(View v) {
-        Intent results = new Intent(getApplicationContext(), SearchActivity.class);
+        final Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "TOP");
         results.putExtra("TYPE", false);
         startActivity(results);
@@ -308,7 +308,7 @@ public class Dashboard extends AppCompatActivity {
      */
     @SuppressWarnings("unused")
     public void buttonSearchClick3(View v) {
-        Intent results = new Intent(getApplicationContext(), SearchActivity.class);
+        final Intent results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "MAJOR");
         results.putExtra("TYPE", false);
 

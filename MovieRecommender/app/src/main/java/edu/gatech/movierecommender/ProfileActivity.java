@@ -25,17 +25,17 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         //Get spinner and populate it from String resource file.
-        Spinner spinner = (Spinner) findViewById(R.id.majorSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        final Spinner spinner = (Spinner) findViewById(R.id.majorSpinner);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.spin, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         //Get references to controls.
-        TextView usernameLabel = (TextView) findViewById(R.id.usernameProfileLabel);
-        TextView nameLabel = (TextView) findViewById(R.id.nameProfileLabel);
-        TextView emailLabel = (TextView) findViewById(R.id.emailProfileLabel);
-        EditText et = (EditText) findViewById(R.id.descTextBox);
+        final TextView usernameLabel = (TextView) findViewById(R.id.usernameProfileLabel);
+        final TextView nameLabel = (TextView) findViewById(R.id.nameProfileLabel);
+        final TextView emailLabel = (TextView) findViewById(R.id.emailProfileLabel);
+        final EditText et = (EditText) findViewById(R.id.descTextBox);
 
         //Set text in controls
         usernameLabel.setText(getString(R.string.usernameLabel, World.getCurrentUser().getUsername()));
@@ -53,8 +53,8 @@ public class ProfileActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void finishProfile(View v) {
         //Get references to controls.
-        Spinner spinner = (Spinner) findViewById(R.id.majorSpinner);
-        EditText et = (EditText) findViewById(R.id.descTextBox);
+        final Spinner spinner = (Spinner) findViewById(R.id.majorSpinner);
+        final EditText et = (EditText) findViewById(R.id.descTextBox);
 
         //Set values in singleton.
         World.getCurrentUser().getProfile().setMajor(spinner.getSelectedItem().toString());
@@ -64,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         setDescription(World.getCurrentUser().getUsername(), et.getText().toString());
 
         //Close profile, reopen dashboard.
-        Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
+        final Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
         startActivity(dashboardIntent);
     }
 

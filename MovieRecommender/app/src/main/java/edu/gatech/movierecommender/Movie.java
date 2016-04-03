@@ -32,12 +32,12 @@ public class Movie implements Comparable<Movie> {
     public void addRating(Rating r) {
         ratings.add(r);
 
-        float aggregateRating = (ratings.size() - 1) * averageRating;
+        final float aggregateRating = (ratings.size() - 1) * averageRating;
 
         averageRating = (aggregateRating + ratings.get(ratings.size() - 1).getRating())
                     / ratings.size();
 
-        String major = r.getPoster().getProfile().getMajor();
+        final String major = r.getPoster().getProfile().getMajor();
 
         //Add to majorRatings ArrayList
         if (majorRatings.containsKey(major)) {
@@ -64,12 +64,12 @@ public class Movie implements Comparable<Movie> {
     public float getAverageMajorRating(String major) {
         if (majorRatings.containsKey(major)) {
             //Get all ratings for a major
-            ArrayList<Float> listRatings = majorRatings.get(major);
+            final ArrayList<Float> listRatings = majorRatings.get(major);
 
             //Calculate average rating
             float aggregateRating = 0;
 
-            for (Float f : listRatings) {
+            for (final Float f : listRatings) {
                 aggregateRating += f;
             }
 

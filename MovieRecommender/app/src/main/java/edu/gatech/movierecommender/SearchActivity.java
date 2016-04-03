@@ -45,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final boolean isSearch = intent.getBooleanExtra("TYPE", true);
         final ListView populate = (ListView) findViewById(R.id.populate);
         final String query = intent.getStringExtra("QUERY");
@@ -53,25 +53,25 @@ public class SearchActivity extends AppCompatActivity {
         if (isSearch) {
             RequestQueue mRequestQueue;
 
-            int BASE_SIZE = 1024;
+            final int BASE_SIZE = 1024;
             // Instantiate the cache
-            Cache cache = new DiskBasedCache(getCacheDir(), BASE_SIZE * BASE_SIZE); // 1MB cap
+            final Cache cache = new DiskBasedCache(getCacheDir(), BASE_SIZE * BASE_SIZE); // 1MB cap
 
             // Set up the network to use HttpURLConnection as the HTTP client.
-            Network network = new BasicNetwork(new HurlStack());
+            final Network network = new BasicNetwork(new HurlStack());
 
             // Instantiate the RequestQueue with the cache and network.
             mRequestQueue = new RequestQueue(cache, network);
 
             // Start the queue
             mRequestQueue.start();
-            String url = "http://www.omdbapi.com/?s=" + query;
+            final String url = "http://www.omdbapi.com/?s=" + query;
 
             final ArrayList<String> titleArr = new ArrayList<>();
             final ArrayList<String> imgArr = new ArrayList<>();
 
             // Formulate the request and handle the response.
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+            final StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -102,7 +102,7 @@ public class SearchActivity extends AppCompatActivity {
             //Click listener
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
-                    Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
+                    final Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
                     movieProfile.putExtra("title", titleArr.get(position));
                     movieProfile.putExtra("url", imgArr.get(position));
 
@@ -115,14 +115,14 @@ public class SearchActivity extends AppCompatActivity {
         } else if (("TOP").equals(query)){
 
             //arrays
-            ArrayList<Movie> movieList = getAllMovies();
+            final ArrayList<Movie> movieList = getAllMovies();
             Collections.sort(movieList);
-            ArrayList<String> arr = new ArrayList<>();
-            ArrayList<String> img = new ArrayList<>();
-            ArrayList<String> title = new ArrayList<>();
+            final ArrayList<String> arr = new ArrayList<>();
+            final ArrayList<String> img = new ArrayList<>();
+            final ArrayList<String> title = new ArrayList<>();
 
             //Fill arrays
-            for (Movie m : movieList) {
+            for (final Movie m : movieList) {
                 arr.add(m.toString());
                 title.add(m.getTitle());
                 img.add(m.getURL());
@@ -132,14 +132,14 @@ public class SearchActivity extends AppCompatActivity {
             final ArrayList<String> titles = title;
 
             //Make adapter for ListView
-            ArrayAdapter<String> itemsAdapter =
+            final ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
             populate.setAdapter(itemsAdapter);
 
             //Click listener
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
-                    Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
+                    final Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
                     movieProfile.putExtra("title", titles.get(position));
                     movieProfile.putExtra("url", imgArr.get(position));
 
@@ -151,12 +151,12 @@ public class SearchActivity extends AppCompatActivity {
         } else {
 
             //Arrays
-            ArrayList<Movie> movieList = getAllMovies();
-            ArrayList<Movie> majorMovieList = new ArrayList<>();
-            String major = World.getCurrentUser().getProfile().getMajor();
+            final ArrayList<Movie> movieList = getAllMovies();
+            final ArrayList<Movie> majorMovieList = new ArrayList<>();
+            final String major = World.getCurrentUser().getProfile().getMajor();
 
             //Fill arrays
-            for (Movie m : movieList) {
+            for (final Movie m : movieList) {
                 if (m.getMajorRatings().containsKey(major)) {
                     majorMovieList.add(m);
                 }
@@ -165,7 +165,7 @@ public class SearchActivity extends AppCompatActivity {
             //Custom sort
             Collections.sort(majorMovieList, new Comparator<Movie>() {
                 public int compare(Movie m1, Movie m2) {
-                    String compMajor = World.getCurrentUser().getProfile().getMajor();
+                    final String compMajor = World.getCurrentUser().getProfile().getMajor();
 
                     if (m1.getAverageMajorRating(compMajor) > m2.getAverageMajorRating(compMajor)) {
                         return -1;
@@ -178,12 +178,12 @@ public class SearchActivity extends AppCompatActivity {
             });
 
             //Arrays
-            ArrayList<String> arr = new ArrayList<>();
-            ArrayList<String> img = new ArrayList<>();
-            ArrayList<String> title = new ArrayList<>();
+            final ArrayList<String> arr = new ArrayList<>();
+            final ArrayList<String> img = new ArrayList<>();
+            final ArrayList<String> title = new ArrayList<>();
 
             //Fill them
-            for (Movie m : majorMovieList) {
+            for (final Movie m : majorMovieList) {
                 arr.add(m.toString());
                 title.add(m.getTitle());
                 img.add(m.getURL());
@@ -193,14 +193,14 @@ public class SearchActivity extends AppCompatActivity {
             final ArrayList<String> titles = title;
 
             //ListView adapter
-            ArrayAdapter<String> itemsAdapter =
+            final ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
             populate.setAdapter(itemsAdapter);
 
             //Click listener
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
-                    Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
+                    final Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
                     movieProfile.putExtra("title", titles.get(position));
                     movieProfile.putExtra("url", imgArr.get(position));
 

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void buttonLoginClick(View v) {
         //Open login activity.
-        Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+        final Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(loginIntent);
 
     }
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void buttonRegisterClick(View v) {
         //Open register activity.
-        Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
+        final Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(registerIntent);
     }
 

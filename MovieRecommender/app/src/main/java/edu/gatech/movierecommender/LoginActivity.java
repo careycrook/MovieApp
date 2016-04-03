@@ -32,22 +32,22 @@ public class LoginActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void buttonOnClick(View v) {
         //Get references to all controls and text data.
-        EditText usernameBox = (EditText) findViewById(R.id.usernameTextBox);
-        EditText passwordBox = (EditText) findViewById(R.id.passwordTextBox);
-        String username = usernameBox.getText().toString();
-        String password = passwordBox.getText().toString();
+        final EditText usernameBox = (EditText) findViewById(R.id.usernameTextBox);
+        final EditText passwordBox = (EditText) findViewById(R.id.passwordTextBox);
+        final String username = usernameBox.getText().toString();
+        final String password = passwordBox.getText().toString();
 
         //hard-coded admin log in
         if (("admin").equals(username) && ("admin").equals(password)) {
             World.setCurrentUser(new User("admin", "admin@google.com", "admin", "admin"));
-            Intent dashboardIntent = new Intent(getApplicationContext(), AdminDashboard.class);
+            final Intent dashboardIntent = new Intent(getApplicationContext(), AdminDashboard.class);
             startActivity(dashboardIntent);
         } else {
             //Access db to see if login is valid
             if (checkIfInDB("users", "username", username)) {
-                int ourHash = password.hashCode();
-                int theirHash = getPassHash(username);
-                String status = getStatus(username);
+                final int ourHash = password.hashCode();
+                final int theirHash = getPassHash(username);
+                final String status = getStatus(username);
                 //Block and alert banned users on login attempt
                 switch (status) {
                     case "Banned":
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                 World.getCurrentUser().setProfile(new Profile(getMajor(username), getDescription(username)));
                             }
 
-                            Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
+                            final Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
                             startActivity(dashboardIntent);
                             //Lock the user
                         } else {

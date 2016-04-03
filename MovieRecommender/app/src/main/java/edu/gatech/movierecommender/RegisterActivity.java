@@ -32,21 +32,21 @@ public class RegisterActivity extends AppCompatActivity {
     public void buttonOnClick(View v) {
 
         //Get references to controls.
-        EditText nameBox = (EditText) findViewById(R.id.nameRegisterTextBox);
-        EditText emailBox = (EditText) findViewById(R.id.emailRegisterTextBox);
-        EditText usernameBox = (EditText) findViewById(R.id.usernameRegisterTextBox);
-        EditText passwordBox = (EditText) findViewById(R.id.passwordRegisterTextBox);
-        EditText passwordBox2 = (EditText) findViewById(R.id.password2RegisterTextBox);
+        final EditText nameBox = (EditText) findViewById(R.id.nameRegisterTextBox);
+        final EditText emailBox = (EditText) findViewById(R.id.emailRegisterTextBox);
+        final EditText usernameBox = (EditText) findViewById(R.id.usernameRegisterTextBox);
+        final EditText passwordBox = (EditText) findViewById(R.id.passwordRegisterTextBox);
+        final EditText passwordBox2 = (EditText) findViewById(R.id.password2RegisterTextBox);
 
         //Get strings from controls.
-        String name = nameBox.getText().toString();
-        String email = emailBox.getText().toString();
-        String username = usernameBox.getText().toString();
-        String password1 = passwordBox.getText().toString();
-        String password2 = passwordBox2.getText().toString();
+        final String name = nameBox.getText().toString();
+        final String email = emailBox.getText().toString();
+        final String username = usernameBox.getText().toString();
+        final String password1 = passwordBox.getText().toString();
+        final String password2 = passwordBox2.getText().toString();
 
         //Create user from control data.
-        User u = new User(name, email, username, password1);
+        final User u = new User(name, email, username, password1);
 
         //Check that passwords match.
         if (!password1.equals(password2)) {
@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         World.setCurrentUser(u);
 
         //Launch dashboard.
-        Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
+        final Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
         startActivity(dashboardIntent);
     }
 

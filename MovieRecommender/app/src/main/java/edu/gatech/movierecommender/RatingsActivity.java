@@ -26,19 +26,19 @@ public class RatingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ratings);
 
         //Get ListView control
-        ListView lv = (ListView) findViewById(R.id.ratinglist);
+        final ListView lv = (ListView) findViewById(R.id.ratinglist);
 
         //Only run if this movie has ratings
         if (!isMovie(getIntent().getStringExtra("title"))) {
             return;
         }
 
-        Movie m = getMovie(getIntent().getStringExtra("title"));
+        final Movie m = getMovie(getIntent().getStringExtra("title"));
 
         //Build rating strings and put them in an ArrayList
-        ArrayList<String> arr = new ArrayList<>();
-        ArrayList<Rating> ratingArr = m.getRatings();
-        for (Rating r : ratingArr) {
+        final ArrayList<String> arr = new ArrayList<>();
+        final ArrayList<Rating> ratingArr = m.getRatings();
+        for (final Rating r : ratingArr) {
             String build = "";
             build += r.getPoster().getUsername() + " (";
             build += r.getPoster().getProfile().getMajor();
@@ -47,7 +47,7 @@ public class RatingsActivity extends AppCompatActivity {
         }
 
         //Create ArrayAdapter
-        ArrayAdapter<String> itemsAdapter =
+        final ArrayAdapter<String> itemsAdapter =
                 new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
         lv.setAdapter(itemsAdapter);
     }

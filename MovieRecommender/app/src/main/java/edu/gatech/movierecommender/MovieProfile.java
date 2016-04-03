@@ -41,16 +41,16 @@ public class MovieProfile extends AppCompatActivity {
         setContentView(R.layout.activity_movie_profile);
 
         //Derive title of movie from extra
-        String title = getIntent().getStringExtra("title");
+        final String title = getIntent().getStringExtra("title");
 
         //Fill ImageView
         img =  (ImageView) findViewById(R.id.img);
         img.setScaleType(ImageView.ScaleType.FIT_XY);
-        String imgURL = getIntent().getStringExtra("url");
+        final String imgURL = getIntent().getStringExtra("url");
         new LoadImage().execute(imgURL);
 
         //Change activity header
-        TextView tv = (TextView) findViewById(R.id.movieTitle);
+        final TextView tv = (TextView) findViewById(R.id.movieTitle);
         tv.setText(title);
 
     }
@@ -67,12 +67,12 @@ public class MovieProfile extends AppCompatActivity {
             Toast.makeText(this, "You need to make an account before you can post.", Toast.LENGTH_LONG).show();
         } else {
             //Get controls
-            RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);
-            EditText et = (EditText) findViewById(R.id.commentbox);
-            String title = getIntent().getStringExtra("title");
+            final RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);
+            final EditText et = (EditText) findViewById(R.id.commentbox);
+            final String title = getIntent().getStringExtra("title");
 
             //Make rating and movie
-            Rating r = new Rating(rb.getRating(), et.getText().toString(), World.getCurrentUser());
+            final Rating r = new Rating(rb.getRating(), et.getText().toString(), World.getCurrentUser());
             Movie m;
 
             if (isMovie(title)) {
@@ -103,7 +103,7 @@ public class MovieProfile extends AppCompatActivity {
      */
     @SuppressWarnings("unused")
     public void onSeeRatings(View v) {
-        Intent seeRatings = new Intent(getBaseContext(), RatingsActivity.class);
+        final Intent seeRatings = new Intent(getBaseContext(), RatingsActivity.class);
         seeRatings.putExtra("title", getIntent().getStringExtra("title"));
         startActivity(seeRatings);
     }

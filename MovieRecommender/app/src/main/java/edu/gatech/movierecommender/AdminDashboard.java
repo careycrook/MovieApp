@@ -44,7 +44,7 @@ public class AdminDashboard extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -61,7 +61,7 @@ public class AdminDashboard extends AppCompatActivity {
      */
     @SuppressWarnings("unused")
     public void viewUserList(View v) {
-        Intent newIntent = new Intent(getApplicationContext(), UserListActivity.class);
+        final Intent newIntent = new Intent(getApplicationContext(), UserListActivity.class);
         startActivity(newIntent);
     }
 
@@ -73,7 +73,7 @@ public class AdminDashboard extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void logout(MenuItem item) {
         //Launch main activity.
-        Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+        final Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(homeIntent);
     }
 
