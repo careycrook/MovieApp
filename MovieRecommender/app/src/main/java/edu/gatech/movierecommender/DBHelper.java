@@ -353,7 +353,7 @@ class DBHelper {
      *
      * @param user to ban
      */
-    public static void  banUser(String user) {
+    public static void banUser(String user) {
         setStatus(user, "Banned");
     }
 
