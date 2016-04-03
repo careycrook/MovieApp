@@ -27,7 +27,11 @@ final class DBHelper {
     private static final String IMG_URL = "imgURL";
 
     private static final String FATAL_DB_ERROR = "Fatal DB error";
+    private static final String ERROR = "ERROR";
 
+    /**
+     * Constructor
+     */
     private DBHelper(){}
 
     /**
@@ -157,7 +161,7 @@ final class DBHelper {
                 }
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -210,7 +214,7 @@ final class DBHelper {
                 originalRating = cursor.getFloat(cursor.getColumnIndex(AVERAGE_RATING));
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -225,7 +229,7 @@ final class DBHelper {
             cursor = World.getDatabase().rawQuery(query, null);
             numRatings = cursor.getCount();
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -332,7 +336,7 @@ final class DBHelper {
                         cursor.getString(cursor.getColumnIndex(DESCRIPTION))));
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -431,7 +435,7 @@ final class DBHelper {
                 email = cursor.getString(cursor.getColumnIndex(EMAIL));
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -460,7 +464,7 @@ final class DBHelper {
                 name = cursor.getString(cursor.getColumnIndex(NAME));
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -489,7 +493,7 @@ final class DBHelper {
                 status = cursor.getString(cursor.getColumnIndex(STATUS));
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -518,7 +522,7 @@ final class DBHelper {
                 major = cursor.getString(cursor.getColumnIndex(MAJOR));
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -547,7 +551,7 @@ final class DBHelper {
                 desc = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -576,7 +580,7 @@ final class DBHelper {
                 passHash = cursor.getInt(cursor.getColumnIndex(PASSWORD));
             }
         } catch (SQLiteException e) {
-            Log.d("ERROR", FATAL_DB_ERROR);
+            Log.d(ERROR, FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
