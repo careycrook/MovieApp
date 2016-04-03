@@ -13,7 +13,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import static edu.gatech.movierecommender.DBHelper.addNewMovie;
@@ -118,8 +120,10 @@ public class MovieProfile extends AppCompatActivity {
             try {
                 bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            } catch (IOException e2) {
+                e2.printStackTrace();
             }
             return bitmap;
         }
