@@ -7,7 +7,7 @@ class Rating {
     private final User poster;
 
     /**
-     * Contructor
+     * Constructor
      *
      * @param r the rating
      * @param c the the comment

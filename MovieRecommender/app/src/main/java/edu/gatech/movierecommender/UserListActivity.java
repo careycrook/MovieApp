@@ -27,11 +27,11 @@ public class UserListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
-        //Get reference to listview, set color.
+        //Get reference to ListView, set color.
         ListView populate = (ListView) findViewById(R.id.populate);
         populate.setBackgroundColor(Color.BLACK);
 
-        //Fill arraylist with list items.
+        //Fill ArrayList with list items.
         arrU = DBHelper.getAllUsers();
         ArrayList<String> l = new ArrayList<>();
         for (User u : arrU) {
