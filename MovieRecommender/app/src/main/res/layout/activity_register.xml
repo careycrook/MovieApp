@@ -9,10 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true">
+        android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,8 +17,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/register"
         android:id="@+id/registerTitleLabel"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal" />
 
@@ -72,9 +67,6 @@
         android:text="@string/submit"
         android:id="@+id/submitButton"
         android:onClick="buttonOnClick"
-            android:layout_alignBottom="@+id/scrollView"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false"
             android:layout_marginTop="30dp" />
 
     </LinearLayout>
