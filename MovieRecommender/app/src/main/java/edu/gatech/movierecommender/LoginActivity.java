@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordBox.getText().toString();
 
         //hard-coded admin log in
-        if (username.equals("admin") && password.equals("admin")) {
+        if (("admin").equals(username) && ("admin").equals(password)) {
             World.setCurrentUser(new User("admin", "admin@google.com", "admin", "admin"));
             Intent dashboardIntent = new Intent(getApplicationContext(), AdminDashboard.class);
             startActivity(dashboardIntent);
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                             PASSWORD_ATTEMPTS = 0;
                             World.setCurrentUser(new User(getName(username), getEmail(username), username, password));
 
-                            if (!getMajor(username).equals("NONE")) {
+                            if (!("NONE").equals(getMajor(username))) {
                                 World.getCurrentUser().setProfile(new Profile(getMajor(username), getDescription(username)));
                             }
 
@@ -75,7 +75,8 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(dashboardIntent);
                             //Lock the user
                         } else {
-                            if (PASSWORD_ATTEMPTS >= 3) {
+                            final int NUM_ATTEMPTS = 3;
+                            if (PASSWORD_ATTEMPTS >= NUM_ATTEMPTS) {
                                 Toast.makeText(this, "This account is now locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
                                 lockUser(username);
                                 passwordBox.setText("");

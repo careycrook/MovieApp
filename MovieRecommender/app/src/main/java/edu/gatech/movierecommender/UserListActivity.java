@@ -72,17 +72,17 @@ public class UserListActivity extends AppCompatActivity {
         builder.setSingleChoiceItems(items, -1,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
-                        if (items[item].equals("Active")) {
+                        if (("Active").equals(items[item])) {
                             u2.setStatus("Active");
                             /**
                              * Runs on inception of UserListActivity
                              *
                              * @param savedInstanceState
                              */                  DBHelper.setStatus(u2.getUsername(), "Active");
-                        } else if (items[item].equals("Locked")) {
+                        } else if (("Locked").equals(items[item])) {
                             u2.setStatus("Locked");
                             lockUser(u2.getUsername());
-                        } else if (items[item].equals("Banned")) {
+                        } else if (("Banned").equals(items[item])) {
                             u2.setStatus("Banned");
                             banUser(u2.getUsername());
                         }

@@ -57,8 +57,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         //Check that no field was left blank.
-        if (username.equals("") || password1.equals("") || password2.equals("")
-                || name.equals("") || email.equals("")) {
+        if (("").equals(username) || ("").equals(password1) || ("").equals(password2)
+                || ("").equals(name) || ("").equals(email)) {
             Toast.makeText(this, "You cannot have a blank field.",
                     Toast.LENGTH_LONG).show();
             return;

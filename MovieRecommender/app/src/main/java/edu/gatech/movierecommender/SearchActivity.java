@@ -53,8 +53,9 @@ public class SearchActivity extends AppCompatActivity {
         if (isSearch) {
             RequestQueue mRequestQueue;
 
+            int BASE_SIZE = 1024;
             // Instantiate the cache
-            Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+            Cache cache = new DiskBasedCache(getCacheDir(), BASE_SIZE * BASE_SIZE); // 1MB cap
 
             // Set up the network to use HttpURLConnection as the HTTP client.
             Network network = new BasicNetwork(new HurlStack());
@@ -111,7 +112,7 @@ public class SearchActivity extends AppCompatActivity {
             mRequestQueue.add(stringRequest);
 
         //If clicked top recommendations
-        } else if (query.equals("TOP")){
+        } else if (("TOP").equals(query)){
 
             //arrays
             ArrayList<Movie> movieList = getAllMovies();
