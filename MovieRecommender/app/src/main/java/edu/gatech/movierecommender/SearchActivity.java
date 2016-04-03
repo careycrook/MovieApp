@@ -130,9 +130,6 @@ public class SearchActivity extends AppCompatActivity {
                 img.add(m.getURL());
             }
 
-            final ArrayList<String> imgArr = img;
-            final ArrayList<String> titles = title;
-
             //Make adapter for ListView
             final ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
@@ -142,8 +139,8 @@ public class SearchActivity extends AppCompatActivity {
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
                     final Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
-                    movieProfile.putExtra("title", titles.get(position));
-                    movieProfile.putExtra("url", imgArr.get(position));
+                    movieProfile.putExtra("title", title.get(position));
+                    movieProfile.putExtra("url", img.get(position));
 
                     startActivity(movieProfile);
                 }
@@ -191,9 +188,6 @@ public class SearchActivity extends AppCompatActivity {
                 img.add(m.getURL());
             }
 
-            final ArrayList<String> imgArr = img;
-            final ArrayList<String> titles = title;
-
             //ListView adapter
             final ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, arr);
@@ -203,8 +197,8 @@ public class SearchActivity extends AppCompatActivity {
             populate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
                     final Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
-                    movieProfile.putExtra("title", titles.get(position));
-                    movieProfile.putExtra("url", imgArr.get(position));
+                    movieProfile.putExtra("title", title.get(position));
+                    movieProfile.putExtra("url", img.get(position));
 
                     startActivity(movieProfile);
                 }

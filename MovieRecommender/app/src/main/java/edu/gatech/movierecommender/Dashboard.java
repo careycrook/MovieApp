@@ -35,6 +35,46 @@ public class Dashboard extends AppCompatActivity {
     private Context c = this;
 
     /**
+     * Results
+     */
+    private Intent results;
+    /**
+     * Search Box
+     */
+    private EditText searchBox;
+    /**
+     * Query
+     */
+    private String query;
+
+    /**
+     * Get results intent
+     *
+     * @return intent
+     */
+    private Intent getResults() {
+        return results;
+    }
+
+    /**
+     * Get search intent
+     *
+     * @return intent
+     */
+    private EditText getSearchBox() {
+        return searchBox;
+    }
+
+    /**
+     * Get query intent
+     *
+     * @return intent
+     */
+    private String getQuery() {
+        return query;
+    }
+
+    /**
      * Runs on inception of activity
      *
      * @param savedInstanceState default argument
@@ -186,6 +226,58 @@ public class Dashboard extends AppCompatActivity {
         startActivity(profileIntent);
     }
 
+
+    /**
+     * Search function
+     *
+     * @param v View for layout
+     */
+    @SuppressWarnings(UNUSED)
+    public void buttonSearchClick(View v) {
+        results = new Intent(c, SearchActivity.class);
+        searchBox = (EditText) findViewById(R.id.search_box);
+        query = getSearchBox().getText().toString();
+        results.putExtra("QUERY", getQuery());
+        results.putExtra("TITLE", true);
+
+        if (query.length() < 2) {
+            Toast.makeText(this, "Searches must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
+        } else {
+            startActivity(getResults());
+        }
+    }
+
+    /**
+     * Top recommendation function
+     *
+     * @param v View for layout
+     */
+    @SuppressWarnings(UNUSED)
+    public void buttonSearchClick2(View v) {
+        results = new Intent(getApplicationContext(), SearchActivity.class);
+        results.putExtra("QUERY", "TOP");
+        results.putExtra("TYPE", false);
+        startActivity(getResults());
+    }
+
+    /**
+     * Major recommendation function
+     *
+     * @param v View for layout
+     */
+    @SuppressWarnings(UNUSED)
+    public void buttonSearchClick3(View v) {
+        results = new Intent(getApplicationContext(), SearchActivity.class);
+        results.putExtra("QUERY", "MAJOR");
+        results.putExtra("TYPE", false);
+
+        if (World.getCurrentUser().getProfile() == null) {
+            Toast.makeText(this, "You must have a profile to get a recommendation.", Toast.LENGTH_LONG).show();
+        } else {
+            startActivity(getResults());
+        }
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -225,6 +317,8 @@ public class Dashboard extends AppCompatActivity {
             return inflater.inflate(R.layout.fragment_dashboard, container, false);
         }
     }
+
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -283,96 +377,4 @@ public class Dashboard extends AppCompatActivity {
             return null;
         }
     }
-
-    /**
-     * Results
-     */
-    private Intent results;
-    /**
-     * Search Box
-     */
-    private EditText searchBox;
-    /**
-     * Query
-     */
-    private String query;
-
-    /**
-     * Get results intent
-     *
-     * @return intent
-     */
-    private Intent getResults() {
-        return results;
-    }
-
-    /**
-     * Get search intent
-     *
-     * @return intent
-     */
-    private EditText getSearchBox() {
-        return searchBox;
-    }
-
-    /**
-     * Get query intent
-     *
-     * @return intent
-     */
-    private String getQuery() {
-        return query;
-    }
-
-    /**
-     * Search function
-     *
-     * @param v View for layout
-     */
-    @SuppressWarnings(UNUSED)
-    public void buttonSearchClick(View v) {
-        results = new Intent(c, SearchActivity.class);
-        searchBox = (EditText) findViewById(R.id.search_box);
-        query = getSearchBox().getText().toString();
-        results.putExtra("QUERY", getQuery());
-        results.putExtra("TITLE", true);
-
-        if (query.length() < 2) {
-            Toast.makeText(this, "Searches must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
-        } else {
-            startActivity(getResults());
-        }
-    }
-
-    /**
-     * Top recommendation function
-     *
-     * @param v View for layout
-     */
-    @SuppressWarnings(UNUSED)
-    public void buttonSearchClick2(View v) {
-        results = new Intent(getApplicationContext(), SearchActivity.class);
-        results.putExtra("QUERY", "TOP");
-        results.putExtra("TYPE", false);
-        startActivity(getResults());
-    }
-
-    /**
-     * Major recommendation function
-     *
-     * @param v View for layout
-     */
-    @SuppressWarnings(UNUSED)
-    public void buttonSearchClick3(View v) {
-        results = new Intent(getApplicationContext(), SearchActivity.class);
-        results.putExtra("QUERY", "MAJOR");
-        results.putExtra("TYPE", false);
-
-        if (World.getCurrentUser().getProfile() == null) {
-            Toast.makeText(this, "You must have a profile to get a recommendation.", Toast.LENGTH_LONG).show();
-        } else {
-            startActivity(getResults());
-        }
-    }
-
 }
