@@ -272,7 +272,7 @@ final class DBHelper {
             temp.add(new Rating(rating, comment, u));
         }
 
-            cursor.close();
+        cursor.close();
 
         return temp;
     }
@@ -308,7 +308,7 @@ final class DBHelper {
             temp.add(u);
         }
 
-            cursor.close();
+        cursor.close();
 
         return temp;
     }

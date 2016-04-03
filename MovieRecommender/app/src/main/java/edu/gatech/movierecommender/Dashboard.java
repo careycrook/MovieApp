@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class Dashboard extends AppCompatActivity {
 
-    private static final String unused = "unused";
+    private static final String UNUSED = "unused";
     private Context c = this;
 
     /**
@@ -118,7 +118,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param  item  MenuItem corresponding to this method.
      */
-    @SuppressWarnings(unused)
+    @SuppressWarnings(UNUSED)
     public void logout(MenuItem item) {
         //Launch main activity.
         final Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -314,7 +314,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param v View for layout
      */
-    @SuppressWarnings(unused)
+    @SuppressWarnings(UNUSED)
     public void buttonSearchClick(View v) {
         results = new Intent(c, SearchActivity.class);
         searchBox = (EditText) findViewById(R.id.search_box);
@@ -334,7 +334,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param v View for layout
      */
-    @SuppressWarnings(unused)
+    @SuppressWarnings(UNUSED)
     public void buttonSearchClick2(View v) {
         results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "TOP");
@@ -347,7 +347,7 @@ public class Dashboard extends AppCompatActivity {
      *
      * @param v View for layout
      */
-    @SuppressWarnings(unused)
+    @SuppressWarnings(UNUSED)
     public void buttonSearchClick3(View v) {
         results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "MAJOR");

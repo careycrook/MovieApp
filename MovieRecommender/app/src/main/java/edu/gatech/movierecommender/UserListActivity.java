@@ -23,9 +23,9 @@ public class UserListActivity extends AppCompatActivity {
      */
     private List<User> arrU;
 
-    private static final String active = "Active";
-    private static final String locked = "Locked";
-    private static final String banned = "Banned";
+    private static final String ACTIVE = "Active";
+    private static final String LOCKED = "Locked";
+    private static final String BANNED = "Banned";
 
 
     /**
@@ -71,7 +71,7 @@ public class UserListActivity extends AppCompatActivity {
      * @param u User to edit
      */
     private void dialog(User u) {
-        final CharSequence[] items = {active, locked, banned};
+        final CharSequence[] items = {ACTIVE, LOCKED, BANNED};
         final User u2 = u;
         //Create dialog.
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -79,11 +79,11 @@ public class UserListActivity extends AppCompatActivity {
         //Set items
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                if ((active).equals(items[item])) {
-                    DBHelper.setStatus(u2.getUsername(), active);
-                } else if (locked.equals(items[item])) {
+                if ((ACTIVE).equals(items[item])) {
+                    DBHelper.setStatus(u2.getUsername(), ACTIVE);
+                } else if (LOCKED.equals(items[item])) {
                     lockUser(u2.getUsername());
-                } else if (banned.equals(items[item])) {
+                } else if (BANNED.equals(items[item])) {
                     banUser(u2.getUsername());
                 }
                 u2.setStatus(items[item].toString());

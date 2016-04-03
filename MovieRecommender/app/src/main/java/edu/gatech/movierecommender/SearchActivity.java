@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -79,19 +80,19 @@ public class SearchActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                         public void onResponse(String response) {
                             try {
-                                JSONObject jsonObj = new JSONObject(response);
-                                JSONArray s = jsonObj.getJSONArray("Search");
-                                ArrayList<String> titles = new ArrayList<>();
+                                final JSONObject jsonObj = new JSONObject(response);
+                                final JSONArray s = jsonObj.getJSONArray("Search");
+                                final ArrayList<String> titles = new ArrayList<>();
                                 for (int i = 0; i < s.length(); i++) {
-                                    JSONObject c2 = s.getJSONObject(i);
+                                    final JSONObject c2 = s.getJSONObject(i);
                                     titles.add(c2.getString("Title") + " (" + c2.getString("Year").replaceAll(" ", "") + ")");
                                     titleArr.add(c2.getString("Title") + " (" + c2.getString("Year").replaceAll(" ", "") + ")");
                                     imgArr.add(c2.getString("Poster"));
                                 }
-                                ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, titles);
+                                final ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, titles);
                                 populate.setAdapter(itemsAdapter);
                             } catch (JSONException e1) {
-                                e1.printStackTrace();
+                                Log.e("ERROR", "exception", e1);
                             }
                         }
                     }, new Response.ErrorListener() {

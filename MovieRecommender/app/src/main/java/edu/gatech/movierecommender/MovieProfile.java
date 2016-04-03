@@ -130,9 +130,9 @@ public class MovieProfile extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
 
             } catch (MalformedURLException e1) {
-                e1.printStackTrace();
+                Log.e("ERROR", "exception", e1);
             } catch (IOException e2) {
-                e2.printStackTrace();
+                Log.e("ERROR", "exception", e2);
             }
             return bitmap;
         }
