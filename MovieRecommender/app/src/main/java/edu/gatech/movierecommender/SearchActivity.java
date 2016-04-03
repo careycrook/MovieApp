@@ -141,7 +141,6 @@ public class SearchActivity extends AppCompatActivity {
                     Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
                     movieProfile.putExtra("title", titles.get(position));
                     movieProfile.putExtra("url", imgArr.get(position));
-                    movieProfile.putExtra("isMajorSorted", false);
 
                     startActivity(movieProfile);
                 }
@@ -203,7 +202,6 @@ public class SearchActivity extends AppCompatActivity {
                     Intent movieProfile = new Intent(v.getContext(), MovieProfile.class);
                     movieProfile.putExtra("title", titles.get(position));
                     movieProfile.putExtra("url", imgArr.get(position));
-                    movieProfile.putExtra("isMajorSorted", true);
 
                     startActivity(movieProfile);
                 }

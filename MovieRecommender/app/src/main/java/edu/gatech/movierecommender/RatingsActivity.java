@@ -25,7 +25,7 @@ public class RatingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ratings);
 
-        //Get listview control
+        //Get ListView control
         ListView lv = (ListView) findViewById(R.id.ratinglist);
 
         //Only run if this movie has ratings
@@ -35,7 +35,7 @@ public class RatingsActivity extends AppCompatActivity {
 
         Movie m = getMovie(getIntent().getStringExtra("title"));
 
-        //Build rating strings and put them in an arraylist
+        //Build rating strings and put them in an ArrayList
         ArrayList<String> arr = new ArrayList<>();
         ArrayList<Rating> ratingArr = m.getRatings();
         for (Rating r : ratingArr) {
