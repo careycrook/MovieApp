@@ -10,23 +10,59 @@ import java.util.List;
 
 final class DBHelper {
 
-    // Increment database version when updating schema
+    /**
+     * DB
+     */
     public static final String DATABASE_NAME = "DB.db";
 
-    // ContentValues form
+    /**
+     * Name
+     */
     private static final String NAME = "name";
+    /**
+     * Email
+     */
     private static final String EMAIL = "email";
+    /**
+     * Username
+     */
     private static final String USERNAME = "username";
+    /**
+     * Password
+     */
     private static final String PASSWORD = "password";
+    /**
+     * Status
+     */
     private static final String STATUS = "status";
+    /**
+     * Major
+     */
     private static final String MAJOR = "major";
+    /**
+     * Description
+     */
     private static final String DESCRIPTION = "description";
 
+    /**
+     * Title
+     */
     private static final String TITLE = "title";
+    /**
+     * Average Rating
+     */
     private static final String AVERAGE_RATING = "averageRating";
+    /**
+     * Image Url
+     */
     private static final String IMG_URL = "imgURL";
-
+    /**
+     * Fatal error
+     */
     private static final String FATAL_DB_ERROR = "Fatal DB error";
+    /**
+     * Error
+     */
     private static final String ERROR = "ERROR";
 
     /**

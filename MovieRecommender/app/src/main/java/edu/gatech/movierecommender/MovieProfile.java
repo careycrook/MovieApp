@@ -35,6 +35,9 @@ public class MovieProfile extends AppCompatActivity {
      */
     private ImageView img = null;
 
+    /**
+     * Title
+     */
     private static final String TITLE = "title";
 
     /**

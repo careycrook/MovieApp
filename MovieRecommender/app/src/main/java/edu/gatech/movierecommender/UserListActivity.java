@@ -22,9 +22,17 @@ public class UserListActivity extends AppCompatActivity {
      * Array of users
      */
     private List<User> arrU;
-
+    /**
+     * Active
+     */
     private static final String ACTIVE = "Active";
+    /**
+     * Locked
+     */
     private static final String LOCKED = "Locked";
+    /**
+     * Banned
+     */
     private static final String BANNED = "Banned";
 
 

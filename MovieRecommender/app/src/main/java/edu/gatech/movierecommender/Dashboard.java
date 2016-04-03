@@ -25,7 +25,13 @@ import android.widget.Toast;
 
 public class Dashboard extends AppCompatActivity {
 
+    /**
+     * Unused
+     */
     private static final String UNUSED = "unused";
+    /**
+     * Context
+     */
     private Context c = this;
 
     /**
@@ -278,8 +284,17 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
+    /**
+     * Results
+     */
     private Intent results;
+    /**
+     * Search Box
+     */
     private EditText searchBox;
+    /**
+     * Query
+     */
     private String query;
 
     /**
