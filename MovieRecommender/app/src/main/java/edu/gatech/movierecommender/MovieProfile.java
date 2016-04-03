@@ -28,6 +28,8 @@ public class MovieProfile extends AppCompatActivity {
     private Bitmap bitmap;
     private ImageView img = null;
 
+    private static final String TITLE = "title";
+
     /**
      * Runs on inception of activity
      *
@@ -41,7 +43,7 @@ public class MovieProfile extends AppCompatActivity {
         setContentView(R.layout.activity_movie_profile);
 
         //Derive title of movie from extra
-        final String title = getIntent().getStringExtra("title");
+        final String title = getIntent().getStringExtra(TITLE);
 
         //Fill ImageView
         img =  (ImageView) findViewById(R.id.img);
@@ -69,7 +71,7 @@ public class MovieProfile extends AppCompatActivity {
             //Get controls
             final RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);
             final EditText et = (EditText) findViewById(R.id.commentbox);
-            final String title = getIntent().getStringExtra("title");
+            final String title = getIntent().getStringExtra(TITLE);
 
             //Make rating and movie
             final Rating r = new Rating(rb.getRating(), et.getText().toString(), World.getCurrentUser());
@@ -104,7 +106,7 @@ public class MovieProfile extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void onSeeRatings(View v) {
         final Intent seeRatings = new Intent(getBaseContext(), RatingsActivity.class);
-        seeRatings.putExtra("title", getIntent().getStringExtra("title"));
+        seeRatings.putExtra(TITLE, getIntent().getStringExtra(TITLE));
         startActivity(seeRatings);
     }
 

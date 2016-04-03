@@ -4,13 +4,15 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Movie implements Comparable<Movie> {
 
     private final String title;
-    private final ArrayList<Rating> ratings;
+    private final List<Rating> ratings;
     private float averageRating;
-    private final HashMap<String, ArrayList<Float>> majorRatings;
+    private final Map<String, ArrayList<Float>> majorRatings;
     private String imgURL = "";
 
     /**
@@ -53,7 +55,7 @@ public class Movie implements Comparable<Movie> {
      *
      * @return the HashMap of majors to ratings
      */
-    public HashMap<String, ArrayList<Float>> getMajorRatings() { return majorRatings; }
+    public Map<String, ArrayList<Float>> getMajorRatings() { return majorRatings; }
 
     /**
      * Calculates average rating for a major
@@ -116,7 +118,7 @@ public class Movie implements Comparable<Movie> {
      *
      * @return ArrayList of ratings
      */
-    public ArrayList<Rating> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
 

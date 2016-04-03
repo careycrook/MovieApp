@@ -11,13 +11,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static edu.gatech.movierecommender.DBHelper.banUser;
 import static edu.gatech.movierecommender.DBHelper.lockUser;
 
 public class UserListActivity extends AppCompatActivity {
 
-    private ArrayList<User> arrU;
+    private List<User> arrU;
+
+    private final String ACTIVE = "Active";
+    private final String LOCKED = "Locked";
+    private final String BANNED = "Banned";
 
 
     /**
@@ -63,7 +68,7 @@ public class UserListActivity extends AppCompatActivity {
      * @param u User to edit
      */
     private void dialog(User u) {
-        final CharSequence[] items = { "Active", "Locked", "Banned"};
+        final CharSequence[] items = {ACTIVE, LOCKED, BANNED};
         final User u2 = u;
         //Create dialog.
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -72,18 +77,18 @@ public class UserListActivity extends AppCompatActivity {
         builder.setSingleChoiceItems(items, -1,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
-                        if (("Active").equals(items[item])) {
-                            u2.setStatus("Active");
+                        if ((ACTIVE).equals(items[item])) {
+                            u2.setStatus(ACTIVE);
                             /**
                              * Runs on inception of UserListActivity
                              *
                              * @param savedInstanceState
-                             */                  DBHelper.setStatus(u2.getUsername(), "Active");
-                        } else if (("Locked").equals(items[item])) {
-                            u2.setStatus("Locked");
+                             */                  DBHelper.setStatus(u2.getUsername(), ACTIVE);
+                        } else if (LOCKED.equals(items[item])) {
+                            u2.setStatus(LOCKED);
                             lockUser(u2.getUsername());
-                        } else if (("Banned").equals(items[item])) {
-                            u2.setStatus("Banned");
+                        } else if (BANNED.equals(items[item])) {
+                            u2.setStatus(BANNED);
                             banUser(u2.getUsername());
                         }
                         dialog.dismiss();

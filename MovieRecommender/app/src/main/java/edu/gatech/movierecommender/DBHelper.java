@@ -5,11 +5,27 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 final class DBHelper {
 
     // Increment database version when updating schema
     public static final String DATABASE_NAME = "DB.db";
+
+    // ContentValues form
+    private static final String NAME = "name";
+    private static final String EMAIL = "email";
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
+    private static final String STATUS = "status";
+    private static final String MAJOR = "major";
+    private static final String DESCRIPTION = "description";
+
+    private static final String TITLE = "title";
+    private static final String AVERAGE_RATING = "averageRating";
+    private static final String IMG_URL = "imgURL";
+
+    private static final String FATAL_DB_ERROR = "Fatal DB error";
 
     private DBHelper(){}
 
@@ -30,13 +46,13 @@ final class DBHelper {
      */
     public static boolean addUser(User u) {
         final ContentValues userInfo = new ContentValues();
-        userInfo.put("name", u.getName());
-        userInfo.put("email", u.getEmail());
-        userInfo.put("username", u.getUsername());
-        userInfo.put("password", u.getPassword().hashCode());
-        userInfo.put("status", "Active");
-        userInfo.put("major", "NONE");
-        userInfo.put("description", "NONE");
+        userInfo.put(NAME, u.getName());
+        userInfo.put(EMAIL, u.getEmail());
+        userInfo.put(USERNAME, u.getUsername());
+        userInfo.put(PASSWORD, u.getPassword().hashCode());
+        userInfo.put(STATUS, "Active");
+        userInfo.put(MAJOR, "NONE");
+        userInfo.put(DESCRIPTION, "NONE");
 
         final long check = World.getDatabase().insert("users", null, userInfo);
 
@@ -58,9 +74,9 @@ final class DBHelper {
      */
     public static boolean addNewMovie(Movie m) {
         final ContentValues movieInfo = new ContentValues();
-        movieInfo.put("title", m.getTitle());
-        movieInfo.put("averageRating", m.getAverageRating());
-        movieInfo.put("imgURL", m.getURL());
+        movieInfo.put(TITLE, m.getTitle());
+        movieInfo.put(AVERAGE_RATING, m.getAverageRating());
+        movieInfo.put(IMG_URL, m.getURL());
 
         final long check = World.getDatabase().insert("movies", null, movieInfo);
 
@@ -71,22 +87,22 @@ final class DBHelper {
      * Returns an ArrayList of all of the Movies in the database
      * @return an ArrayList of all of the Movies in the database
      */
-    public static ArrayList<Movie> getAllMovies() {
+    public static List<Movie> getAllMovies() {
         final ArrayList<Movie> temp = new ArrayList<>();
         final String query = "SELECT * FROM movies";
 
         final Cursor cursor = World.getDatabase().rawQuery(query, null);
 
         while (cursor.moveToNext()) {
-            final String title = cursor.getString(cursor.getColumnIndex("title"));
-            final float averageRating = cursor.getFloat(cursor.getColumnIndex("averageRating"));
-            final String imgURL = cursor.getString(cursor.getColumnIndex("imgURL"));
+            final String title = cursor.getString(cursor.getColumnIndex(TITLE));
+            final float averageMovieRating = cursor.getFloat(cursor.getColumnIndex(AVERAGE_RATING));
+            final String imgURL = cursor.getString(cursor.getColumnIndex(IMG_URL));
 
             final Movie m = new Movie(title);
             m.setUrl(imgURL);
-            m.setAverageRating(averageRating);
-
-            final ArrayList<Rating> tempR = getAllRatings(m);
+            m.setAverageRating(averageMovieRating);
+            
+            final List<Rating> tempR = getAllRatings(m);
 
             for (final Rating r : tempR) {
                 m.addRating(r);
@@ -106,7 +122,7 @@ final class DBHelper {
      * @return true if a Movie with that title is contained in the database
      */
     public static boolean isMovie(String title) {
-        return checkIfInDB("movies", "title", title);
+        return checkIfInDB("movies", TITLE, title);
     }
 
     /**
@@ -126,21 +142,21 @@ final class DBHelper {
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
 
-                final float averageRating = cursor.getFloat(cursor.getColumnIndex("averageRating"));
-                final String imgURL = cursor.getString(cursor.getColumnIndex("imgURL"));
+                final float averageMovieRating = cursor.getFloat(cursor.getColumnIndex(AVERAGE_RATING));
+                final String imgURL = cursor.getString(cursor.getColumnIndex(IMG_URL));
 
                 m = new Movie(title);
                 m.setUrl(imgURL);
-                m.setAverageRating(averageRating);
+                m.setAverageRating(averageMovieRating);
 
-                final ArrayList<Rating> tempR = getAllRatings(m);
+                final List<Rating> tempR = getAllRatings(m);
 
                 for (final Rating r : tempR) {
                     m.addRating(r);
                 }
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -190,10 +206,10 @@ final class DBHelper {
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
-                originalRating = cursor.getFloat(cursor.getColumnIndex("averageRating"));
+                originalRating = cursor.getFloat(cursor.getColumnIndex(AVERAGE_RATING));
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -208,7 +224,7 @@ final class DBHelper {
             cursor = World.getDatabase().rawQuery(query, null);
             numRatings = cursor.getCount();
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -233,7 +249,7 @@ final class DBHelper {
      * @param m The Movie we're looking up the Ratings for
      * @return an ArrayList of all Ratings for a given Movie
      */
-    private static ArrayList<Rating> getAllRatings(Movie m) {
+    private static List<Rating> getAllRatings(Movie m) {
         final ArrayList<Rating> temp = new ArrayList<>();
         final String formattedTitle = m.getTitle().replaceAll(" ", "_").trim();
         final String query = "SELECT * FROM " + "\'" + formattedTitle + "\'";
@@ -261,7 +277,7 @@ final class DBHelper {
      * @return ArrayList<User> all users
      *
      */
-    public static ArrayList<User> getAllUsers() {
+    public static List<User> getAllUsers() {
         final ArrayList<User> temp = new ArrayList<>();
         final String query = "SELECT * FROM users";
 
@@ -274,11 +290,11 @@ final class DBHelper {
             int password;
             String status;
 
-            name = cursor.getString(cursor.getColumnIndex("name"));
-            email = cursor.getString(cursor.getColumnIndex("email"));
-            username = cursor.getString(cursor.getColumnIndex("username"));
-            password = cursor.getInt(cursor.getColumnIndex("password"));
-            status = cursor.getString(cursor.getColumnIndex("status"));
+            name = cursor.getString(cursor.getColumnIndex(NAME));
+            email = cursor.getString(cursor.getColumnIndex(EMAIL));
+            username = cursor.getString(cursor.getColumnIndex(USERNAME));
+            password = cursor.getInt(cursor.getColumnIndex(PASSWORD));
+            status = cursor.getString(cursor.getColumnIndex(STATUS));
 
             final User u = new User(name, email, username, String.valueOf(password));
             u.setStatus(status);
@@ -307,15 +323,15 @@ final class DBHelper {
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
-                u = new User(cursor.getString(cursor.getColumnIndex("name")),
-                        cursor.getString(cursor.getColumnIndex("email")),
-                        cursor.getString(cursor.getColumnIndex("username")),
-                        cursor.getString(cursor.getColumnIndex("password")));
-                u.setProfile(new Profile(cursor.getString(cursor.getColumnIndex("major")),
-                        cursor.getString(cursor.getColumnIndex("description"))));
+                u = new User(cursor.getString(cursor.getColumnIndex(NAME)),
+                        cursor.getString(cursor.getColumnIndex(EMAIL)),
+                        cursor.getString(cursor.getColumnIndex(USERNAME)),
+                        cursor.getString(cursor.getColumnIndex(PASSWORD)));
+                u.setProfile(new Profile(cursor.getString(cursor.getColumnIndex(MAJOR)),
+                        cursor.getString(cursor.getColumnIndex(DESCRIPTION))));
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -411,10 +427,10 @@ final class DBHelper {
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
-                email = cursor.getString(cursor.getColumnIndex("email"));
+                email = cursor.getString(cursor.getColumnIndex(EMAIL));
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -440,10 +456,10 @@ final class DBHelper {
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
-                name = cursor.getString(cursor.getColumnIndex("name"));
+                name = cursor.getString(cursor.getColumnIndex(NAME));
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -469,10 +485,10 @@ final class DBHelper {
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
-                status = cursor.getString(cursor.getColumnIndex("status"));
+                status = cursor.getString(cursor.getColumnIndex(STATUS));
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -498,10 +514,10 @@ final class DBHelper {
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
-                major = cursor.getString(cursor.getColumnIndex("major"));
+                major = cursor.getString(cursor.getColumnIndex(MAJOR));
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -527,10 +543,10 @@ final class DBHelper {
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
-                desc = cursor.getString(cursor.getColumnIndex("description"));
+                desc = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -556,10 +572,10 @@ final class DBHelper {
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
-                passHash = cursor.getInt(cursor.getColumnIndex("password"));
+                passHash = cursor.getInt(cursor.getColumnIndex(PASSWORD));
             }
         } catch (SQLiteException e) {
-            System.out.println("Fatal DB error");
+            System.out.println(FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();

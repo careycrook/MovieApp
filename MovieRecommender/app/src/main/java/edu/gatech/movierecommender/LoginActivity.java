@@ -7,11 +7,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static edu.gatech.movierecommender.DBHelper.*;
+import static edu.gatech.movierecommender.DBHelper.checkIfInDB;
+import static edu.gatech.movierecommender.DBHelper.getDescription;
+import static edu.gatech.movierecommender.DBHelper.getEmail;
+import static edu.gatech.movierecommender.DBHelper.getMajor;
+import static edu.gatech.movierecommender.DBHelper.getName;
+import static edu.gatech.movierecommender.DBHelper.getPassHash;
+import static edu.gatech.movierecommender.DBHelper.getStatus;
+import static edu.gatech.movierecommender.DBHelper.lockUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private int PASSWORD_ATTEMPTS = 0;
+    private int passwordAttempts = 0;
+    private static final String ADMIN = "admin";
 
     /**
      * Runs on inception of activity
@@ -38,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         final String password = passwordBox.getText().toString();
 
         //hard-coded admin log in
-        if (("admin").equals(username) && ("admin").equals(password)) {
-            World.setCurrentUser(new User("admin", "admin@google.com", "admin", "admin"));
+        if ((ADMIN).equals(username) && (ADMIN).equals(password)) {
+            World.setCurrentUser(new User(ADMIN, "admin@google.com", ADMIN, ADMIN));
             final Intent dashboardIntent = new Intent(getApplicationContext(), AdminDashboard.class);
             startActivity(dashboardIntent);
         } else {
@@ -64,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                         //Set currentUser
                         if (ourHash == theirHash) {
                             Toast.makeText(this, "Login successful.", Toast.LENGTH_LONG).show();
-                            PASSWORD_ATTEMPTS = 0;
+                            passwordAttempts = 0;
                             World.setCurrentUser(new User(getName(username), getEmail(username), username, password));
 
                             if (!("NONE").equals(getMajor(username))) {
@@ -76,14 +84,14 @@ public class LoginActivity extends AppCompatActivity {
                             //Lock the user
                         } else {
                             final int NUM_ATTEMPTS = 3;
-                            if (PASSWORD_ATTEMPTS >= NUM_ATTEMPTS) {
+                            if (passwordAttempts >= NUM_ATTEMPTS) {
                                 Toast.makeText(this, "This account is now locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
                                 lockUser(username);
                                 passwordBox.setText("");
                             } else {
                                 Toast.makeText(this, "Incorrect password.", Toast.LENGTH_LONG).show();
                                 passwordBox.setText("");
-                                PASSWORD_ATTEMPTS++;
+                                passwordAttempts++;
                             }
                         }
                         break;
