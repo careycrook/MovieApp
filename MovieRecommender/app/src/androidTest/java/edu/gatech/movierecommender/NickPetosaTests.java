@@ -31,6 +31,7 @@ public class NickPetosaTests extends AndroidTestCase {
         DBHelper.addUser(bob);
         DBHelper.addUser(jane);
         DBHelper.addUser(chuck);
+        //
     }
 
     @Test
