@@ -62,16 +62,14 @@
             android:ems="10"
             android:id="@+id/passwordRegisterTextBox"
             android:layout_gravity="right"
-            android:hint="Password"
-            android:password="true" />
+            android:hint="Password" />
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/password2RegisterTextBox"
             android:layout_gravity="right"
-            android:hint="Re-enter Password"
-            android:password="true" />
+            android:hint="Re-enter Password" />
 
         <Button
         android:layout_width="match_parent"

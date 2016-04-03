@@ -1,8 +1,5 @@
 package edu.gatech.movierecommender;
 
-/**
- * Created by Nick on 2/27/2016.
- */
 public class Rating {
 
     private float rating;

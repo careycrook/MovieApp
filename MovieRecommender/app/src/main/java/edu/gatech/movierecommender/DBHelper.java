@@ -39,7 +39,7 @@ public class DBHelper {
 
         long check = World.DB.insert("users", null, userInfo);
 
-        return (check != 0) ? true : false;
+        return (check != 0);
     }
 
     /**
@@ -64,7 +64,7 @@ public class DBHelper {
 
         long check = World.DB.insert("movies", null, movieInfo);
 
-        return (check != 0) ? true : false;
+        return (check != 0);
     }
 
     /**
@@ -94,6 +94,8 @@ public class DBHelper {
 
             temp.add(m);
         }
+
+        cursor.close();
 
         return temp;
     }
@@ -246,6 +248,8 @@ public class DBHelper {
             temp.add(new Rating(rating, comment, u));
         }
 
+        cursor.close();
+
         return temp;
     }
 
@@ -279,6 +283,8 @@ public class DBHelper {
 
             temp.add(u);
         }
+
+        cursor.close();
 
         return temp;
     }

@@ -38,8 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //hard-coded admin log in
         if (username.equals("admin") && password.equals("admin")) {
-            User admin = new User("admin", "admin@google.com", "admin", "admin");
-            World.currentUser = admin;
+            World.currentUser = new User("admin", "admin@google.com", "admin", "admin");
             Intent dashboardIntent = new Intent(getApplicationContext(), AdminDashboard.class);
             startActivity(dashboardIntent);
         } else {
