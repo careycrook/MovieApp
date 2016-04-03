@@ -12,6 +12,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import static edu.gatech.movierecommender.DBHelper.banUser;
+import static edu.gatech.movierecommender.DBHelper.lockUser;
+
 public class UserListActivity extends AppCompatActivity {
 
     private ArrayList<User> arrU;
@@ -78,10 +81,10 @@ public class UserListActivity extends AppCompatActivity {
                              */                  DBHelper.setStatus(u2.getUsername(), "Active");
                         } else if (items[item].equals("Locked")) {
                             u2.setStatus("Locked");
-                            DBHelper.setStatus(u2.getUsername(), "Locked");
+                            lockUser(u2.getUsername());
                         } else if (items[item].equals("Banned")) {
                             u2.setStatus("Banned");
-                            DBHelper.setStatus(u2.getUsername(), "Banned");
+                            banUser(u2.getUsername());
                         }
                         dialog.dismiss();
 

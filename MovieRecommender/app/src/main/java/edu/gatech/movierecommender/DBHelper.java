@@ -8,9 +8,8 @@ import java.util.ArrayList;
 
 class DBHelper {
 
-    // Increment database version when updating schema
     public static final int DATABASE_VERSION = 36;
-    public static final String DATABASE_NAME = "datab.db";
+    public static final String DATABASE_NAME = "DB.db";
 
     /**
      * Create table for users
