@@ -3,6 +3,7 @@ package edu.gatech.movierecommender;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,7 +157,7 @@ final class DBHelper {
                 }
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -209,7 +210,7 @@ final class DBHelper {
                 originalRating = cursor.getFloat(cursor.getColumnIndex(AVERAGE_RATING));
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -224,7 +225,7 @@ final class DBHelper {
             cursor = World.getDatabase().rawQuery(query, null);
             numRatings = cursor.getCount();
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -331,7 +332,7 @@ final class DBHelper {
                         cursor.getString(cursor.getColumnIndex(DESCRIPTION))));
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -430,7 +431,7 @@ final class DBHelper {
                 email = cursor.getString(cursor.getColumnIndex(EMAIL));
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -459,7 +460,7 @@ final class DBHelper {
                 name = cursor.getString(cursor.getColumnIndex(NAME));
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -488,7 +489,7 @@ final class DBHelper {
                 status = cursor.getString(cursor.getColumnIndex(STATUS));
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -517,7 +518,7 @@ final class DBHelper {
                 major = cursor.getString(cursor.getColumnIndex(MAJOR));
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -546,7 +547,7 @@ final class DBHelper {
                 desc = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -575,7 +576,7 @@ final class DBHelper {
                 passHash = cursor.getInt(cursor.getColumnIndex(PASSWORD));
             }
         } catch (SQLiteException e) {
-            System.out.println(FATAL_DB_ERROR);
+            Log.d("ERROR", FATAL_DB_ERROR);
         } finally {
             if (cursor != null) {
                 cursor.close();

@@ -57,9 +57,9 @@ public class SearchActivity extends AppCompatActivity {
         if (isSearch) {
             RequestQueue mRequestQueue;
 
-            final int BASE = 1024;
+            final int base = 1024;
             // Instantiate the cache
-            final Cache cache = new DiskBasedCache(getCacheDir(), BASE * BASE); // 1MB cap
+            final Cache cache = new DiskBasedCache(getCacheDir(), base * base); // 1MB cap
 
             // Set up the network to use HttpURLConnection as the HTTP client.
             final Network network = new BasicNetwork(new HurlStack());

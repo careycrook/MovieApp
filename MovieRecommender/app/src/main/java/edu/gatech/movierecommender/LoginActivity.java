@@ -88,8 +88,8 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(dashboardIntent);
                             //Lock the user
                         } else {
-                            final int ATTEMPTS = 3;
-                            if (passwordAttempts >= ATTEMPTS) {
+                            final int attempts = 3;
+                            if (passwordAttempts >= attempts) {
                                 Toast.makeText(this, "This account is now locked until an admin unlocks it.", Toast.LENGTH_LONG).show();
                                 lockUser(username);
                                 passwordBox.setText("");
