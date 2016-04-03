@@ -282,14 +282,29 @@ public class Dashboard extends AppCompatActivity {
     private EditText searchBox;
     private String query;
 
+    /**
+     * Get results intent
+     *
+     * @return intent
+     */
     private Intent getResults() {
         return results;
     }
 
+    /**
+     * Get search intent
+     *
+     * @return intent
+     */
     private EditText getSearchBox() {
         return searchBox;
     }
 
+    /**
+     * Get query intent
+     *
+     * @return intent
+     */
     private String getQuery() {
         return query;
     }

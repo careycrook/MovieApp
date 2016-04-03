@@ -40,10 +40,10 @@ public class Profile {
     /**
      * Set the major for this profile
      *
-     * @param major major
+     * @param myMajor major
      */
-    public void setMajor(String major) {
-        this.major = major;
+    public void setMajor(String myMajor) {
+        major = myMajor;
     }
 
     /**
@@ -58,9 +58,9 @@ public class Profile {
     /**
      * Set the description for this profile
      *
-     * @param desc description
+     * @param myDesc description
      */
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String myDesc) {
+        this.desc = myDesc;
     }
 }

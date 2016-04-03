@@ -83,10 +83,10 @@ public class SearchActivity extends AppCompatActivity {
                                 JSONArray s = jsonObj.getJSONArray("Search");
                                 ArrayList<String> titles = new ArrayList<>();
                                 for (int i = 0; i < s.length(); i++) {
-                                    JSONObject c = s.getJSONObject(i);
-                                    titles.add(c.getString("Title") + " (" + c.getString("Year").replaceAll(" ", "") + ")");
-                                    titleArr.add(c.getString("Title") + " (" + c.getString("Year").replaceAll(" ", "") + ")");
-                                    imgArr.add(c.getString("Poster"));
+                                    JSONObject c2 = s.getJSONObject(i);
+                                    titles.add(c2.getString("Title") + " (" + c2.getString("Year").replaceAll(" ", "") + ")");
+                                    titleArr.add(c2.getString("Title") + " (" + c2.getString("Year").replaceAll(" ", "") + ")");
+                                    imgArr.add(c2.getString("Poster"));
                                 }
                                 ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, titles);
                                 populate.setAdapter(itemsAdapter);

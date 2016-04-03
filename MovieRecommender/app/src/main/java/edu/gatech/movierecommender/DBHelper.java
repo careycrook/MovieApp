@@ -76,6 +76,7 @@ final class DBHelper {
     /**
      * Adds a new movie with no ratings to the table of movies
      * @param m the Movie object we want to add
+     * @return boolean worked
      */
     public static boolean addNewMovie(Movie m) {
         final ContentValues movieInfo = new ContentValues();
@@ -349,15 +350,18 @@ final class DBHelper {
     /**
      * Check if entry is in DB
      *
+     * @param dbField database
+     * @param fieldValue field
+     * @param tableName table
      * @return true if in database
      */
     public static boolean checkIfInDB(String tableName, String dbField, String fieldValue) {
         final String query = "Select 1 from " + tableName + " where " + dbField + " = \'" + fieldValue + "\' LIMIT 1";
         final Cursor cursor = World.getDatabase().rawQuery(query, null);
-            if (cursor.getCount() <= 0) {
-                cursor.close();
-                return false;
-            }
+        if (cursor.getCount() <= 0) {
+            cursor.close();
+            return false;
+        }
         cursor.close();
         return true;
     }
@@ -419,6 +423,7 @@ final class DBHelper {
     /**
      * Get a user's description
      *
+     * @param user user
      * @return user's email
      */
     public static String getEmail(String user) {
@@ -448,6 +453,7 @@ final class DBHelper {
     /**
      * Get a user's name
      *
+     * @param user user
      * @return user's name
      */
     public static String getName(String user) {
@@ -477,6 +483,7 @@ final class DBHelper {
     /**
      * Get a user's status
      *
+     * @param user user
      * @return user's status
      */
     public static String getStatus(String user) {
@@ -506,6 +513,7 @@ final class DBHelper {
     /**
      * Get a user's major
      *
+     * @param user user
      * @return user's major
      */
     public static String getMajor(String user) {
@@ -535,6 +543,7 @@ final class DBHelper {
     /**
      * Get a user's description
      *
+     * @param user user
      * @return user's description
      */
     public static String getDescription(String user) {
@@ -564,6 +573,7 @@ final class DBHelper {
     /**
      * Get a user's password as hash
      *
+     * @param user user
      * @return user's password as hash
      */
     public static int getPassHash(String user) {

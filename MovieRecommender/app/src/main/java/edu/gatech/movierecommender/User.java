@@ -30,16 +30,16 @@ public class User {
     /**
      * Constructor
      *
-     * @param name the person's name
-     * @param email the person's email
-     * @param username the person's username
-     * @param password the person's passwords
+     * @param myName the person's name
+     * @param myEmail the person's email
+     * @param myUsername the person's username
+     * @param myPassword the person's passwords
      */
-    public User(String name, String email, String username, String password) {
-        this.name = name;
-        this.email = email;
-        this.username = username;
-        this.password = password;
+    public User(String myName, String myEmail, String myUsername, String myPassword) {
+        this.name = myName;
+        this.email = myEmail;
+        this.username = myUsername;
+        this.password = myPassword;
         profile = null;
     }
 
@@ -91,10 +91,10 @@ public class User {
     /**
      * Set the profile for this user
      *
-     * @param profile profile of user
+     * @param myProfile profile of user
      */
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setProfile(Profile myProfile) {
+        profile = myProfile;
     }
 
     /**
@@ -107,7 +107,7 @@ public class User {
     /**
      * Set the status for this user
      *
-     * @param status status of user
+     * @param myStatus status of user
      */
-    public void setStatus(String status) { this.status = status; }
+    public void setStatus(String myStatus) { status = myStatus; }
 }
