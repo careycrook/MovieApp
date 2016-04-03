@@ -41,8 +41,8 @@
         android:text="@string/nameColon"
         android:id="@+id/nameProfileLabel"
         android:layout_below="@+id/usernameProfileLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="42dp" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="42dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,8 +51,8 @@
         android:text="@string/emailColon"
         android:id="@+id/emailProfileLabel"
         android:layout_below="@+id/nameProfileLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="42dp" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="42dp" />
 
     <Spinner
         android:layout_width="fill_parent"
