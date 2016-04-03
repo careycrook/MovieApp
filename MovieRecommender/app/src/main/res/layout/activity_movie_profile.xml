@@ -27,7 +27,8 @@
         android:layout_height="300dp"
         android:id="@+id/img"
         android:layout_below="@+id/movieTitle"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/moviePoster"/>
 
     <TextView
         android:layout_width="wrap_content"
