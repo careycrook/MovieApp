@@ -6,6 +6,10 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,35 +27,13 @@ import static org.junit.Assert.assertTrue;
 @SmallTest
 public class DBTests extends AndroidTestCase {
 
-    @Test
-    public void getMovieExists() {
-        this.getContext().deleteDatabase("testDB1.db");
+    Random rand;
 
-        World.setDatabase(this.getContext().openOrCreateDatabase("testDB1.db", Context.MODE_PRIVATE, null));
+    @Before
+    public void setUp() {
+        this.getContext().deleteDatabase("testDB.db");
 
-        World.getDatabase().execSQL("DROP TABLE IF EXISTS movies");
-
-        World.getDatabase().execSQL("CREATE TABLE IF NOT EXISTS movies (_id INTEGER PRIMARY KEY "
-                + "AUTOINCREMENT, title TEXT NOT NULL, averageRating REAL NOT NULL DEFAULT '0', " +
-                "imgURL TEXT NOT NULL)");
-
-        Movie m = new Movie("The Hunger Games");
-        m.setUrl("URL");
-        m.setAverageRating(5);
-        DBHelper.addNewMovie(m);
-
-        Movie m2 = DBHelper.getMovie("The Hunger Games");
-
-        assertTrue(m2.getTitle().equals(m.getTitle()));
-        assertTrue(m2.getURL().equals(m.getURL()));
-        assertTrue(m2.getAverageRating() == m.getAverageRating());
-    }
-
-    @Test
-    public void getMovieNotExists() {
-        this.getContext().deleteDatabase("testDB1.db");
-
-        World.setDatabase(this.getContext().openOrCreateDatabase("testDB1.db", Context.MODE_PRIVATE, null));
+        World.setDatabase(this.getContext().openOrCreateDatabase("testDB.db", Context.MODE_PRIVATE, null));
 
         World.getDatabase().execSQL("DROP TABLE IF EXISTS movies");
 
@@ -59,64 +41,130 @@ public class DBTests extends AndroidTestCase {
                 + "AUTOINCREMENT, title TEXT NOT NULL, averageRating REAL NOT NULL DEFAULT '0', " +
                 "imgURL TEXT NOT NULL)");
 
-        Movie m2 = DBHelper.getMovie("Up");
-
-        assertTrue(m2 == null);
-    }
-
-    @Test(expected = SQLiteException.class)
-    public void getMovieInvalidSQL() {
-        this.getContext().deleteDatabase("testDB1.db");
-
-        World.setDatabase(this.getContext().openOrCreateDatabase("testDB1.db", Context.MODE_PRIVATE, null));
-
-        World.getDatabase().execSQL("DROP TABLE IF EXISTS movies");
-
-        World.getDatabase().execSQL("CREATE TABLE IF NOT EXISTS movies (_id INTEGER PRIMARY KEY "
-                + "AUTOINCREMENT, title TEXT NOT NULL, averageRating REAL NOT NULL DEFAULT '0', " +
-                "imgURL TEXT NOT NULL)");
-
-        Movie m = new Movie("The Hunger Games");
-        m.setUrl("URL");
-        m.setAverageRating(5);
-        DBHelper.addNewMovie(m);
-
-        Movie m2 = DBHelper.getMovie(";\'");
-
-        assertTrue(m2 == null);
+        rand = new Random();
     }
 
     @Test
-    public void getMovieDBExists() {
-        this.getContext().deleteDatabase("testDB1.db");
+    public void getAllMoviesSize() {
+        int j = rand.nextInt(100);
+        ArrayList<Movie> movies = new ArrayList<Movie>();
 
-        World.setDatabase(this.getContext().openOrCreateDatabase("testDB1.db", Context.MODE_PRIVATE, null));
+        User u = new User("u", "u", "u", "u");
+        u.setProfile(new Profile());
+        DBHelper.addUser(u);
 
-        World.getDatabase().execSQL("DROP TABLE IF EXISTS movies");
+        for (int i = 0; i < j; i++) {
+            Movie m = new Movie(generateString());
+            m.setUrl(generateString());
+            DBHelper.addNewMovie(m);
 
-        World.getDatabase().execSQL("CREATE TABLE IF NOT EXISTS movies (_id INTEGER PRIMARY KEY "
-                + "AUTOINCREMENT, title TEXT NOT NULL, averageRating REAL NOT NULL DEFAULT '0', " +
-                "imgURL TEXT NOT NULL)");
+            float rating1 = 5 * rand.nextFloat();
+            float rating2 = 5 * rand.nextFloat();
+            float rating3 = 5 * rand.nextFloat();
 
+            Rating r1 = new Rating(rating1, "yep", u);
+            Rating r2 = new Rating(rating2, "yep", u);
+            Rating r3 = new Rating(rating3, "yep", u);
 
-        Movie m = new Movie("The Hunger Games");
-        m.setUrl("URL");
-        m.setAverageRating(5);
-        DBHelper.addNewMovie(m);
+            DBHelper.addRating(m, r1);
+            DBHelper.addRating(m, r2);
+            DBHelper.addRating(m, r3);
 
-        Movie m2 = DBHelper.getMovie("The Hunger Games");
+            m.addRating(r1);
+            m.addRating(r2);
+            m.addRating(r3);
+        }
 
-        assertTrue(m2.getTitle().equals(m.getTitle()));
-        assertTrue(m2.getURL().equals(m.getURL()));
-        assertTrue(m2.getAverageRating() == m.getAverageRating());
+        List<Movie> result = DBHelper.getAllMovies();
+
+        assertTrue(movies.size() == result.size());
     }
 
     @Test
-    public void DBNotNull() {
-        this.getContext().deleteDatabase("testDB1.db");
+    public void getAllMoviesStableOrder() {
+        int j = rand.nextInt(100);
+        ArrayList<Movie> movies = new ArrayList<Movie>();
 
-        World.setDatabase(this.getContext().openOrCreateDatabase("testDB1.db", Context.MODE_PRIVATE, null));
+        User u = new User("u", "u", "u", "u");
+        u.setProfile(new Profile());
+        DBHelper.addUser(u);
 
-        assertTrue(World.getDatabase() != null);
+        for (int i = 0; i < j; i++) {
+            Movie m = new Movie(generateString());
+            m.setUrl(generateString());
+            DBHelper.addNewMovie(m);
+
+            float rating1 = 5 * rand.nextFloat();
+            float rating2 = 5 * rand.nextFloat();
+            float rating3 = 5 * rand.nextFloat();
+
+            Rating r1 = new Rating(rating1, "yep", u);
+            Rating r2 = new Rating(rating2, "yep", u);
+            Rating r3 = new Rating(rating3, "yep", u);
+
+            DBHelper.addRating(m, r1);
+            DBHelper.addRating(m, r2);
+            DBHelper.addRating(m, r3);
+
+            m.addRating(r1);
+            m.addRating(r2);
+            m.addRating(r3);
+        }
+
+        List<Movie> result = DBHelper.getAllMovies();
+
+        for (int i = 0; i < j; i++) {
+            assertTrue(movies.get(i).getTitle().equals(result.get(i)));
+        }
+    }
+
+    @Test
+    public void getAllMoviesPropertiesPreserved() {
+        int j = rand.nextInt(100);
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+
+        User u = new User("u", "u", "u", "u");
+        u.setProfile(new Profile());
+        DBHelper.addUser(u);
+
+        for (int i = 0; i < j; i++) {
+            Movie m = new Movie(generateString());
+            m.setUrl(generateString());
+            DBHelper.addNewMovie(m);
+
+            float rating1 = 5 * rand.nextFloat();
+            float rating2 = 5 * rand.nextFloat();
+            float rating3 = 5 * rand.nextFloat();
+
+            Rating r1 = new Rating(rating1, "yep", u);
+            Rating r2 = new Rating(rating2, "yep", u);
+            Rating r3 = new Rating(rating3, "yep", u);
+
+            DBHelper.addRating(m, r1);
+            DBHelper.addRating(m, r2);
+            DBHelper.addRating(m, r3);
+
+            m.addRating(r1);
+            m.addRating(r2);
+            m.addRating(r3);
+        }
+
+        List<Movie> result = DBHelper.getAllMovies();
+
+        for (int i = 0; i < j; i++) {
+            assertTrue(movies.get(i).getTitle().equals(result.get(i).getTitle()));
+            assertTrue(movies.get(i).getURL().equals(result.get(i).getURL()));
+            assertTrue(movies.get(i).getAverageRating() == result.get(i).getAverageRating());
+        }
+    }
+
+    private String generateString() {
+        String characters = "abcdefghijklmnopqrstuvwxyz ";
+        char[] text = new char[10];
+        for (int i = 0; i < 10; i++)
+        {
+            text[i] = characters.charAt(rand.nextInt(characters.length()));
+        }
+        return new String(text);
     }
 }
