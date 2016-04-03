@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class Dashboard extends AppCompatActivity {
 
-    private final String unused = "unused";
+    private static final String unused = "unused";
     private Context c = this;
 
     /**
@@ -278,9 +278,21 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
-    Intent results;
-    EditText searchBox;
-    String query;
+    private Intent results;
+    private EditText searchBox;
+    private String query;
+
+    private Intent getResults() {
+        return results;
+    }
+
+    private EditText getSearchBox() {
+        return searchBox;
+    }
+
+    private String getQuery() {
+        return query;
+    }
 
     /**
      * Search function
@@ -291,14 +303,14 @@ public class Dashboard extends AppCompatActivity {
     public void buttonSearchClick(View v) {
         results = new Intent(c, SearchActivity.class);
         searchBox = (EditText) findViewById(R.id.search_box);
-        query = searchBox.getText().toString();
-        results.putExtra("QUERY", query);
+        query = getSearchBox().getText().toString();
+        results.putExtra("QUERY", getQuery());
         results.putExtra("TITLE", true);
 
         if (query.length() < 2) {
             Toast.makeText(this, "Searches must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
         } else {
-            startActivity(results);
+            startActivity(getResults());
         }
     }
 
@@ -312,7 +324,7 @@ public class Dashboard extends AppCompatActivity {
         results = new Intent(getApplicationContext(), SearchActivity.class);
         results.putExtra("QUERY", "TOP");
         results.putExtra("TYPE", false);
-        startActivity(results);
+        startActivity(getResults());
     }
 
     /**
@@ -329,7 +341,7 @@ public class Dashboard extends AppCompatActivity {
         if (World.getCurrentUser().getProfile() == null) {
             Toast.makeText(this, "You must have a profile to get a recommendation.", Toast.LENGTH_LONG).show();
         } else {
-            startActivity(results);
+            startActivity(getResults());
         }
     }
 

@@ -23,9 +23,9 @@ public class UserListActivity extends AppCompatActivity {
      */
     private List<User> arrU;
 
-    private final String ACTIVE = "Active";
-    private final String LOCKED = "Locked";
-    private final String BANNED = "Banned";
+    private static final String ACTIVE = "Active";
+    private static final String LOCKED = "Locked";
+    private static final String BANNED = "Banned";
 
 
     /**
@@ -77,36 +77,25 @@ public class UserListActivity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Set user status.");
         //Set items
-        builder.setSingleChoiceItems(items, -1,
-                new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         if ((ACTIVE).equals(items[item])) {
-                            u2.setStatus(ACTIVE);
-                            /**
-                             * Runs on inception of UserListActivity
-                             *
-                             * @param savedInstanceState
-                             */                  DBHelper.setStatus(u2.getUsername(), ACTIVE);
+                            DBHelper.setStatus(u2.getUsername(), ACTIVE);
                         } else if (LOCKED.equals(items[item])) {
-                            u2.setStatus(LOCKED);
                             lockUser(u2.getUsername());
                         } else if (BANNED.equals(items[item])) {
-                            u2.setStatus(BANNED);
                             banUser(u2.getUsername());
                         }
+                        u2.setStatus(items[item].toString());
                         dialog.dismiss();
-
-                        //Refresh entries
                         final ArrayList<String> l = new ArrayList<>();
                         for (final User u : arrU) {
                             l.add(u.getUsername() + ": " + u.getStatus());
                         }
                         final ListView populate = (ListView) findViewById(R.id.populate);
-                        final ArrayAdapter<String> itemsAdapter =
-                                new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, l);
+                        final ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, l);
                         populate.setAdapter(itemsAdapter);
-                    }
-                });
+                    }});
         final AlertDialog dialog = builder.create();
         //Show the dialog that was created.
         dialog.show();

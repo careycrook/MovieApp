@@ -77,7 +77,6 @@ public class SearchActivity extends AppCompatActivity {
             // Formulate the request and handle the response.
             final StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
-                        @Override
                         public void onResponse(String response) {
                             try {
                                 JSONObject jsonObj = new JSONObject(response);
@@ -89,15 +88,13 @@ public class SearchActivity extends AppCompatActivity {
                                     titleArr.add(c.getString("Title") + " (" + c.getString("Year").replaceAll(" ", "") + ")");
                                     imgArr.add(c.getString("Poster"));
                                 }
-                                ArrayAdapter<String> itemsAdapter =
-                                        new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, titles);
+                                ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, titles);
                                 populate.setAdapter(itemsAdapter);
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }
                         }
-                    },
-                    new Response.ErrorListener() {
+                    }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                         }
