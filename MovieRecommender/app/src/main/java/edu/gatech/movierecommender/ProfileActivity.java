@@ -38,11 +38,11 @@ public class ProfileActivity extends AppCompatActivity {
         EditText et = (EditText) findViewById(R.id.descTextBox);
 
         //Set text in controls
-        usernameLabel.setText(getString(R.string.usernameLabel, World.currentUser.getUsername()));
-        nameLabel.setText(getString(R.string.nameLabel, World.currentUser.getName()));
-        emailLabel.setText(getString(R.string.emailLabel, World.currentUser.getEmail()));
-        et.setText(World.currentUser.getProfile().getDesc());
-        spinner.setSelection(adapter.getPosition(World.currentUser.getProfile().getMajor()));
+        usernameLabel.setText(getString(R.string.usernameLabel, World.getCurrentUser().getUsername()));
+        nameLabel.setText(getString(R.string.nameLabel, World.getCurrentUser().getName()));
+        emailLabel.setText(getString(R.string.emailLabel, World.getCurrentUser().getEmail()));
+        et.setText(World.getCurrentUser().getProfile().getDesc());
+        spinner.setSelection(adapter.getPosition(World.getCurrentUser().getProfile().getMajor()));
     }
 
     /**
@@ -57,11 +57,11 @@ public class ProfileActivity extends AppCompatActivity {
         EditText et = (EditText) findViewById(R.id.descTextBox);
 
         //Set values in singleton.
-        World.currentUser.getProfile().setMajor(spinner.getSelectedItem().toString());
-        World.currentUser.getProfile().setDesc(et.getText().toString());
+        World.getCurrentUser().getProfile().setMajor(spinner.getSelectedItem().toString());
+        World.getCurrentUser().getProfile().setDesc(et.getText().toString());
 
-        setMajor(World.currentUser.getUsername(), spinner.getSelectedItem().toString());
-        setDescription(World.currentUser.getUsername(), et.getText().toString());
+        setMajor(World.getCurrentUser().getUsername(), spinner.getSelectedItem().toString());
+        setDescription(World.getCurrentUser().getUsername(), et.getText().toString());
 
         //Close profile, reopen dashboard.
         Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);

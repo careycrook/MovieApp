@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         //Set active user.
-        World.currentUser = u;
+        World.setCurrentUser(u);
 
         //Launch dashboard.
         Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);

@@ -61,7 +61,7 @@ public class MovieProfile extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void onPost(View v) {
         //If user doesn't have a profile, fail
-        if (World.currentUser.getProfile() == null) {
+        if (World.getCurrentUser().getProfile() == null) {
             Toast.makeText(this, "You need to make an account before you can post.", Toast.LENGTH_LONG).show();
         } else {
             //Get controls
@@ -70,7 +70,7 @@ public class MovieProfile extends AppCompatActivity {
             String title = getIntent().getStringExtra("title");
 
             //Make rating and movie
-            Rating r = new Rating(rb.getRating(), et.getText().toString(), World.currentUser);
+            Rating r = new Rating(rb.getRating(), et.getText().toString(), World.getCurrentUser());
             Movie m;
 
             if (isMovie(title)) {

@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (World.DB == null) {
-            World.DB = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+        if (World.getDB() == null) {
+            World.setDB(openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null));
 
             initUserTable();
             initMovieTable();

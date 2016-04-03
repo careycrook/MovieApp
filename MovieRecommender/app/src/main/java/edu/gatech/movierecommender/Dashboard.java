@@ -134,7 +134,7 @@ public class Dashboard extends AppCompatActivity {
         //Create profile case.
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                World.currentUser.setProfile(new Profile());
+                World.getCurrentUser().setProfile(new Profile());
                 launchProfile(vi);
                 dialog.dismiss();
             }
@@ -157,7 +157,7 @@ public class Dashboard extends AppCompatActivity {
      */
     private void profileButton(View v) {
         //If currentUser does not have a profile, show the prompt.
-        if (World.currentUser.getProfile() == null) {
+        if (World.getCurrentUser().getProfile() == null) {
             dialog(v);
         //Else just launch the profile.
         } else {
@@ -312,7 +312,7 @@ public class Dashboard extends AppCompatActivity {
         results.putExtra("QUERY", "MAJOR");
         results.putExtra("TYPE", false);
 
-        if (World.currentUser.getProfile() == null) {
+        if (World.getCurrentUser().getProfile() == null) {
             Toast.makeText(this, "You must have a profile to get a recommendation.", Toast.LENGTH_LONG).show();
         } else {
             startActivity(results);

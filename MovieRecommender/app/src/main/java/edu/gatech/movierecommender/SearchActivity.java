@@ -152,7 +152,7 @@ public class SearchActivity extends AppCompatActivity {
             //Arrays
             ArrayList<Movie> movieList = getAllMovies();
             ArrayList<Movie> majorMovieList = new ArrayList<>();
-            String major = World.currentUser.getProfile().getMajor();
+            String major = World.getCurrentUser().getProfile().getMajor();
 
             //Fill arrays
             for (Movie m : movieList) {
@@ -164,7 +164,7 @@ public class SearchActivity extends AppCompatActivity {
             //Custom sort
             Collections.sort(majorMovieList, new Comparator<Movie>() {
                 public int compare(Movie m1, Movie m2) {
-                    String compMajor = World.currentUser.getProfile().getMajor();
+                    String compMajor = World.getCurrentUser().getProfile().getMajor();
 
                     if (m1.getAverageMajorRating(compMajor) > m2.getAverageMajorRating(compMajor)) {
                         return -1;

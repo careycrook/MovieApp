@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //hard-coded admin log in
         if (username.equals("admin") && password.equals("admin")) {
-            World.currentUser = new User("admin", "admin@google.com", "admin", "admin");
+            World.setCurrentUser(new User("admin", "admin@google.com", "admin", "admin"));
             Intent dashboardIntent = new Intent(getApplicationContext(), AdminDashboard.class);
             startActivity(dashboardIntent);
         } else {
@@ -65,10 +65,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (ourHash == theirHash) {
                             Toast.makeText(this, "Login successful.", Toast.LENGTH_LONG).show();
                             PASSWORD_ATTEMPTS = 0;
-                            World.currentUser = new User(getName(username), getEmail(username), username, password);
+                            World.setCurrentUser(new User(getName(username), getEmail(username), username, password));
 
                             if (!getMajor(username).equals("NONE")) {
-                                World.currentUser.setProfile(new Profile(getMajor(username), getDescription(username)));
+                                World.getCurrentUser().setProfile(new Profile(getMajor(username), getDescription(username)));
                             }
 
                             Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);

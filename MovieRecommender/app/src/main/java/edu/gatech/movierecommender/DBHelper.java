@@ -17,7 +17,7 @@ final class DBHelper {
      * Create table for users
      */
     public static void initUserTable() {
-        World.DB.execSQL("CREATE TABLE IF NOT EXISTS users (_id INTEGER PRIMARY KEY "
+        World.getDB().execSQL("CREATE TABLE IF NOT EXISTS users (_id INTEGER PRIMARY KEY "
                 + "AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, username TEXT NOT NULL," +
                 " password INTEGER NOT NULL DEFAULT '0', status TEXT NOT NULL, " +
                 "major TEXT NOT NULL, description TEXT NOT NULL)");
@@ -38,7 +38,7 @@ final class DBHelper {
         userInfo.put("major", "NONE");
         userInfo.put("description", "NONE");
 
-        long check = World.DB.insert("users", null, userInfo);
+        long check = World.getDB().insert("users", null, userInfo);
 
         return (check != 0);
     }
@@ -47,7 +47,7 @@ final class DBHelper {
      * Create table for movies
      */
     public static void initMovieTable() {
-        World.DB.execSQL("CREATE TABLE IF NOT EXISTS movies (_id INTEGER PRIMARY KEY "
+        World.getDB().execSQL("CREATE TABLE IF NOT EXISTS movies (_id INTEGER PRIMARY KEY "
         + "AUTOINCREMENT, title TEXT NOT NULL, averageRating REAL NOT NULL DEFAULT '0', " +
                 "imgURL TEXT NOT NULL)");
     }
@@ -62,7 +62,7 @@ final class DBHelper {
         movieInfo.put("averageRating", m.getAverageRating());
         movieInfo.put("imgURL", m.getURL());
 
-        long check = World.DB.insert("movies", null, movieInfo);
+        long check = World.getDB().insert("movies", null, movieInfo);
 
         return (check != 0);
     }
@@ -75,7 +75,7 @@ final class DBHelper {
         ArrayList<Movie> temp = new ArrayList<>();
         String query = "SELECT * FROM movies";
 
-        Cursor cursor = World.DB.rawQuery(query, null);
+        Cursor cursor = World.getDB().rawQuery(query, null);
 
         while (cursor.moveToNext()) {
             String title = cursor.getString(cursor.getColumnIndex("title"));
@@ -121,7 +121,7 @@ final class DBHelper {
         String query = "SELECT * FROM movies WHERE title = \'" + title + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
@@ -158,7 +158,7 @@ final class DBHelper {
     public static void addRating(Movie m, Rating r) {
         String tempTitle = m.getTitle().replaceAll(" ", "_").trim();
 
-        World.DB.execSQL("CREATE TABLE IF NOT EXISTS " + "\'" + tempTitle + "\'"
+        World.getDB().execSQL("CREATE TABLE IF NOT EXISTS " + "\'" + tempTitle + "\'"
                 + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, rating REAL NOT NULL DEFAULT '0', " +
                 "comment TEXT NOT NULL, user TEXT NOT NULL)");
 
@@ -167,7 +167,7 @@ final class DBHelper {
         ratingInfo.put("comment", r.getComment());
         ratingInfo.put("user", r.getPoster().getUsername());
 
-        long check = World.DB.insert("\'" + tempTitle + "\'", null, ratingInfo);
+        long check = World.getDB().insert("\'" + tempTitle + "\'", null, ratingInfo);
 
         if (check != 0) {
             updateAverageRating(m, r.getRating());
@@ -186,7 +186,7 @@ final class DBHelper {
         String query = "SELECT * FROM movies WHERE title = \'" + m.getTitle() + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
@@ -205,7 +205,7 @@ final class DBHelper {
         int numRatings = 0;
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
             numRatings = cursor.getCount();
         } catch (SQLiteException e) {
             System.out.println("Fatal DB error");
@@ -225,7 +225,7 @@ final class DBHelper {
 
         query = "UPDATE movies SET averageRating = " + newRating + " WHERE title = \'" + m.getTitle() + "\'";
 
-        World.DB.execSQL(query);
+        World.getDB().execSQL(query);
     }
 
     /**
@@ -238,7 +238,7 @@ final class DBHelper {
         String formattedTitle = m.getTitle().replaceAll(" ", "_").trim();
         String query = "SELECT * FROM " + "\'" + formattedTitle + "\'";
 
-        Cursor cursor = World.DB.rawQuery(query, null);
+        Cursor cursor = World.getDB().rawQuery(query, null);
 
         while (cursor.moveToNext()) {
             float rating = cursor.getFloat(cursor.getColumnIndex("rating"));
@@ -265,7 +265,7 @@ final class DBHelper {
         ArrayList<User> temp = new ArrayList<>();
         String query = "SELECT * FROM users";
 
-        Cursor cursor = World.DB.rawQuery(query, null);
+        Cursor cursor = World.getDB().rawQuery(query, null);
 
         while (cursor.moveToNext()) {
             String name;
@@ -303,7 +303,7 @@ final class DBHelper {
         String query = "SELECT * FROM users WHERE username = \'" + username + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
@@ -332,7 +332,7 @@ final class DBHelper {
      */
     public static boolean checkIfInDB(String tableName, String dbField, String fieldValue) {
         String query = "Select 1 from " + tableName + " where " + dbField + " = \'" + fieldValue + "\' LIMIT 1";
-        Cursor cursor = World.DB.rawQuery(query, null);
+        Cursor cursor = World.getDB().rawQuery(query, null);
             if (cursor.getCount() <= 0) {
                 cursor.close();
                 return false;
@@ -368,7 +368,7 @@ final class DBHelper {
     public static void setMajor(String user, String major) {
         String query = "UPDATE users SET major = \'" + major + "\' WHERE username = \'" + user + "\'";
 
-        World.DB.execSQL(query);
+        World.getDB().execSQL(query);
     }
 
     /**
@@ -380,7 +380,7 @@ final class DBHelper {
     public static void setDescription(String user, String description) {
         String query = "UPDATE users SET description = \'" + description + "\' WHERE username = \'" + user + "\'";
 
-        World.DB.execSQL(query);
+        World.getDB().execSQL(query);
     }
 
     /**
@@ -392,7 +392,7 @@ final class DBHelper {
     public static void setStatus(String user, String status) {
         String query = "UPDATE users SET status = \'" + status + "\' WHERE username = \'" + user + "\'";
 
-        World.DB.execSQL(query);
+        World.getDB().execSQL(query);
     }
 
     /**
@@ -407,7 +407,7 @@ final class DBHelper {
         String query = "SELECT email FROM users WHERE username = \'" + user + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
@@ -436,7 +436,7 @@ final class DBHelper {
         String query = "SELECT name FROM users WHERE username = \'" + user + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
@@ -465,7 +465,7 @@ final class DBHelper {
         String query = "SELECT status FROM users WHERE username = \'" + user + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
@@ -494,7 +494,7 @@ final class DBHelper {
         String query = "SELECT major FROM users WHERE username = \'" + user + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
@@ -523,7 +523,7 @@ final class DBHelper {
         String query = "SELECT description FROM users WHERE username = \'" + user + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
@@ -552,7 +552,7 @@ final class DBHelper {
         String query = "SELECT password FROM users WHERE username = \'" + user + "\'";
 
         try {
-            cursor = World.DB.rawQuery(query, null);
+            cursor = World.getDB().rawQuery(query, null);
 
             if (cursor.getCount() > 0)  {
                 cursor.moveToFirst();
