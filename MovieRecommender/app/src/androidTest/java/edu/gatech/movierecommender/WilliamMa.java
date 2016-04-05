@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(AndroidJUnit4.class)
 @SmallTest
-public class DBTests extends AndroidTestCase {
+public class WilliamMa extends AndroidTestCase {
 
     Random rand;
 
