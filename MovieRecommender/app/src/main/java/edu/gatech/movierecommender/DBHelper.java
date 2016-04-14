@@ -11,7 +11,9 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -102,12 +104,14 @@ final class DBHelper {
     public static boolean isUser(String username) {
         final AtomicBoolean result = new AtomicBoolean();
         final Firebase tempRef = USER_TABLE.child(username);
+        final String fusername = username;
 
         tempRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                result.set(dataSnapshot.getValue() != null);
+                result.set(dataSnapshot.getValue() != null
+                    && fusername.equals(dataSnapshot.getValue()));
             }
 
             @Override
@@ -245,12 +249,14 @@ final class DBHelper {
 
         final AtomicBoolean result = new AtomicBoolean();
         final Firebase tempRef = MOVIE_TABLE.child(title);
+        final String ftitle = title;
 
         tempRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                result.set(dataSnapshot.getValue() != null);
+                result.set(dataSnapshot.getValue() != null
+                    && ftitle.equals(dataSnapshot.getValue()));
             }
 
             @Override
@@ -267,8 +273,9 @@ final class DBHelper {
      * @param title The title of the Movie
      * @return The Movie object associated with the title
      */
-    /*public static Movie getMovie(String title) {
-        Cursor cursor = null;
+    public static Movie getMovie(String title) {
+        // *** DEPRECATED ***
+        /*Cursor cursor = null;
         Movie m = null;
 
         final String query = "SELECT * FROM movies WHERE title = \'" + title + "\'";
@@ -300,16 +307,40 @@ final class DBHelper {
             }
         }
 
-        return m;
-    }*/
+        return m;*/
+
+        final Movie result = new Movie(title);
+        final Firebase tempRef = MOVIE_TABLE.child(title);
+
+        tempRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Movie tempM = dataSnapshot.getValue(Movie.class);
+
+                result.setAverageRating(tempM.getAverageRating());
+                result.setUrl(tempM.getURL());
+                result.setRatings(tempM.getRatings());
+                result.setMajorRatings(tempM.getMajorRatings());
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(ERROR, "The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+        return result;
+    }
 
     /**
      * Returns true if the Rating is successfully added for a Movie
      * @param m The Movie we want to add a Rating to
      * @param r The Rating object we want to add
      */
-    /*public static void addRating(Movie m, Rating r) {
-        final String tempTitle = m.getTitle().replaceAll(" ", "_").trim();
+    public static void addRating(Movie m, Rating r) {
+        // *** DEPRECATED ***
+        /*final String tempTitle = m.getTitle().replaceAll(" ", "_").trim();
 
         World.getDatabase().execSQL("CREATE TABLE IF NOT EXISTS " + "\'" + tempTitle + "\'"
                 + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, rating REAL NOT NULL DEFAULT '0', " +
@@ -324,8 +355,11 @@ final class DBHelper {
 
         if (check != 0) {
             updateAverageRating(m, r.getRating());
-        }
-    }*/
+        }*/
+
+        Firebase tempRef = MOVIE_TABLE.child(m.getTitle());
+        Map<Rating> ratings = new HashMap<Rating>();
+    }
 
     /**
      * Updates the average rating for a Movie with a new Rating value
@@ -414,8 +448,9 @@ final class DBHelper {
      * @return ArrayList<User> all users
      *
      */
-    /*public static List<User> getAllUsers() {
-        final ArrayList<User> temp = new ArrayList<>();
+    public static List<User> getAllUsers() {
+        // *** DEPRECATED ***
+        /*final ArrayList<User> temp = new ArrayList<>();
         final String query = "SELECT * FROM users";
 
         final Cursor cursor = World.getDatabase().rawQuery(query, null);
@@ -441,16 +476,36 @@ final class DBHelper {
 
         cursor.close();
 
-        return temp;
-    }*/
+        return temp;*/
+
+        final List<User> result = new ArrayList<User>();
+
+        USER_TABLE.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    result.add(postSnapshot.getValue(User.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(ERROR, "The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+        return result;
+    }
 
     /**
      * Returns the User object associated with a given username
      * @param username The username of the User object we're looking for
      * @return the User object associated with a given username
      */
-    /*private static User getUser(String username) {
-        Cursor cursor = null;
+    private static User getUser(String username) {
+        // *** DEPRECATED ***
+        /*Cursor cursor = null;
         User u = null;
 
         final String query = "SELECT * FROM users WHERE username = \'" + username + "\'";
@@ -475,8 +530,33 @@ final class DBHelper {
             }
         }
 
-        return u;
-    }*/
+        return u;*/
+
+        final User result = new User(null, null, null, 0);
+        final Firebase tempRef = USER_TABLE.child(username);
+
+        tempRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User tempU = dataSnapshot.getValue(User.class);
+
+                result.setName(tempU.getName());
+                result.setEmail(tempU.getEmail());
+                result.setUsername(tempU.getUsername());
+                result.setPasswordHash(tempU.getPasswordHash());
+                result.setStatus(tempU.getStatus());
+                result.setProfile(tempU.getProfile());
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(ERROR, "The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+        return result;
+    }
 
     /*/**
      * Check if entry is in DB
@@ -522,18 +602,18 @@ final class DBHelper {
      *
      * @param user to lock
      */
-    /*public static void lockUser(String user) {
+    public static void lockUser(String user) {
         setStatus(user, "Locked");
-    }*/
+    }
 
     /**
      * Set a user's status to banned
      *
      * @param user to ban
      */
-    /*public static void banUser(String user) {
+    public static void banUser(String user) {
         setStatus(user, "Banned");
-    }*/
+    }
 
     /**
      * Set a user's major
@@ -541,11 +621,14 @@ final class DBHelper {
      * @param user user in question
      * @param major to set
      */
-    /*public static void setMajor(String user, String major) {
-        final String query = "UPDATE users SET major = \'" + major + "\' WHERE username = \'" + user + "\'";
+    public static void setMajor(String user, String major) {
+        // *** DEPRECATED ***
+        /*final String query = "UPDATE users SET major = \'" + major + "\' WHERE username = \'" + user + "\'";
 
-        World.getDatabase().execSQL(query);
-    }*/
+        World.getDatabase().execSQL(query);*/
+
+        USER_TABLE.child(user).child("major").setValue(major);
+    }
 
     /**
      * Set a user's description
@@ -553,11 +636,14 @@ final class DBHelper {
      * @param user user in question
      * @param description to set
      */
-    /*public static void setDescription(String user, String description) {
-        final String query = "UPDATE users SET description = \'" + description + "\' WHERE username = \'" + user + "\'";
+    public static void setDescription(String user, String description) {
+        // *** DEPRECATED ***
+        /*final String query = "UPDATE users SET description = \'" + description + "\' WHERE username = \'" + user + "\'";
 
-        World.getDatabase().execSQL(query);
-    }*/
+        World.getDatabase().execSQL(query);*/
+
+        USER_TABLE.child(user).child("description").setValue(description);
+    }
 
     /**
      * Set a user's status
@@ -565,11 +651,14 @@ final class DBHelper {
      * @param user user in question
      * @param status to set
      */
-    /*public static void setStatus(String user, String status) {
-        final String query = "UPDATE users SET status = \'" + status + "\' WHERE username = \'" + user + "\'";
+    public static void setStatus(String user, String status) {
+        // *** DEPRECATED ***
+        /*final String query = "UPDATE users SET status = \'" + status + "\' WHERE username = \'" + user + "\'";
 
-        World.getDatabase().execSQL(query);
-    }*/
+        World.getDatabase().execSQL(query);*/
+
+        USER_TABLE.child(user).child("status").setValue(status);
+    }
 
     /**
      * Get a user's description
@@ -608,7 +697,7 @@ final class DBHelper {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                result.append((String) dataSnapshot.getValue());
+                result.append(dataSnapshot.getValue(String.class));
             }
 
             @Override
@@ -657,7 +746,7 @@ final class DBHelper {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                result.append((String) dataSnapshot.getValue());
+                result.append(dataSnapshot.getValue(String.class));
             }
 
             @Override
@@ -706,7 +795,7 @@ final class DBHelper {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                result.append((String) dataSnapshot.getValue());
+                result.append(dataSnapshot.getValue(String.class));
             }
 
             @Override
@@ -755,7 +844,7 @@ final class DBHelper {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                result.append((String) dataSnapshot.getValue());
+                result.append(dataSnapshot.getValue(String.class));
             }
 
             @Override
@@ -804,7 +893,7 @@ final class DBHelper {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                result.append((String) dataSnapshot.getValue());
+                result.append(dataSnapshot.getValue(String.class));
             }
 
             @Override
@@ -853,7 +942,7 @@ final class DBHelper {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                result.set((Integer) dataSnapshot.getValue());
+                result.set(dataSnapshot.getValue(Integer.class));
             }
 
             @Override

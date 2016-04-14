@@ -16,7 +16,7 @@ public class Movie implements Comparable<Movie> {
     /**
      * Ratings
      */
-    private final List<Rating> ratings;
+    private List<Rating> ratings;
     /**
      * Average Rating
      */
@@ -24,7 +24,7 @@ public class Movie implements Comparable<Movie> {
     /**
      * Major Ratings
      */
-    private final Map<String, ArrayList<Float>> majorRatings;
+    private Map<String, ArrayList<Float>> majorRatings;
     /**
      * Image URL
      */
@@ -71,6 +71,8 @@ public class Movie implements Comparable<Movie> {
      * @return the HashMap of majors to ratings
      */
     public Map<String, ArrayList<Float>> getMajorRatings() { return majorRatings; }
+
+    public void setMajorRatings(Map<String, ArrayList<Float>> majorR) {majorRatings = majorR;}
 
     /**
      * Calculates average rating for a major
@@ -141,6 +143,8 @@ public class Movie implements Comparable<Movie> {
     public List<Rating> getRatings() {
         return ratings;
     }
+
+    public void setRatings(List<Rating> ratings) {this.ratings = ratings;}
 
     /**
      * Compares a movie against this movies average rating

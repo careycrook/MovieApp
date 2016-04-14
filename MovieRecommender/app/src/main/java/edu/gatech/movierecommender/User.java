@@ -5,19 +5,19 @@ public class User {
     /**
      * Name
      */
-    private final String name;
+    private String name;
     /**
      * Email
      */
-    private final String email;
+    private String email;
     /**
      * Username
      */
-    private final String username;
+    private String username;
     /**
      * Password
      */
-    private final int passwordHash;
+    private int passwordHash;
     /**
      * Status
      */
@@ -53,6 +53,12 @@ public class User {
     }
 
     /**
+     * Sets the name of the user to the specified String
+     * @param nom The new name
+     */
+    public void setName(String nom) {this.name = nom;}
+
+    /**
      * Return the email for this user
      *
      * @return the person's email
@@ -60,6 +66,12 @@ public class User {
     public String getEmail() {
         return email;
     }
+
+    /**
+     * Sets the email of the user to the specified String
+     * @param email The new email
+     */
+    public void setEmail(String email) {this.email = email;}
 
     /**
      * Return the username for this user
@@ -71,6 +83,12 @@ public class User {
     }
 
     /**
+     * Sets the username of the user to the specified String
+     * @param username The new username
+     */
+    public void setUsername(String username) {this.username = username;}
+
+    /**
      * Return the password for this user
      *
      * @return the person's password
@@ -78,6 +96,12 @@ public class User {
     public int getPasswordHash() {
         return passwordHash;
     }
+
+    /**
+     * Set the password hash to the specified int
+     * @param passwordHash the new hash
+     */
+    public void setPasswordHash(int passwordHash) {this.passwordHash = passwordHash;}
 
     /**
      * Return the profile for this user
