@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import static edu.gatech.movierecommender.DBHelper.addUser;
-import static edu.gatech.movierecommender.DBHelper.checkIfInDB;
+import static edu.gatech.movierecommender.DBHelper.isUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String password2 = passwordBox2.getText().toString();
 
         //Create user from control data.
-        final User u = new User(name, email, username, password1);
+        final User u = new User(name, email, username, password1.hashCode());
 
         //Check that passwords match.
         if (!password1.equals(password2)) {
@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if (checkIfInDB("users", "username", username)) {
+        if (isUser(username)) {
             Toast.makeText(this, "A user by that name already exists", Toast.LENGTH_LONG).show();
             return;
         } else {

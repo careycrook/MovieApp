@@ -17,7 +17,7 @@ public class User {
     /**
      * Password
      */
-    private final String password;
+    private final int passwordHash;
     /**
      * Status
      */
@@ -33,13 +33,13 @@ public class User {
      * @param myName the person's name
      * @param myEmail the person's email
      * @param myUsername the person's username
-     * @param myPassword the person's passwords
+     * @param myPasswordHash the person's passwords
      */
-    public User(String myName, String myEmail, String myUsername, String myPassword) {
+    public User(String myName, String myEmail, String myUsername, int myPasswordHash) {
         this.name = myName;
         this.email = myEmail;
         this.username = myUsername;
-        this.password = myPassword;
+        this.passwordHash = myPasswordHash;
         profile = null;
     }
 
@@ -75,8 +75,8 @@ public class User {
      *
      * @return the person's password
      */
-    public String getPassword() {
-        return password;
+    public int getPasswordHash() {
+        return passwordHash;
     }
 
     /**

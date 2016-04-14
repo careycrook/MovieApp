@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import static edu.gatech.movierecommender.DBHelper.DATABASE_NAME;
+import com.firebase.client.Firebase;
+
+//import static edu.gatech.movierecommender.DBHelper.DATABASE_NAME;
 import static edu.gatech.movierecommender.DBHelper.initMovieTable;
 import static edu.gatech.movierecommender.DBHelper.initUserTable;
 
@@ -23,11 +25,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (World.getDatabase() == null) {
-            World.setDatabase(openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null));
+            Firebase.setAndroidContext(getApplicationContext());
+            World.setDatabase(new Firebase("https://movierecommender.firebaseio.com/"));
 
             initUserTable();
             initMovieTable();
         }
+
+        
     }
 
     /**

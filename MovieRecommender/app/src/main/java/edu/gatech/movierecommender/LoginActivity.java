@@ -7,13 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static edu.gatech.movierecommender.DBHelper.checkIfInDB;
 import static edu.gatech.movierecommender.DBHelper.getDescription;
 import static edu.gatech.movierecommender.DBHelper.getEmail;
 import static edu.gatech.movierecommender.DBHelper.getMajor;
 import static edu.gatech.movierecommender.DBHelper.getName;
 import static edu.gatech.movierecommender.DBHelper.getPassHash;
 import static edu.gatech.movierecommender.DBHelper.getStatus;
+import static edu.gatech.movierecommender.DBHelper.isUser;
 import static edu.gatech.movierecommender.DBHelper.lockUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -52,12 +52,12 @@ public class LoginActivity extends AppCompatActivity {
 
         //hard-coded admin log in
         if ((ADMIN).equals(username) && (ADMIN).equals(password)) {
-            World.setCurrentUser(new User(ADMIN, "admin@google.com", ADMIN, ADMIN));
+            World.setCurrentUser(new User(ADMIN, "admin@google.com", ADMIN, ADMIN.hashCode()));
             final Intent dashboardIntent = new Intent(getApplicationContext(), AdminDashboard.class);
             startActivity(dashboardIntent);
         } else {
             //Access db to see if login is valid
-            if (checkIfInDB("users", "username", username)) {
+            if (isUser(username)) {
                 final int ourHash = password.hashCode();
                 final int theirHash = getPassHash(username);
                 final String status = getStatus(username);
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (ourHash == theirHash) {
                             Toast.makeText(this, "Login successful.", Toast.LENGTH_LONG).show();
                             passwordAttempts = 0;
-                            World.setCurrentUser(new User(getName(username), getEmail(username), username, password));
+                            World.setCurrentUser(new User(getName(username), getEmail(username), username, password.hashCode()));
 
                             if (!("NONE").equals(getMajor(username))) {
                                 World.getCurrentUser().setProfile(new Profile(getMajor(username), getDescription(username)));

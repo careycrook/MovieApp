@@ -1,7 +1,8 @@
 package edu.gatech.movierecommender;
 
 import android.app.Application;
-import android.database.sqlite.SQLiteDatabase;
+
+import com.firebase.client.Firebase;
 
 class World extends Application {
     /**
@@ -11,7 +12,7 @@ class World extends Application {
     /**
      * Database
      */
-    private static SQLiteDatabase database = null;
+    private static Firebase database = null;
 
     /**
      * Gets current user
@@ -25,7 +26,7 @@ class World extends Application {
      *
      * @return SQLiteDatabase
      */
-    public static SQLiteDatabase getDatabase() {return database;}
+    public static Firebase getDatabase() {return database;}
 
     /**
      * Set global current user
@@ -39,5 +40,5 @@ class World extends Application {
      *
      * @param db SQLiteDatabase
      */
-    public static void setDatabase(SQLiteDatabase db) {database = db;}
+    public static void setDatabase(Firebase db) {database = db;}
 }
