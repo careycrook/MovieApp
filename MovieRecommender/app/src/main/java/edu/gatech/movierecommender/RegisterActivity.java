@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static edu.gatech.movierecommender.DBHelper.addUser;
 import static edu.gatech.movierecommender.DBHelper.isUser;
 
@@ -67,7 +69,23 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if (isUser(username)) {
+        final AtomicBoolean isUser = new AtomicBoolean();
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                isUser.set(isUser(username));
+            }
+        });
+
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (isUser.get()) {
             Toast.makeText(this, "A user by that name already exists", Toast.LENGTH_LONG).show();
             return;
         } else {

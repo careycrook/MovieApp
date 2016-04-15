@@ -34,17 +34,17 @@ public class DBHelper {
     private final String AVERAGE_RATING = "averageRating";
     private final String IMG_URL = "imgURL";
     private final String FATAL_DB_ERROR = "Fatal DB error";
-    private final String ERROR = "ERROR";
+    private static final String ERROR = "ERROR";
 
-    private Firebase USER_TABLE;
-    private Firebase MOVIE_TABLE;
+    private static Firebase USER_TABLE;
+    private static Firebase MOVIE_TABLE;
 
     public DBHelper() {}
 
     /**
      * Create table for users
      */
-    public void initUserTable() {
+    public static void initUserTable() {
         USER_TABLE = World.getDatabase().child("users");
     }
 
@@ -53,7 +53,7 @@ public class DBHelper {
      * @param username The User's username
      * @return true if a User with that username is contained in the database
      */
-    public boolean isUser(String username) {
+    public static boolean isUser(String username) {
         final AtomicBoolean result = new AtomicBoolean();
         final Firebase tempRef = USER_TABLE.child(username);
         final String fusername = username;
@@ -80,7 +80,7 @@ public class DBHelper {
      * @param u The User object we want to add
      * @return true if the User was successfully added
      */
-    public boolean addUser(User u) {
+    public static boolean addUser(User u) {
         final AtomicBoolean result = new AtomicBoolean();
         u.setStatus("Active");
 
@@ -102,7 +102,7 @@ public class DBHelper {
     /**
      * Create table for movies
      */
-    public void initMovieTable() {
+    public static void initMovieTable() {
         MOVIE_TABLE = World.getDatabase().child("movies");
     }
 
@@ -111,7 +111,7 @@ public class DBHelper {
      * @param m the Movie object we want to add
      * @return boolean worked
      */
-    public boolean addNewMovie(Movie m) {
+    public static boolean addNewMovie(Movie m) {
         final AtomicBoolean result = new AtomicBoolean();
         Map<String, String> basicAttribs = new HashMap<String, String>();
         basicAttribs.put("title", m.getTitle());
@@ -137,7 +137,7 @@ public class DBHelper {
      * Returns an ArrayList of all of the Movies in the database
      * @return an ArrayList of all of the Movies in the database
      */
-    public List<Movie> getAllMovies() {
+    public static List<Movie> getAllMovies() {
         final ArrayList<Movie> temp = new ArrayList<>();
 
         MOVIE_TABLE.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -177,7 +177,7 @@ public class DBHelper {
      * @param title The title of the Movie
      * @return true if a Movie with that title is contained in the database
      */
-    public boolean isMovie(String title) {
+    public static boolean isMovie(String title) {
         final AtomicBoolean result = new AtomicBoolean();
         final Firebase tempRef = MOVIE_TABLE.child(title);
         final String ftitle = title;
@@ -204,7 +204,7 @@ public class DBHelper {
      * @param title The title of the Movie
      * @return The Movie object associated with the title
      */
-    public Movie getMovie(String title) {
+    public static Movie getMovie(String title) {
         final Movie result = new Movie(title);
         final Firebase tempRef = MOVIE_TABLE.child(title);
 
@@ -240,7 +240,7 @@ public class DBHelper {
      * @param m The Movie we want to add a Rating to
      * @param r The Rating object we want to add
      */
-    public void addRating(Movie m, Rating r) {
+    public static void addRating(Movie m, Rating r) {
         final AtomicBoolean result = new AtomicBoolean();
         Firebase tempRef = MOVIE_TABLE.child(m.getTitle()).child("ratings");
 
@@ -266,7 +266,7 @@ public class DBHelper {
      * @param m The Movie we want to update the Rating for
      * @param r The Rating we want to add
      */
-    private void updateAverageRating(Movie m, float r) {
+    private static void updateAverageRating(Movie m, float r) {
         final AtomicInteger oldRating = new AtomicInteger();
         final AtomicLong numRatings = new AtomicLong();
         Firebase tempRef = MOVIE_TABLE.child(m.getTitle()).child("averageRating");
@@ -325,7 +325,7 @@ public class DBHelper {
      * @param m The Movie we're looking up the Ratings for
      * @return an ArrayList of all Ratings for a given Movie
      */
-    private List<Rating> getAllRatings(Movie m) {
+    private static List<Rating> getAllRatings(Movie m) {
         final ArrayList<Rating> temp = new ArrayList<>();
         final Firebase tempRef = MOVIE_TABLE.child(m.getTitle()).child("ratings");
 
@@ -364,7 +364,7 @@ public class DBHelper {
      * @return ArrayList<User> all users
      *
      */
-    public List<User> getAllUsers() {
+    public static List<User> getAllUsers() {
         final List<User> result = new ArrayList<User>();
 
         USER_TABLE.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -390,7 +390,7 @@ public class DBHelper {
      * @param username The username of the User object we're looking for
      * @return the User object associated with a given username
      */
-    private User getUser(String username) {
+    private static User getUser(String username) {
         final User result = new User(null, null, null, 0);
         final Firebase tempRef = USER_TABLE.child(username);
 
@@ -431,7 +431,7 @@ public class DBHelper {
      *
      * @param user to lock
      */
-    public void lockUser(String user) {
+    public static void lockUser(String user) {
         setStatus(user, "Locked");
     }
 
@@ -440,7 +440,7 @@ public class DBHelper {
      *
      * @param user to ban
      */
-    public void banUser(String user) {
+    public static void banUser(String user) {
         setStatus(user, "Banned");
     }
 
@@ -450,7 +450,7 @@ public class DBHelper {
      * @param user user in question
      * @param major to set
      */
-    public void setMajor(String user, String major) {
+    public static void setMajor(String user, String major) {
         USER_TABLE.child(user).child("major").setValue(major);
     }
 
@@ -460,7 +460,7 @@ public class DBHelper {
      * @param user user in question
      * @param description to set
      */
-    public void setDescription(String user, String description) {
+    public static void setDescription(String user, String description) {
         USER_TABLE.child(user).child("description").setValue(description);
     }
 
@@ -470,7 +470,7 @@ public class DBHelper {
      * @param user user in question
      * @param status to set
      */
-    public void setStatus(String user, String status) {
+    public static void setStatus(String user, String status) {
         USER_TABLE.child(user).child("status").setValue(status);
     }
 
@@ -480,7 +480,7 @@ public class DBHelper {
      * @param user user
      * @return user's email
      */
-    public String getEmail(String user) {
+    public static String getEmail(String user) {
         final StringBuffer result = new StringBuffer();
         final Firebase tempRef = USER_TABLE.child(user).child("email");
 
@@ -506,7 +506,7 @@ public class DBHelper {
      * @param user user
      * @return user's name
      */
-    public String getName(String user) {
+    public static String getName(String user) {
         final StringBuffer result = new StringBuffer();
         final Firebase tempRef = USER_TABLE.child(user).child("name");
 
@@ -532,7 +532,7 @@ public class DBHelper {
      * @param user user
      * @return user's status
      */
-    public String getStatus(String user) {
+    public static String getStatus(String user) {
         final StringBuffer result = new StringBuffer();
         final Firebase tempRef = USER_TABLE.child(user).child("status");
 
@@ -558,7 +558,7 @@ public class DBHelper {
      * @param user user
      * @return user's major
      */
-    public String getMajor(String user) {
+    public static String getMajor(String user) {
         final StringBuffer result = new StringBuffer();
         final Firebase tempRef = USER_TABLE.child(user).child("major");
 
@@ -584,7 +584,7 @@ public class DBHelper {
      * @param user user
      * @return user's description
      */
-    public String getDescription(String user) {
+    public static String getDescription(String user) {
         final StringBuffer result = new StringBuffer();
         final Firebase tempRef = USER_TABLE.child(user).child("description");
 
@@ -610,7 +610,7 @@ public class DBHelper {
      * @param user user
      * @return user's password as hash
      */
-    public int getPassHash(String user) {
+    public static int getPassHash(String user) {
         final AtomicInteger result = new AtomicInteger();
         final Firebase tempRef = USER_TABLE.child(user).child("passwordHash");
 
