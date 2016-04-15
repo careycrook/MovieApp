@@ -8,10 +8,6 @@ import android.view.View;
 
 import com.firebase.client.Firebase;
 
-//import static edu.gatech.movierecommender.DBHelper.DATABASE_NAME;
-import static edu.gatech.movierecommender.DBHelper.initMovieTable;
-import static edu.gatech.movierecommender.DBHelper.initUserTable;
-
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -27,9 +23,10 @@ public class MainActivity extends AppCompatActivity {
         if (World.getDatabase() == null) {
             Firebase.setAndroidContext(getApplicationContext());
             World.setDatabase(new Firebase("https://movierecommender.firebaseio.com/"));
+            World.setDbHelper(new DBHelper());
 
-            initUserTable();
-            initMovieTable();
+            World.getDbHelper().initUserTable();
+            World.getDbHelper().initMovieTable();
         }
 
         

@@ -1,5 +1,8 @@
 package edu.gatech.movierecommender;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class Rating {
 
     /**
@@ -55,4 +58,13 @@ class Rating {
         return poster;
     }
 
+    public Map<String, String> toMap() {
+        Map<String, String> toMap = new HashMap<>();
+
+        toMap.put("rating", String.valueOf(rating));
+        toMap.put("comment", comment);
+        toMap.put("user", poster.getUsername());
+
+        return toMap;
+    }
 }

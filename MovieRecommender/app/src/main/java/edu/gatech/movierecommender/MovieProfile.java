@@ -75,7 +75,7 @@ public class MovieProfile extends AppCompatActivity {
     public void onPost(View v) {
         //If user doesn't have a profile, fail
         if (World.getCurrentUser().getProfile() == null) {
-            Toast.makeText(this, "You need to make an account before you can post.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "You need to make a profile before you can post.", Toast.LENGTH_LONG).show();
         } else {
             //Get controls
             final RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);

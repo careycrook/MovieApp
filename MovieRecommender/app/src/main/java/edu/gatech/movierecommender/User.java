@@ -1,5 +1,8 @@
 package edu.gatech.movierecommender;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
     /**
@@ -134,4 +137,24 @@ public class User {
      * @param myStatus status of user
      */
     public void setStatus(String myStatus) { status = myStatus; }
+
+    public Map<String, String> toMap() {
+        Map<String, String> toMap = new HashMap<String, String>();
+
+        toMap.put("name", name);
+        toMap.put("email", email);
+        toMap.put("username", username);
+        toMap.put("passwordHash", String.valueOf(passwordHash));
+        toMap.put("status", status);
+
+        if (profile == null) {
+            toMap.put("major", "");
+            toMap.put("description", "");
+        } else {
+            toMap.put("major", profile.getMajor());
+            toMap.put("description", profile.getDesc());
+        }
+
+        return toMap;
+    }
 }
