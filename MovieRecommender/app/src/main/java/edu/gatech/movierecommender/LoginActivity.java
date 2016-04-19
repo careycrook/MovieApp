@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static edu.gatech.movierecommender.DBHelper.getDescription;
 import static edu.gatech.movierecommender.DBHelper.getEmail;
 import static edu.gatech.movierecommender.DBHelper.getMajor;
@@ -57,6 +59,9 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(dashboardIntent);
         } else {
             //Access db to see if login is valid
+
+            AtomicBoolean boo = new AtomicBoolean();
+
             if (isUser(username)) {
                 final int ourHash = password.hashCode();
                 final int theirHash = getPassHash(username);

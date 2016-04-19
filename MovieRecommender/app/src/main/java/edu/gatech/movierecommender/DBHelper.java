@@ -36,8 +36,45 @@ public class DBHelper {
     private final String FATAL_DB_ERROR = "Fatal DB error";
     private static final String ERROR = "ERROR";
 
+    private static AtomicBoolean resolved;
+
     private static Firebase USER_TABLE;
     private static Firebase MOVIE_TABLE;
+
+    protected class DBWorker implements Runnable {
+
+        private DBParams params;
+        private String username;
+        private AtomicBoolean b;
+        private User u;
+
+        protected DBWorker(DBParams p, String username, AtomicBoolean boo) {
+            params = p;
+            this.username = username;
+            b = boo;
+        }
+
+        protected DBWorker(DBParams p, User u, AtomicBoolean boo) {
+            params = p;
+            this.u = u;
+            b = boo;
+        }
+
+        @Override
+        public void run() {
+            switch(params) {
+
+            }
+        }
+    }
+
+    protected enum DBParams {
+        IS_USER, ADD_USER, ADD_NEW_MOVIE,
+        GET_ALL_MOVIES, IS_MOVIE, GET_MOVIE, ADD_RATING, UPDATE_AVERAGE_RATING,
+        GET_ALL_RATINGS, GET_ALL_USERS, GET_USER, LOCK_USER, BAN_USER,
+        SET_MAJOR, SET_DESCRIPTION, SET_STATUS, GET_EMAIL, GET_NAME, GET_STATUS,
+        GET_MAJOR, GET_DESCRIPTION, GET_PASS_HASH
+    }
 
     public DBHelper() {}
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="edu.gatech.movierecommender">
+<manifest package="edu.gatech.movierecommender"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -21,31 +21,33 @@
             android:label="Movie Recommender"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity">
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProfileActivity" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ProfileActivity"/>
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MovieProfile"
             android:label="@string/title_activity_movie_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RatingsActivity" />
-        <activity android:name=".AdminDashboard" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".RatingsActivity"/>
+        <activity android:name=".AdminDashboard"/>
         <activity android:name=".UserListActivity"/>
+        <activity android:name=".LoadingScreenActivity">
+        </activity>
     </application>
 
 </manifest>
