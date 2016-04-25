@@ -46,8 +46,6 @@
         <activity android:name=".RatingsActivity"/>
         <activity android:name=".AdminDashboard"/>
         <activity android:name=".UserListActivity"/>
-        <activity android:name=".LoadingScreenActivity">
-        </activity>
     </application>
 
 </manifest>

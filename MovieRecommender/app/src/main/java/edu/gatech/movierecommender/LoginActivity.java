@@ -1,12 +1,15 @@
 package edu.gatech.movierecommender;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static edu.gatech.movierecommender.DBHelper.getDescription;
@@ -59,8 +62,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(dashboardIntent);
         } else {
             //Access db to see if login is valid
-
-            AtomicBoolean boo = new AtomicBoolean();
 
             if (isUser(username)) {
                 final int ourHash = password.hashCode();
@@ -115,4 +116,77 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    protected class LoginLoadingScreenActivity extends AppCompatActivity {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            LoadViewTask lv = new LoadViewTask();
+            lv.userParams = getIntent().getStringArrayListExtra("userParams");
+            lv.execute();
+        }
+
+        protected class LoadViewTask extends AsyncTask<List<String>, AtomicBoolean, AtomicBoolean> {
+
+            public List<String> userParams;
+
+            //Before running code in separate thread
+            @Override
+            protected void onPreExecute()
+            {
+                //Create a new progress dialog
+                progressDialog = new ProgressDialog(LoginLoadingScreenActivity.this);
+                //Set the progress dialog to display a horizontal progress bar
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                //Set the dialog title to 'Loading...'
+                progressDialog.setTitle("Loading...");
+                //Set the dialog message to 'Loading application View, please wait...'
+                progressDialog.setMessage("Loading application View, please wait...");
+                //This dialog can't be canceled by pressing the back key
+                progressDialog.setCancelable(false);
+                //This dialog isn't indeterminate
+                progressDialog.setIndeterminate(false);
+                //The maximum number of items is 100
+                progressDialog.setMax(100);
+                //Set the current progress to zero
+                progressDialog.setProgress(0);
+                //Display the progress dialog
+                progressDialog.show();
+            }
+
+            @Override
+            protected AtomicBoolean doInBackground(List<String>... params) {
+                String username = userParams.get(0);
+                int passHash = Integer.parseInt(userParams.get(1));
+
+                AtomicBoolean returnB = new AtomicBoolean();
+
+                if (isUser(username)) {
+
+                } else {
+                    returnB.set(false);
+                }
+
+                return returnB;
+            }
+
+            //Update the progress
+            @Override
+            protected void onProgressUpdate(AtomicBoolean... values)
+            {
+                //set the current progress of the progress dialog
+                //progressDialog.setProgress(values[0]);
+            }
+
+            //after executing the code in the thread
+            @Override
+            protected void onPostExecute(AtomicBoolean result)
+            {
+                //close the progress dialog
+                progressDialog.dismiss();
+                //initialize the View
+            }
+        }
+    }
 }

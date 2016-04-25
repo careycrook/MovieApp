@@ -41,41 +41,6 @@ public class DBHelper {
     private static Firebase USER_TABLE;
     private static Firebase MOVIE_TABLE;
 
-    protected class DBWorker implements Runnable {
-
-        private DBParams params;
-        private String username;
-        private AtomicBoolean b;
-        private User u;
-
-        protected DBWorker(DBParams p, String username, AtomicBoolean boo) {
-            params = p;
-            this.username = username;
-            b = boo;
-        }
-
-        protected DBWorker(DBParams p, User u, AtomicBoolean boo) {
-            params = p;
-            this.u = u;
-            b = boo;
-        }
-
-        @Override
-        public void run() {
-            switch(params) {
-
-            }
-        }
-    }
-
-    protected enum DBParams {
-        IS_USER, ADD_USER, ADD_NEW_MOVIE,
-        GET_ALL_MOVIES, IS_MOVIE, GET_MOVIE, ADD_RATING, UPDATE_AVERAGE_RATING,
-        GET_ALL_RATINGS, GET_ALL_USERS, GET_USER, LOCK_USER, BAN_USER,
-        SET_MAJOR, SET_DESCRIPTION, SET_STATUS, GET_EMAIL, GET_NAME, GET_STATUS,
-        GET_MAJOR, GET_DESCRIPTION, GET_PASS_HASH
-    }
-
     public DBHelper() {}
 
     /**
@@ -83,6 +48,77 @@ public class DBHelper {
      */
     public static void initUserTable() {
         USER_TABLE = World.getDatabase().child("users");
+
+        USER_TABLE.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String name = postSnapshot.child("name").getValue(String.class);
+                    String email = postSnapshot.child("email").getValue(String.class);
+                    String username = postSnapshot.child("username").getValue(String.class);
+                    int passwordHash = postSnapshot.child("passwordHash").getValue(Integer.class);
+
+                    User tempU = new User(name, email, username, passwordHash);
+
+                    String major = postSnapshot.child("major").getValue(String.class);
+                    String description = postSnapshot.child("description").getValue(String.class);
+                    String status = postSnapshot.child("status").getValue(String.class);
+
+                    tempU.setStatus(status);
+
+                    if (!"".equals(major) && !"".equals(description)) {
+                        tempU.setProfile(new Profile(major, description));
+                    }
+
+                    World.getUsersMap().put(username, tempU);
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(ERROR, "The read failed: " + firebaseError.toString());
+            }
+        });
+    }
+
+    /**
+     * Create table for movies
+     */
+    public static void initMovieTable() {
+        MOVIE_TABLE = World.getDatabase().child("movies");
+
+        MOVIE_TABLE.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String title = postSnapshot.child("title").getValue(String.class);
+                    float avg = postSnapshot.child("averageRating").getValue(Float.class);
+                    String imgURL = postSnapshot.child("imgURL").getValue(String.class);
+
+                    Movie tempM = new Movie(title);
+
+                    tempM.setAverageRating(avg);
+                    tempM.setUrl(imgURL);
+
+                    for (DataSnapshot post2Snapshot : postSnapshot.child("ratings").getChildren()) {
+                        float rating = post2Snapshot.child("rating").getValue(Float.class);
+                        String comment = post2Snapshot.child("comment").getValue(String.class);
+                        String poster = post2Snapshot.child("poster").getValue(String.class);
+
+                        Rating r = new Rating(rating, comment, getUser(poster));
+
+                        if (!tempM.getRatings().contains(r)) {
+                            tempM.addRating(r);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(ERROR, "The read failed: " + firebaseError.toString());
+            }
+        });
     }
 
     /**
@@ -134,13 +170,6 @@ public class DBHelper {
         });
 
         return result.get();
-    }
-
-    /**
-     * Create table for movies
-     */
-    public static void initMovieTable() {
-        MOVIE_TABLE = World.getDatabase().child("movies");
     }
 
     /**

@@ -23,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
         if (World.getDatabase() == null) {
             Firebase.setAndroidContext(getApplicationContext());
             World.setDatabase(new Firebase("https://movierecommender.firebaseio.com/"));
-            World.setDbHelper(new DBHelper());
 
-            World.getDbHelper().initUserTable();
-            World.getDbHelper().initMovieTable();
+            DBHelper.initUserTable();
         }
 
         
