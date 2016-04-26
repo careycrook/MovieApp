@@ -57,15 +57,15 @@ public class LoginActivity extends AppCompatActivity {
 
         //hard-coded admin log in
         if ((ADMIN).equals(username) && (ADMIN).equals(password)) {
-            World.setCurrentUser(new User(ADMIN, "admin@google.com", ADMIN, ADMIN.hashCode()));
+            World.setCurrentUser(new User(ADMIN, "admin@google.com", ADMIN, ADMIN));
             final Intent dashboardIntent = new Intent(getApplicationContext(), AdminDashboard.class);
             startActivity(dashboardIntent);
         } else {
             //Access db to see if login is valid
 
             if (isUser(username)) {
-                final int ourHash = password.hashCode();
-                final int theirHash = getPassHash(username);
+                final String ourHash = DBHelper.getDigest(password);
+                final String theirHash = getPassHash(username);
                 final String status = getStatus(username);
                 //Block and alert banned users on login attempt
                 switch (status) {
@@ -81,12 +81,12 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                     default:
                         //Set currentUser
-                        if (ourHash == theirHash) {
+                        if (ourHash.equals(theirHash)) {
                             Toast.makeText(this, "Login successful.", Toast.LENGTH_LONG).show();
                             passwordAttempts = 0;
-                            World.setCurrentUser(new User(getName(username), getEmail(username), username, password.hashCode()));
+                            World.setCurrentUser(World.getUsersMap().get(username));
 
-                            if (!("NONE").equals(getMajor(username))) {
+                            if (!("").equals(getMajor(username))) {
                                 World.getCurrentUser().setProfile(new Profile(getMajor(username), getDescription(username)));
                             }
 

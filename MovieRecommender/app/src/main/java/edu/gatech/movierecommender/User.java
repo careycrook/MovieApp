@@ -20,7 +20,7 @@ public class User {
     /**
      * Password
      */
-    private int passwordHash;
+    private String passwordHash;
     /**
      * Status
      */
@@ -38,7 +38,7 @@ public class User {
      * @param myUsername the person's username
      * @param myPasswordHash the person's passwords
      */
-    public User(String myName, String myEmail, String myUsername, int myPasswordHash) {
+    public User(String myName, String myEmail, String myUsername, String myPasswordHash) {
         this.name = myName;
         this.email = myEmail;
         this.username = myUsername;
@@ -96,7 +96,7 @@ public class User {
      *
      * @return the person's password
      */
-    public int getPasswordHash() {
+    public String getPasswordHash() {
         return passwordHash;
     }
 
@@ -104,7 +104,7 @@ public class User {
      * Set the password hash to the specified int
      * @param passwordHash the new hash
      */
-    public void setPasswordHash(int passwordHash) {this.passwordHash = passwordHash;}
+    public void setPasswordHash(String passwordHash) {this.passwordHash = passwordHash;}
 
     /**
      * Return the profile for this user
