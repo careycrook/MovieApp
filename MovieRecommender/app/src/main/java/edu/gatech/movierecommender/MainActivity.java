@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
             World.setDatabase(new Firebase("https://movierecommender.firebaseio.com/"));
 
             DBHelper.initUserTable();
+            DBHelper.initMovieTable();
         }
 
         
