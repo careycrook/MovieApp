@@ -1,6 +1,5 @@
 package edu.gatech.movierecommender;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
             Firebase.setAndroidContext(getApplicationContext());
             World.setDatabase(new Firebase("https://movierecommender.firebaseio.com/"));
 
-            DBHelper.initUserTable();
-            DBHelper.initMovieTable();
+            DBHelper.initTables();
         }
 
         

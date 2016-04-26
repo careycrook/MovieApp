@@ -19,7 +19,7 @@ public class NickPetosa extends AndroidTestCase {
     public void setUp() {
         this.getContext().deleteDatabase("testDB1.db");
         World.setDatabase(this.getContext().openOrCreateDatabase("testDB1.db", Context.MODE_PRIVATE, null));
-        DBHelper.initUserTable();
+        DBHelper.initTables();
 
         User bob = new User("Bob", "bob@gmail.com", "bwaters", "pass");
         User jane = new User("Jane", "jane@gmail.com", "fluffy", "france");

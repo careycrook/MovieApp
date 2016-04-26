@@ -13,12 +13,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DBHelper {
     private static final String ERROR = "ERROR";
 
     private static Firebase USER_TABLE;
     private static Firebase MOVIE_TABLE;
+
+    private static final AtomicBoolean init = new AtomicBoolean();
 
     public DBHelper() {}
 
@@ -40,7 +43,7 @@ public class DBHelper {
         return sb.toString();
     }
 
-    public static void initUserTable() {
+    public static void initTables() {
         USER_TABLE = World.getDatabase().child("users");
 
         USER_TABLE.addValueEventListener(new ValueEventListener() {
@@ -66,6 +69,11 @@ public class DBHelper {
 
                     World.getUsersMap().put(username, tempU);
                 }
+
+                if (!init.get()) {
+                    initMovieTable();
+                    init.set(true);
+                }
             }
 
             @Override
@@ -75,7 +83,7 @@ public class DBHelper {
         });
     }
 
-    public static void initMovieTable() {
+    private static void initMovieTable() {
         MOVIE_TABLE = World.getDatabase().child("movies");
 
         MOVIE_TABLE.addValueEventListener(new ValueEventListener() {

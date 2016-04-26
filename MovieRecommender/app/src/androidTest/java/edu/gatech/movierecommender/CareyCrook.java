@@ -3,9 +3,6 @@ package edu.gatech.movierecommender;
 import android.content.Context;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
-
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +16,7 @@ public class CareyCrook extends AndroidTestCase {
         this.getContext().deleteDatabase("testDB.db");
         World.setDatabase(this.getContext().openOrCreateDatabase("testDB.db", Context.MODE_PRIVATE,
                 null));
-        DBHelper.initUserTable();
+        DBHelper.initTables();
 
 
         World.getDatabase().execSQL("DROP TABLE IF EXISTS movies");

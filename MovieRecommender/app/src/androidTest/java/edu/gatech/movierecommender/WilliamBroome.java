@@ -25,7 +25,7 @@ public class WilliamBroome extends AndroidTestCase {
         this.getContext().deleteDatabase("testDB1.db");
         World.setDatabase(this.getContext().openOrCreateDatabase("testDB1.db", Context.MODE_PRIVATE, null));
         DBHelper.initMovieTable();
-        DBHelper.initUserTable();
+        DBHelper.initTables();
 
         User me = new User("Will", "wbroome14@gmail.com", "wbroome14", "soccer14");
         me.setProfile(new Profile("CS", "sup"));

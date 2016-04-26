@@ -20,7 +20,7 @@ public class DaveySmith extends AndroidTestCase {
         this.getContext().deleteDatabase("testDB.db");
         World.setDatabase(this.getContext().openOrCreateDatabase("testDB.db", Context.MODE_PRIVATE,
                 null));
-        DBHelper.initUserTable();
+        DBHelper.initTables();
 
         World.getDatabase().execSQL("DROP TABLE IF EXISTS movies");
 
