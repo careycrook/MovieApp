@@ -91,17 +91,21 @@ public class DBHelper {
                     tempM.setAverageRating(avg);
                     tempM.setUrl(imgURL);
 
-                    for (DataSnapshot post2Snapshot : postSnapshot.child("ratings").getChildren()) {
-                        float rating = post2Snapshot.child("rating").getValue(Float.class);
-                        String comment = post2Snapshot.child("comment").getValue(String.class);
-                        String poster = post2Snapshot.child("poster").getValue(String.class);
+                    if (postSnapshot.hasChild("ratings")) {
+                        for (DataSnapshot post2Snapshot : postSnapshot.child("ratings").getChildren()) {
+                            float rating = post2Snapshot.child("rating").getValue(Float.class);
+                            String comment = post2Snapshot.child("comment").getValue(String.class);
+                            String poster = post2Snapshot.child("user").getValue(String.class);
 
-                        Rating r = new Rating(rating, comment, getUser(poster));
+                            Rating r = new Rating(rating, comment, getUser(poster));
 
-                        if (!tempM.getRatings().contains(r)) {
-                            tempM.addRating(r);
+                            if (!tempM.getRatings().contains(r)) {
+                                tempM.addRating(r);
+                            }
                         }
                     }
+
+                    World.getMoviesMap().put(title, tempM);
                 }
             }
 
@@ -201,10 +205,10 @@ public class DBHelper {
      * @param r The Rating we want to add
      */
     private static void updateAverageRating(Movie m, float r) {
-        Map<String, String> basicAttribs = new HashMap<String, String>();
+        Map<String, Object> basicAttribs = new HashMap<>();
         basicAttribs.put("averageRating", String.valueOf(m.getAverageRating()));
 
-        MOVIE_TABLE.child(m.getTitle()).setValue(basicAttribs);
+        MOVIE_TABLE.child(m.getTitle()).updateChildren(basicAttribs);
     }
 
     /**

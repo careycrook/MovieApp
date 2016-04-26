@@ -97,7 +97,6 @@ public class MovieProfile extends AppCompatActivity {
                 }
             }
 
-            m.addRating(r);
             addRating(m, r);
 
             //Clear controls and notify
