@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String password2 = passwordBox2.getText().toString();
 
         //Create user from control data.
-        final User u = new User(name, email, username, password1.hashCode());
+        final User u = new User(name, email, username, DBHelper.getDigest(password1));
 
         //Check that passwords match.
         if (!password1.equals(password2)) {
