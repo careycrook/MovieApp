@@ -86,10 +86,6 @@ public class LoginActivity extends AppCompatActivity {
                             passwordAttempts = 0;
                             World.setCurrentUser(World.getUsersMap().get(username));
 
-                            if (!("").equals(getMajor(username))) {
-                                World.getCurrentUser().setProfile(new Profile(getMajor(username), getDescription(username)));
-                            }
-
                             final Intent dashboardIntent = new Intent(getApplicationContext(), Dashboard.class);
                             startActivity(dashboardIntent);
                             //Lock the user
