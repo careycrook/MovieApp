@@ -4,16 +4,16 @@ import android.app.Application;
 
 import com.firebase.client.Firebase;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 class World extends Application {
 
     private static User currentUser = null;
     private static Firebase database = null;
 
-    private static Map<String, User> allUsers = new HashMap<>();
-    private static Map<String, Movie> allMovies = new HashMap<>();
+    private static Map<String, User> allUsers = new ConcurrentHashMap<>();
+    private static Map<String, Movie> allMovies = new ConcurrentHashMap<>();
 
     public static User getCurrentUser() {return currentUser;}
 
